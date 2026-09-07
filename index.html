@@ -1,0 +1,2768 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}</style></head><body>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The League — Since 2007</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0c1a30;
+    --navy-deep:#070f1c;
+    --gold:#d6a63d;
+    --gold-bright:#f0c667;
+    --cream:#f3ede0;
+    --crimson:#a8342a;
+    --ink:#161311;
+    --line: rgba(214,166,61,0.25);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Barlow', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3, .display{
+    font-family:'Anton', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+  }
+  .eyebrow{
+    font-family:'Barlow Condensed', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.28em;
+    font-weight:600;
+    font-size:0.78rem;
+    color:var(--gold);
+  }
+  a{color:inherit;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(circle at 20% -10%, rgba(214,166,61,0.18), transparent 45%),
+      linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color:var(--cream);
+    padding: 5.5rem 6vw 4rem;
+    position:relative;
+    overflow:hidden;
+    border-bottom: 6px solid var(--gold);
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image: repeating-linear-gradient(115deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 60px);
+    pointer-events:none;
+  }
+  .hero-inner{max-width:1080px; position:relative;}
+  .hero .eyebrow{margin-bottom:1.1rem; display:block;}
+  .hero h1{
+    font-size: clamp(3rem, 9vw, 6.4rem);
+    line-height:0.92;
+    color:var(--cream);
+  }
+  .hero h1 span{color:var(--gold-bright);}
+  .hero .sub{
+    font-family:'Barlow Condensed', sans-serif;
+    font-size: clamp(1.05rem, 2vw, 1.5rem);
+    color:rgba(243,237,224,0.75);
+    max-width: 640px;
+    margin-top:1.4rem;
+    font-weight:500;
+  }
+  .hero-stats{
+    display:flex; flex-wrap:wrap; gap:2.6rem;
+    margin-top:3rem;
+    border-top:1px solid var(--line);
+    padding-top:2rem;
+  }
+  .hero-stat .num{
+    font-family:'Anton', sans-serif;
+    font-size:2.6rem;
+    color:var(--gold-bright);
+    line-height:1;
+  }
+  .hero-stat .lbl{
+    font-family:'Barlow Condensed', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    font-size:0.78rem;
+    color:rgba(243,237,224,0.6);
+    margin-top:0.35rem;
+  }
+
+  /* ---------- TICKER ---------- */
+  .ticker-wrap{
+    background:var(--gold);
+    color:var(--navy-deep);
+    overflow:hidden;
+    white-space:nowrap;
+    border-bottom:2px solid var(--navy-deep);
+  }
+  .ticker{
+    display:inline-block;
+    padding:0.55rem 0;
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    font-size:0.95rem;
+    animation: scroll 42s linear infinite;
+  }
+  .ticker span{margin:0 1.6rem;}
+  .ticker span::after{content:"•"; margin-left:1.6rem; opacity:0.5;}
+  @keyframes scroll{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ticker{animation:none;}
+  }
+
+  /* ---------- TAB NAV ---------- */
+  .tab-nav{
+    position:sticky; top:0; z-index:50;
+    display:flex; justify-content:center; gap:0;
+    background:var(--navy-deep);
+    border-bottom:3px solid var(--gold);
+  }
+  .tab-btn{
+    appearance:none; border:none; background:transparent; cursor:pointer;
+    font-family:'Barlow Condensed', sans-serif; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.1em; font-size:0.9rem;
+    color:rgba(243,237,224,0.55);
+    padding:1rem 1.8rem;
+    border-bottom:3px solid transparent;
+    margin-bottom:-3px;
+    transition:color .15s ease;
+  }
+  .tab-btn:hover{color:rgba(243,237,224,0.85);}
+  .tab-btn.active{color:var(--gold-bright); border-bottom-color:var(--gold-bright);}
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding: 4.5rem 6vw;}
+  .section-head{max-width:720px; margin-bottom:2.6rem;}
+  .section-head h2{font-size:clamp(2rem,4.4vw,3rem); color:var(--navy);}
+  .section-head p{
+    font-family:'Barlow Condensed', sans-serif;
+    color:#5a5347; font-size:1.15rem; margin-top:0.6rem;
+  }
+  .season-note{
+    display:inline-block; margin-top:1rem; padding:0.5rem 0.9rem;
+    background:rgba(214,166,61,0.15); border:1px solid var(--gold);
+    border-radius:3px; font-family:'Barlow Condensed', sans-serif;
+    font-size:0.95rem; color:#5a5347;
+  }
+  .mgr-band .season-note{color:rgba(243,237,224,0.85);}
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{
+    max-width:920px;
+    position:relative;
+    border-left:3px solid var(--gold);
+    margin-left: 0.4rem;
+  }
+  .tl-item{
+    position:relative;
+    padding: 0 0 2.1rem 2.2rem;
+  }
+  .tl-item::before{
+    content:"";
+    position:absolute; left:-9.5px; top:0.3rem;
+    width:16px; height:16px; border-radius:50%;
+    background:var(--navy); border:3px solid var(--gold);
+  }
+  .tl-item.flag::before{background:var(--crimson); border-color:var(--gold-bright);}
+  .tl-year{
+    font-family:'Anton', sans-serif;
+    font-size:1.7rem; color:var(--navy);
+    display:inline-block; min-width:5rem;
+  }
+  .tl-champ{
+    font-family:'Barlow', sans-serif; font-weight:700;
+    font-size:1.15rem; color:var(--crimson);
+  }
+  .tl-manager{
+    font-family:'Barlow Condensed', sans-serif;
+    color:#5a5347; font-size:1.02rem;
+  }
+  .tl-note{
+    font-family:'Barlow Condensed', sans-serif;
+    font-size:0.92rem; color:#8a8072; font-style:italic; margin-top:0.15rem;
+  }
+  .asterisk-note{
+    max-width:920px; margin-top:1rem;
+    font-family:'Barlow Condensed', sans-serif;
+    font-size:0.95rem; color:#8a8072;
+    border-left:3px solid var(--crimson); padding-left:0.9rem;
+  }
+
+  /* ---------- HALL OF FAME ---------- */
+  .hof-band{background:var(--navy); color:var(--cream);}
+  .hof-band .section-head h2{color:var(--cream);}
+  .hof-band .section-head p{color:rgba(243,237,224,0.65);}
+  .hof-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1.1rem;
+    max-width:1080px;
+  }
+  .hof-card{
+    background:rgba(243,237,224,0.05);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:1.5rem 1.4rem;
+    position:relative;
+  }
+  .hof-rings{
+    font-family:'Anton', sans-serif;
+    font-size:2.4rem; color:var(--gold-bright);
+    line-height:1;
+  }
+  .hof-rings sup{font-size:1rem; margin-left:0.2rem; color:rgba(243,237,224,0.5); font-family:'Barlow Condensed',sans-serif;}
+  .hof-name{
+    font-weight:700; font-size:1.15rem; margin-top:0.6rem;
+  }
+  .hof-team{
+    font-family:'Barlow Condensed', sans-serif;
+    color:rgba(243,237,224,0.55); font-size:0.92rem; margin-top:0.15rem;
+  }
+  .hof-years{
+    margin-top:0.7rem; font-family:'Barlow Condensed', sans-serif;
+    font-size:0.86rem; letter-spacing:0.04em; color:var(--gold);
+  }
+
+  /* ---------- RECORDS ---------- */
+  .records-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:1.4rem; max-width:1080px;
+  }
+  .record-card{
+    background:#fff; border:1px solid rgba(12,26,48,0.08);
+    border-top:5px solid var(--crimson);
+    padding:1.6rem 1.5rem; border-radius:2px;
+    box-shadow: 0 6px 18px rgba(12,26,48,0.05);
+  }
+  .record-card h3{
+    font-family:'Barlow Condensed', sans-serif; text-transform:uppercase;
+    letter-spacing:0.06em; font-size:1rem; color:var(--crimson);
+    margin-bottom:0.5rem;
+  }
+  .record-card .big{
+    font-family:'Anton', sans-serif; font-size:1.7rem; color:var(--navy);
+    line-height:1.15;
+  }
+  .record-card .detail{
+    font-family:'Barlow Condensed', sans-serif; color:#5a5347;
+    font-size:0.98rem; margin-top:0.4rem;
+  }
+
+  /* ---------- STORYLINES ---------- */
+  .story{
+    max-width:820px; margin-bottom:2.6rem;
+    padding-bottom:2.4rem; border-bottom:1px solid rgba(12,26,48,0.1);
+  }
+  .story:last-child{border-bottom:none;}
+  .story h3{
+    font-size:1.55rem; color:var(--navy); margin-bottom:0.55rem;
+  }
+  .story p{
+    font-family:'Barlow', sans-serif; font-size:1.05rem; line-height:1.65;
+    color:#332f28;
+  }
+  .story .tag{
+    display:inline-block; background:var(--gold); color:var(--navy-deep);
+    font-family:'Barlow Condensed', sans-serif; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.06em; font-size:0.78rem;
+    padding:0.2rem 0.6rem; border-radius:2px; margin-bottom:0.7rem;
+  }
+
+  /* ---------- LORE / MANAGERS ---------- */
+  .lore-band{background:var(--gold); color:var(--navy-deep);}
+  .lore-band .section-head h2{color:var(--navy-deep);}
+  .lore-band .section-head p{color:rgba(7,15,28,0.65);}
+  .lore-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:1.2rem; max-width:1080px;
+  }
+  .lore-card{
+    background:var(--navy-deep); color:var(--cream);
+    padding:1.5rem; border-radius:3px;
+    border:1px solid rgba(243,237,224,0.1);
+  }
+  .lore-card .who{font-weight:800; font-size:1.1rem; margin-bottom:0.45rem;}
+  .lore-card p{
+    font-family:'Barlow Condensed', sans-serif; font-size:1rem;
+    color:rgba(243,237,224,0.75); line-height:1.5;
+  }
+
+  footer{
+    background:var(--navy-deep); color:rgba(243,237,224,0.5);
+    text-align:center; padding:2.6rem 6vw;
+    font-family:'Barlow Condensed', sans-serif; font-size:0.92rem;
+    letter-spacing:0.04em;
+  }
+  footer strong{color:var(--gold);}
+
+  /* ---------- WALL OF SHAME ---------- */
+  .shame-band{
+    background:
+      radial-gradient(circle at 85% 0%, rgba(168,52,42,0.25), transparent 50%),
+      #1a1310;
+    color:var(--cream);
+  }
+  .shame-band .section-head h2{color:var(--cream);}
+  .shame-band .section-head p{color:rgba(243,237,224,0.6);}
+  .shame-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:1.3rem; max-width:1080px;
+  }
+  .shame-card{
+    background:rgba(243,237,224,0.03);
+    border:1px solid rgba(214,166,61,0.18);
+    border-radius:2px; padding:1.7rem 1.5rem 1.5rem;
+    position:relative;
+  }
+  .shame-rank{
+    position:absolute; top:1.2rem; right:1.4rem;
+    font-family:'Anton', sans-serif; font-size:2.4rem;
+    color:rgba(168,52,42,0.35); line-height:1;
+  }
+  .shame-record{
+    font-family:'Anton', sans-serif; font-size:1.9rem; color:var(--crimson);
+    line-height:1;
+  }
+  .shame-team{
+    font-weight:800; font-size:1.15rem; margin-top:0.55rem;
+  }
+  .shame-manager{
+    font-family:'Barlow Condensed', sans-serif; color:var(--gold);
+    font-size:0.92rem; margin-top:0.1rem; letter-spacing:0.03em;
+  }
+  .shame-card p{
+    font-family:'Barlow Condensed', sans-serif; font-size:1rem;
+    color:rgba(243,237,224,0.7); line-height:1.5; margin-top:0.7rem;
+  }
+  .shame-honorable{
+    max-width:1080px; margin-top:2.2rem; padding-top:1.8rem;
+    border-top:1px solid rgba(243,237,224,0.12);
+  }
+  .shame-honorable h4{
+    font-family:'Barlow Condensed', sans-serif; text-transform:uppercase;
+    letter-spacing:0.12em; font-size:0.9rem; color:rgba(243,237,224,0.5);
+    margin-bottom:0.8rem;
+  }
+  .shame-list{
+    font-family:'Barlow Condensed', sans-serif; font-size:1.02rem;
+    color:rgba(243,237,224,0.75); line-height:2;
+  }
+  .shame-list b{color:var(--cream);}
+
+  /* ---------- MANAGER STATS TABLE ---------- */
+  .mgr-band{background:var(--navy-deep); color:var(--cream);}
+  .mgr-band .section-head h2{color:var(--cream);}
+  .mgr-band .section-head p{color:rgba(243,237,224,0.6);}
+  .mgr-table-wrap{max-width:1080px; overflow-x:auto;}
+  table.mgr-table{border-collapse:collapse; width:100%; min-width:760px; font-family:'Barlow Condensed', sans-serif;}
+  table.mgr-table th{
+    text-align:left; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.08em;
+    color:var(--gold); padding:0.7rem 0.8rem; border-bottom:2px solid var(--gold);
+  }
+  table.mgr-table td{
+    padding:0.65rem 0.8rem; border-bottom:1px solid rgba(243,237,224,0.1);
+    font-size:1rem; color:rgba(243,237,224,0.9);
+  }
+  table.mgr-table td.num, table.mgr-table th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  table.mgr-table tr.champ td:first-child{color:var(--gold-bright); font-weight:700;}
+  table.mgr-table td .rings{color:var(--gold-bright); font-size:0.82em;}
+  .mgr-note{
+    max-width:1080px; margin-top:1.2rem; font-family:'Barlow Condensed', sans-serif;
+    font-size:0.95rem; color:rgba(243,237,224,0.55); border-left:3px solid var(--gold);
+    padding-left:0.9rem;
+  }
+
+  /* ---------- VAULT / ROSTERS ---------- */
+  .vault-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:1.3rem; max-width:1080px;
+  }
+  .vault-card{
+    background:#fff; border:1px solid rgba(12,26,48,0.08);
+    border-radius:2px; padding:1.5rem 1.4rem;
+    box-shadow: 0 6px 18px rgba(12,26,48,0.05);
+  }
+  .vault-card.record{border-top:5px solid var(--crimson);}
+  .vault-card.champ{border-top:5px solid var(--gold);}
+  .vault-tag{
+    font-family:'Barlow Condensed', sans-serif; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.06em; font-size:0.78rem; color:var(--crimson); margin-bottom:0.3rem; display:block;
+  }
+  .vault-card.champ .vault-tag{color:var(--navy);}
+  .vault-card h3{font-size:1.25rem; color:var(--navy); margin-bottom:0.15rem;}
+  .vault-sub{font-family:'Barlow Condensed', sans-serif; color:#8a8072; font-size:0.92rem; margin-bottom:0.8rem;}
+  .vault-lineup{font-family:'Barlow Condensed', sans-serif; font-size:0.98rem; line-height:1.75;}
+  .vault-lineup .pos{color:var(--crimson); font-weight:700; display:inline-block; width:2.4rem;}
+  .vault-lineup .pts{float:right; color:var(--navy); font-weight:700;}
+
+  /* ---------- MANAGERS TAB (season logs) ---------- */
+  .mgr-grid{display:flex; flex-direction:column; gap:1rem; max-width:1080px;}
+  .mgr-card{
+    background:#fff; border:1px solid rgba(12,26,48,0.08);
+    border-radius:2px; box-shadow:0 6px 18px rgba(12,26,48,0.05);
+    overflow:hidden;
+  }
+  .mgr-card-head{
+    padding:1.3rem 1.5rem; display:flex; flex-wrap:wrap;
+    align-items:baseline; gap:0.4rem 1rem;
+    border-left:5px solid var(--gold);
+  }
+  .mgr-card-head h3{font-size:1.4rem; color:var(--navy);}
+  .mgr-card-sub{
+    font-family:'Barlow Condensed', sans-serif; color:#5a5347;
+    font-size:1rem;
+  }
+  .mgr-card-sub .rings-ct{color:var(--crimson); font-weight:700;}
+  .mgr-take{
+    padding:0 1.5rem 1.1rem; margin-top:-0.3rem;
+    font-family:'Barlow', sans-serif; font-style:italic;
+    font-size:0.98rem; line-height:1.55; color:#5a5347;
+  }
+  .mgr-take .label{
+    font-family:'Barlow Condensed', sans-serif; font-style:normal; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.08em; font-size:0.72rem;
+    color:var(--gold); margin-right:0.4rem;
+  }
+  .mgr-card details{border-top:1px solid rgba(12,26,48,0.08);}
+  .mgr-card summary{
+    cursor:pointer; padding:0.8rem 1.5rem;
+    font-family:'Barlow Condensed', sans-serif; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.06em; font-size:0.85rem;
+    color:var(--crimson); list-style:none; user-select:none;
+  }
+  .mgr-card summary::-webkit-details-marker{display:none;}
+  .mgr-card summary::before{content:"▸ "; color:var(--gold);}
+  .mgr-card details[open] summary::before{content:"▾ "; color:var(--gold);}
+  .season-log-wrap{overflow-x:auto; padding:0 1.5rem 1.3rem;}
+  table.season-log{border-collapse:collapse; width:100%; min-width:520px; font-family:'Barlow Condensed', sans-serif; font-size:0.95rem;}
+  table.season-log th{
+    text-align:left; padding:0.4rem 0.6rem; font-size:0.72rem;
+    text-transform:uppercase; letter-spacing:0.06em; color:#8a8072;
+    border-bottom:1px solid rgba(12,26,48,0.15);
+  }
+  table.season-log td{padding:0.4rem 0.6rem; border-bottom:1px solid rgba(12,26,48,0.06); color:#332f28;}
+  table.season-log tr.champ-row td{color:var(--crimson); font-weight:700;}
+  table.season-log tr.missed-row td{color:#a89f8f;}
+  table.season-log td.num, table.season-log th.num{text-align:right; font-variant-numeric:tabular-nums;}
+
+  /* ---------- 2026 SEASON TAB ---------- */
+  .season-banner{
+    max-width:1080px; background:var(--navy); color:var(--cream);
+    border-left:5px solid var(--gold); border-radius:2px;
+    padding:1.1rem 1.4rem; margin-bottom:2.2rem;
+    font-family:'Barlow Condensed', sans-serif; font-size:1.02rem;
+  }
+  .season-banner strong{color:var(--gold-bright);}
+  .subhead{
+    font-family:'Anton', sans-serif; text-transform:uppercase;
+    font-size:1.4rem; color:var(--navy); margin:2.4rem 0 0.7rem;
+  }
+  .subhead:first-of-type{margin-top:0;}
+  .sub-note{
+    font-family:'Barlow Condensed', sans-serif; color:#5a5347;
+    font-size:0.98rem; max-width:820px; margin-bottom:1.2rem;
+  }
+  .draft-toolbar{
+    display:flex; flex-wrap:wrap; gap:0.7rem; align-items:center;
+    max-width:1080px; margin-bottom:1.6rem;
+  }
+  .draft-toolbar button{
+    appearance:none; border:1px solid var(--navy); background:var(--navy); color:var(--cream);
+    font-family:'Barlow Condensed', sans-serif; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.06em; font-size:0.82rem; padding:0.55rem 1.1rem; border-radius:2px; cursor:pointer;
+  }
+  .draft-toolbar button.ghost{background:transparent; color:var(--navy);}
+  .draft-toolbar button:hover{opacity:0.85;}
+  .draft-toolbar .save-status{
+    font-family:'Barlow Condensed', sans-serif; font-size:0.85rem; color:#8a8072; font-style:italic;
+  }
+  .order-grid{
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+    gap:0.6rem; max-width:1080px; margin-bottom:1.8rem;
+  }
+  .order-slot{
+    background:#fff; border:1px solid rgba(12,26,48,0.12); border-radius:2px; padding:0.5rem 0.6rem;
+  }
+  .order-slot label{
+    display:block; font-family:'Barlow Condensed', sans-serif; font-size:0.7rem;
+    text-transform:uppercase; letter-spacing:0.06em; color:#8a8072; margin-bottom:0.2rem;
+  }
+  .order-slot select{
+    width:100%; font-family:'Barlow Condensed', sans-serif; font-weight:700; font-size:0.88rem;
+    border:none; background:transparent; color:var(--navy); padding:0.1rem 0; cursor:pointer;
+  }
+  .draft-board-wrap{max-width:100%; overflow-x:auto; border:1px solid rgba(12,26,48,0.12); border-radius:2px;}
+  table.draft-board{border-collapse:collapse; width:100%; min-width:1400px; font-family:'Barlow Condensed', sans-serif;}
+  table.draft-board th{
+    position:sticky; top:0; background:var(--navy); color:var(--gold-bright);
+    text-align:left; padding:0.5rem 0.5rem; font-size:0.78rem; text-transform:uppercase;
+    letter-spacing:0.04em; white-space:nowrap; z-index:2;
+  }
+  table.draft-board th.rd-col{position:sticky; left:0; z-index:3; background:var(--navy-deep); width:52px; min-width:52px;}
+  table.draft-board td{border-bottom:1px solid rgba(12,26,48,0.06); border-right:1px solid rgba(12,26,48,0.06); padding:0.25rem; vertical-align:middle;}
+  table.draft-board td.rd-cell{
+    position:sticky; left:0; background:#ece5d4; text-align:center; font-weight:700; color:var(--navy);
+    font-size:0.85rem; z-index:1;
+  }
+  table.draft-board tr:nth-child(even) td:not(.rd-cell){background:rgba(12,26,48,0.02);}
+  .pick-cell{display:flex; flex-direction:column; min-width:210px;}
+  .pick-cell .pick-num{font-size:0.66rem; color:#a89f8f; padding:0.1rem 0.35rem 0;}
+  .pick-select{
+    width:100%; font-family:'Barlow Condensed', sans-serif; font-size:0.86rem;
+    border:1px solid transparent; background:transparent; color:var(--ink);
+    padding:0.3rem 0.35rem; border-radius:2px; cursor:pointer;
+  }
+  .pick-select:hover{border-color:rgba(12,26,48,0.15);}
+  .pick-select.filled{background:rgba(214,166,61,0.12); font-weight:600;}
+  .pick-select option:disabled{color:#c9c2b4;}
+  .trade-tag{
+    width:100%; font-family:'Barlow Condensed', sans-serif; font-size:0.68rem;
+    border:none; background:transparent; color:#a89f8f;
+    padding:0 0.35rem 0.2rem; cursor:pointer;
+  }
+  .roster-snap-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:1rem; max-width:1080px;
+  }
+  .roster-snap-card{background:#fff; border:1px solid rgba(12,26,48,0.1); border-radius:2px; padding:1rem 1.1rem;}
+  .roster-snap-card h4{
+    font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:0.05em;
+    font-size:0.95rem; color:var(--crimson); margin-bottom:0.5rem;
+    border-bottom:1px solid rgba(12,26,48,0.08); padding-bottom:0.4rem;
+  }
+  .roster-snap-card ul{list-style:none; font-family:'Barlow Condensed', sans-serif; font-size:0.88rem;}
+  .roster-snap-card li.roster-row{padding:0.3rem 0; border-bottom:1px solid rgba(12,26,48,0.05);}
+  .roster-snap-card li.roster-row:last-child{border-bottom:none;}
+  .roster-row-top{display:flex; justify-content:space-between; color:#332f28;}
+  .roster-snap-card li span.pos{color:#8a8072; font-size:0.78rem;}
+  .keeper-tag{font-size:0.72rem; margin-top:0.1rem; font-style:italic;}
+  .keeper-tag.k-eligible{color:#4a7a4a;}
+  .keeper-tag.k-ineligible{color:var(--crimson);}
+  .keeper-tag.k-unknown{color:#a89f8f;}
+  table.standings-table{border-collapse:collapse; width:100%; max-width:1080px; font-family:'Barlow Condensed', sans-serif;}
+  table.standings-table th{
+    text-align:left; padding:0.5rem 0.7rem; font-size:0.75rem; text-transform:uppercase;
+    letter-spacing:0.05em; color:#8a8072; border-bottom:2px solid var(--navy);
+  }
+  table.standings-table td{padding:0.5rem 0.7rem; border-bottom:1px solid rgba(12,26,48,0.07); color:#332f28;}
+  table.standings-table td.num, table.standings-table th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  .waiver-empty{
+    max-width:1080px; background:#fff; border:1px dashed rgba(12,26,48,0.2); border-radius:2px;
+    padding:2rem; text-align:center; font-family:'Barlow Condensed', sans-serif; color:#8a8072;
+  }
+
+  @media (max-width:640px){
+    section{padding:3.2rem 6vw;}
+    .hero{padding:4rem 6vw 3rem;}
+    .tab-btn{padding:0.85rem 1rem; font-size:0.78rem;}
+  }
+</style>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Est. 2007 &nbsp;•&nbsp; 19 Seasons &nbsp;•&nbsp; Still Undefeated As A Friend Group, Barely</span>
+    <h1>THE LEAGUE<br><span>KEEPS SCORE.</span></h1>
+    <p class="sub">Nineteen years, nine championship belts, one 1&#8209;13 season nobody's allowed to forget, and a cast of characters who still talk trash about waiver priority two decades in. This is the story so far.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">19</div><div class="lbl">Seasons Played</div></div>
+      <div class="hero-stat"><div class="num">2007</div><div class="lbl">League Founded</div></div>
+      <div class="hero-stat"><div class="num">9</div><div class="lbl">Different Champions</div></div>
+      <div class="hero-stat"><div class="num">4</div><div class="lbl">Rings, All-Time Leader</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>Baitzelovas</span><span>Ass Clowns</span><span>Anal Flowers</span><span>Salad Tossers</span><span>Dilly Dilly</span><span>Philly Special</span><span>Let Her Cook</span><span>Pay Us What You Owe Us</span><span>Ricky Pearsall's Chest</span><span>Trump's Ear Shards</span>
+    <span>Baitzelovas</span><span>Ass Clowns</span><span>Anal Flowers</span><span>Salad Tossers</span><span>Dilly Dilly</span><span>Philly Special</span><span>Let Her Cook</span><span>Pay Us What You Owe Us</span><span>Ricky Pearsall's Chest</span><span>Trump's Ear Shards</span>
+  </div>
+</div>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" data-tab="story">Story</button>
+  <button class="tab-btn" data-tab="stats">Stats</button>
+  <button class="tab-btn" data-tab="managers">Managers</button>
+  <button class="tab-btn" data-tab="season2026">2026 Season</button>
+  <button class="tab-btn" data-tab="rules">Rules</button>
+</nav>
+
+<!-- ================= STORY TAB ================= -->
+<div id="tab-story" class="tab-panel active">
+
+<!-- CHAMPIONS TIMELINE -->
+<section id="timeline">
+  <div class="section-head">
+    <span class="eyebrow">The Ledger</span>
+    <h2>Champions, Year By Year</h2>
+    <p>Every title since the league's first draft. Team names change like the weather — the managers behind them mostly don't.</p>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item"><span class="tl-year">2007</span> <span class="tl-champ">TD King 21</span><br><span class="tl-manager">Joe — the league's very first champion, in year one.</span></div>
+    <div class="tl-item"><span class="tl-year">2008</span> <span class="tl-champ">The Snozzberries</span><br><span class="tl-manager">Bob</span></div>
+    <div class="tl-item"><span class="tl-year">2009</span> <span class="tl-champ">Harry Plopper</span><br><span class="tl-manager">Gati</span></div>
+    <div class="tl-item"><span class="tl-year">2010</span> <span class="tl-champ">Chemical Toilet</span><br><span class="tl-manager">Scott</span></div>
+    <div class="tl-item"><span class="tl-year">2011</span> <span class="tl-champ">TiggleBitties</span><br><span class="tl-manager">Phil</span></div>
+    <div class="tl-item"><span class="tl-year">2012</span> <span class="tl-champ">The Snozzberries</span><br><span class="tl-manager">Bob — 10-3, no contest.</span></div>
+    <div class="tl-item"><span class="tl-year">2013</span> <span class="tl-champ">Chemical Toilet</span><br><span class="tl-manager">Scott</span></div>
+    <div class="tl-item flag"><span class="tl-year">2014</span> <span class="tl-champ">Harry Ballz</span><br><span class="tl-manager">Harry</span><br><span class="tl-note">One year after Scott's second title, his own Chemical Toilet went 1–12 — the low point sandwiched right between two rings.</span></div>
+    <div class="tl-item"><span class="tl-year">2015</span> <span class="tl-champ">Chemical Toilet</span><br><span class="tl-manager">Scott — bounced back from 1-12 to 10-3 and a title in one year.</span></div>
+    <div class="tl-item"><span class="tl-year">2016</span> <span class="tl-champ">TiggleBitties</span><br><span class="tl-manager">Phil</span></div>
+    <div class="tl-item"><span class="tl-year">2017</span> <span class="tl-champ">Dream Team2</span><br><span class="tl-manager">Rich — his first title, in just his first year in the league.</span></div>
+    <div class="tl-item"><span class="tl-year">2018</span> <span class="tl-champ">Dream Team2</span><br><span class="tl-manager">Rich — back-to-back.</span></div>
+    <div class="tl-item"><span class="tl-year">2019</span> <span class="tl-champ">Fat Ewoks</span><br><span class="tl-manager">Gati — breaking up Rich's run.</span></div>
+    <div class="tl-item"><span class="tl-year">2020</span> <span class="tl-champ">Dream Team2</span><br><span class="tl-manager">Rich — takes it back.</span></div>
+    <div class="tl-item"><span class="tl-year">2021</span> <span class="tl-champ">Thielen my Chubb</span><br><span class="tl-manager">Joe — finally, after nearly a decade and a half of near-misses.</span></div>
+    <div class="tl-item"><span class="tl-year">2022</span> <span class="tl-champ">Max Bet</span><br><span class="tl-manager">Bill</span></div>
+    <div class="tl-item"><span class="tl-year">2023</span> <span class="tl-champ">Max Bet</span><br><span class="tl-manager">Bill — back-to-back.</span></div>
+    <div class="tl-item"><span class="tl-year">2024</span> <span class="tl-champ">I Like Turtles</span><br><span class="tl-manager">Scott</span></div>
+    <div class="tl-item"><span class="tl-year">2025</span> <span class="tl-champ">Cheesesteak's</span><br><span class="tl-manager">Chris</span></div>
+  </div>
+  <p class="asterisk-note">Cross-checked directly against Yahoo's league history in August 2026. The original version of this page had 2014–2016 shuffled by a year (Chemical Toilet's 1-12 crash and title, and Harry Ballz's only ring, all landed on the wrong seasons) — corrected here.</p>
+</section>
+
+<!-- HALL OF FAME -->
+<section class="hof-band" id="hof">
+  <div class="section-head">
+    <span class="eyebrow">Ring Count</span>
+    <h2>Hall Of Fame</h2>
+    <p>Titles, all-time, by the human being behind the team name.</p>
+  </div>
+  <div class="hof-grid">
+    <div class="hof-card">
+      <div class="hof-rings">4<sup>rings</sup></div>
+      <div class="hof-name">Scott</div>
+      <div class="hof-team">Chemical Toilet / I Like Turtles</div>
+      <div class="hof-years">2010 · 2013 · 2015 · 2024</div>
+    </div>
+    <div class="hof-card">
+      <div class="hof-rings">3<sup>rings</sup></div>
+      <div class="hof-name">Rich</div>
+      <div class="hof-team">Dream Team2</div>
+      <div class="hof-years">2017 · 2018 · 2020</div>
+    </div>
+    <div class="hof-card">
+      <div class="hof-rings">2<sup>rings</sup></div>
+      <div class="hof-name">Joe</div>
+      <div class="hof-team">TD King 21 / Thielen my Chubb</div>
+      <div class="hof-years">2007 · 2021</div>
+    </div>
+    <div class="hof-card">
+      <div class="hof-rings">2<sup>rings</sup></div>
+      <div class="hof-name">Bob</div>
+      <div class="hof-team">The Snozzberries</div>
+      <div class="hof-years">2008 · 2012</div>
+    </div>
+    <div class="hof-card">
+      <div class="hof-rings">2<sup>rings</sup></div>
+      <div class="hof-name">Phil</div>
+      <div class="hof-team">TiggleBitties</div>
+      <div class="hof-years">2011 · 2016</div>
+    </div>
+    <div class="hof-card">
+      <div class="hof-rings">2<sup>rings</sup></div>
+      <div class="hof-name">Bill</div>
+      <div class="hof-team">Max Bet</div>
+      <div class="hof-years">2022 · 2023</div>
+    </div>
+    <div class="hof-card">
+      <div class="hof-rings">2<sup>rings</sup></div>
+      <div class="hof-name">Gati</div>
+      <div class="hof-team">Harry Plopper / Fat Ewoks</div>
+      <div class="hof-years">2009 · 2019</div>
+    </div>
+    <div class="hof-card">
+      <div class="hof-rings">1<sup>ring</sup></div>
+      <div class="hof-name">Harry</div>
+      <div class="hof-team">Harry Ballz</div>
+      <div class="hof-years">2014</div>
+    </div>
+    <div class="hof-card">
+      <div class="hof-rings">1<sup>ring</sup></div>
+      <div class="hof-name">Chris</div>
+      <div class="hof-team">Cheesesteak's</div>
+      <div class="hof-years">2025 — the rookie name that only ever had one name.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WALL OF SHAME -->
+<section class="shame-band" id="shame">
+  <div class="section-head">
+    <span class="eyebrow">Never Forget</span>
+    <h2>Wall Of Shame</h2>
+    <p>The seasons this league still brings up unprompted, years later.</p>
+  </div>
+  <div class="shame-grid">
+    <div class="shame-card">
+      <div class="shame-rank">01</div>
+      <div class="shame-record">0–13</div>
+      <div class="shame-team">One Big McAdoo-do</div>
+      <div class="shame-manager">Premal Colaco, 2017</div>
+      <p>The only winless season in league history. Zero wins across a full 13-game slate — the floor, as far as anyone's found it. Premal left the league after this season.</p>
+    </div>
+    <div class="shame-card">
+      <div class="shame-rank">02</div>
+      <div class="shame-record">1–13</div>
+      <div class="shame-team">Chemical Toilet</div>
+      <div class="shame-manager">Scott, 2021</div>
+      <p>Scott's own worst season, one win off the McAdoo-do floor. The following year the Chemical Toilet name and roster passed to Drew (4-10 in 2022) while Scott rebuilt from scratch as I Like Turtles — and won the title two years later.</p>
+    </div>
+    <div class="shame-card">
+      <div class="shame-rank">03</div>
+      <div class="shame-record">1–12</div>
+      <div class="shame-team">Chemical Toilet</div>
+      <div class="shame-manager">Scott, 2014</div>
+      <p>One year after his second title, Scott's Chemical Toilet cratered to 1-12 — then bounced right back to 10-3 and a championship the very next season. Scott owns two of the three worst seasons in league history and four of its championships.</p>
+    </div>
+  </div>
+  <div class="shame-honorable">
+    <h4>Honorable (Dishonorable) Mentions</h4>
+    <div class="shame-list">
+      <b>Cheesesteak's</b> (Chris) — 1–12 in 2020, five years before his 2025 title. Longest doormat-to-champion turnaround in league history.<br>
+      <b>Bearack Obearma</b> (Bill) — 3–10 in 2009, one of Max Bet's roughest early alter egos.<br>
+      <b>Breaking Bones Badly</b> — 3–10 in 2018, buried in a stacked division.<br>
+      <b>Krumb Lord</b> (Joe) — 4–9, one of the few genuinely bad years in an otherwise championship-contending career.
+    </div>
+  </div>
+</section>
+
+<!-- STORYLINES -->
+<section id="storylines" style="background:#ece5d4;">
+  <div class="section-head">
+    <span class="eyebrow">Trash Talk, Annotated</span>
+    <h2>The Storylines</h2>
+  </div>
+
+  <div class="story">
+    <span class="tag">The Bridesmaid</span>
+    <h3>Joe's long walk back to the podium</h3>
+    <p>Joe won the league's very first title in 2007 as TD King 21 — a founding-father championship. Then came fourteen years of nearly-but-not-quite, and the ending got crueler the closer he got: in 2019 his Thielen my Chubb posted the league's best regular-season record (10-3) and still lost the final to Fat Ewoks. In 2020 he made the final again — and lost again, to Dream Team2. Two straight championship-game defeats after the best team in football all season. He finally broke through in 2021, blowing out Woolwich Football Team 153.00-80.40 in the final. Fourteen years between rings, with two gut-punch finals losses in the two seasons right before it — the longest and hardest title drought in league history.</p>
+  </div>
+
+  <div class="story">
+    <span class="tag">The Dynasty (and the Crash)</span>
+    <h3>Scott, Chemical Toilet, and the boom-bust-boom decade</h3>
+    <p>Scott has been in this league since year one — his 2007 team was Banana Hammocks, two rebrands before Chemical Toilet even existed. Once it did, it became the league's closest thing to a dynasty: titles in 2010, 2013, and 2015. But sandwiched right in the middle of that run was 2014, when Chemical Toilet crashed to 1-12 — one year after a championship — before rebuilding to 10-3 and another ring the very next season. Then in 2021, it happened again, worse: a 1-13 season, one win off the all-time floor. For 2022 the Chemical Toilet name and roster passed to a manager named Drew, while Scott started over from scratch under a new name, I Like Turtles. He made the final in his first year back (2023, runner-up) and won it all in 2024. Two of the three worst seasons in league history belong to Scott's teams — and so do four of its championships.</p>
+  </div>
+
+  <div class="story">
+    <span class="tag">The Streak</span>
+    <h3>Rich's Dream Team2 run</h3>
+    <p>Rich joined the league in 2017 and won it all immediately, then went back-to-back in 2018 — the only true repeat champion in league history besides Bill. Gati's Fat Ewoks broke the streak in 2019, but Rich took the title right back in 2020: three rings in four years from a first-year manager. Adding a fun family wrinkle: Rich is Bob's dad, meaning a Snozzberries championship in 2008/2012 and a Dream Team2 dynasty a decade later both run through the same family tree. Rich rebranded to Eagles Rock 2 in 2024.</p>
+  </div>
+
+  <div class="story">
+    <span class="tag">The Nailbiter</span>
+    <h3>The closest championship game in league history</h3>
+    <p>2011: Phil's TiggleBitties beat Joe's Krumb Lord 137.40 to 136.15 — a margin of 1.25 points, the tightest title game the league has ever seen. It's Phil's first of two rings; the second came five years later, in 2016, when TiggleBitties beat Sex Panther by a much more comfortable 9 points.</p>
+  </div>
+
+  <div class="story">
+    <span class="tag">The Comeback</span>
+    <h3>Chris arrives, never rebrands</h3>
+    <p>Every other manager in this league has cycled through team names — some of them a dozen times. Chris joined in 2017 as Cheesesteak's and has never once changed it. He also owns one of the wildest turnarounds on record: a 1-12 season in 2020, followed five years later by the 2025 championship — the longest doormat-to-champion gap in league history, all under the same unchanged name.</p>
+  </div>
+
+  <div class="story">
+    <span class="tag">The Turnover</span>
+    <h3>Who's actually been here since the start</h3>
+    <p>The league likes to say it's the same faces since 2007, but the roster has churned more than the highlight reel suggests. Five original 2007-08 managers are gone: Rosetti (I'm a Beast!/BEAST/Dixie Normous) left after 2012, Charles Harkins (Murse) after 2013, daniel (The Mighty Wee-Men/Wee Gurley Man) after 2016, Jesse (Your Stepfather) after 2016, and Phil (TiggleBitties, a two-time champion) after 2022. Harry — one championship, 2014 — and Premal Colaco left after 2017, the same year Rich and Chris arrived. Sean joined in 2018 as Virginia Eagles and is still here; Jimmy ran Shake N Bake from 2019-2021; John and Drew both joined in 2022, backfilling Phil's slot and the Chemical Toilet name after Scott stepped away for the year. Of the ten managers in the league today, only four — Joe, Bob, Gati, and Bill — have been here for every single one of the nineteen seasons. Scott's been in the league since 2007 too, but sat out 2022 before rebuilding as I Like Turtles.</p>
+  </div>
+</section>
+
+<!-- LORE -->
+<section class="lore-band" id="lore">
+  <div class="section-head">
+    <span class="eyebrow">Roll Call</span>
+    <h2>The Founding Cast</h2>
+    <p>Four managers have been here for all nineteen seasons. The rest of the roster — Scott included — has turned over more than the trophy has.</p>
+  </div>
+  <div class="lore-grid">
+    <div class="lore-card"><div class="who">Joe</div><p>League's first-ever champion (2007, TD King 21). Spent 14 years as the league's best bridesmaid — including back-to-back finals losses in 2019 and 2020 — before ring #2 in 2021. All 19 seasons, unbroken.</p></div>
+    <div class="lore-card"><div class="who">Bob</div><p>The Snozzberries, since day one. Two titles (2008, 2012). The league's most consistent contender — 17 playoff appearances in 19 seasons. Rich's son. All 19 seasons, unbroken.</p></div>
+    <div class="lore-card"><div class="who">Gati (DavidM)</div><p>Harry Plopper, Sex Panther, Fat Ewoks, Team Browhole, Woolwich Fighting Chickens — a rotating cast of alter egos, and two titles (2009, 2019) to show for it. All 19 seasons, unbroken.</p></div>
+    <div class="lore-card"><div class="who">Scott</div><p>Chemical Toilet dynasty architect turned crash-and-rebuild story: titles in 2010, 2013, 2015 and 2024, a 1-12 season in 2014 and a 1-13 season in 2021 — two of the three worst records in league history. Sat out 2022 after that 1-13 crash, handing the Chemical Toilet name to Drew, then came back in 2023 as I Like Turtles. Four rings, the most of anyone.</p></div>
+    <div class="lore-card"><div class="who">Bill (Max Bet)</div><p>Several early-era alter egos (Plow King, Raw Plower, Bearack Obearma). Back-to-back champion, 2022-2023 — the only other repeat champ besides Rich. League commissioner. All 19 seasons, unbroken.</p></div>
+    <div class="lore-card"><div class="who">Phil <span style="opacity:.5;font-weight:400;">— departed after 2022</span></div><p>TiggleBitties, in the league since 2008. Two titles (2011 — the closest championship game ever, by 1.25 points — and 2016). Left the league after fifteen seasons.</p></div>
+    <div class="lore-card"><div class="who">Harry <span style="opacity:.5;font-weight:400;">— departed after 2017</span></div><p>Harry Ballz. One title, 2014 — sandwiched between two of Scott's championships. In the league through at least 2013; left after 2017.</p></div>
+    <div class="lore-card"><div class="who">Rich</div><p>Joined 2017 and won the title in his first two seasons (2017, 2018) — an immediate back-to-back. Added a third in 2020 as Dream Team2. Rebranded to Eagles Rock 2 in 2024. Bob's dad.</p></div>
+    <div class="lore-card"><div class="who">Chris</div><p>Joined 2017 as Cheesesteak's and never changed the name once — through a 1-12 season in 2020 and a championship five years later, in 2025.</p></div>
+    <div class="lore-card"><div class="who">Sean <span style="opacity:.5;font-weight:400;">— joined 2018</span></div><p>Virginia Eagles, unchanged since he joined. Steady mid-pack contender, never missed more than a couple playoffs running.</p></div>
+    <div class="lore-card"><div class="who">Drew &amp; John <span style="opacity:.5;font-weight:400;">— joined 2022</span></div><p>The league's newest core members. Drew took over the Chemical Toilet name and roster from Scott in 2022, rebranding to Stu Pedasso in 2024. John's Hawk Time backfilled a vacated slot the same year and made the final in its 2022 debut season.</p></div>
+  </div>
+</section>
+
+</div>
+<!-- ================= END STORY TAB ================= -->
+
+<!-- ================= STATS TAB ================= -->
+<div id="tab-stats" class="tab-panel">
+
+<!-- RECORDS -->
+<section id="records">
+  <div class="section-head">
+    <span class="eyebrow">The Numbers</span>
+    <h2>Records &amp; Wreckage</h2>
+    <p>The best runs, the worst seasons, and the games nobody's allowed to bring up at the draft party. (They will anyway.)</p>
+  </div>
+  <div class="records-grid">
+    <div class="record-card">
+      <h3>Rock Bottom</h3>
+      <div class="big">0–13</div>
+      <div class="detail">One Big McAdoo-do, 2017 — a winless season for the ages. Full write-up in the Story tab's Wall of Shame.</div>
+    </div>
+    <div class="record-card">
+      <h3>Also Rock Bottom</h3>
+      <div class="big">1–13</div>
+      <div class="detail">Chemical Toilet, 2021 — Scott's own worst season, one win off the McAdoo-do floor. He handed the name to Drew the next year and rebuilt from scratch.</div>
+    </div>
+    <div class="record-card">
+      <h3>Longest Title Drought</h3>
+      <div class="big">14 Years</div>
+      <div class="detail">Joe went from the league's first-ever champion in 2007 to his second ring in 2021 — with more heartbreak finals in between than anyone else.</div>
+    </div>
+    <div class="record-card">
+      <h3>Best Never Rewarded</h3>
+      <div class="big">10–3</div>
+      <div class="detail">Thielen my Chubb's 2019 regular season — the league's best record that year, and it still ended in a runner-up finish.</div>
+    </div>
+    <div class="record-card">
+      <h3>Dynasty Window</h3>
+      <div class="big">'10 · '13 · '15</div>
+      <div class="detail">Scott's Chemical Toilet won 3 of 6 titles in a six-year stretch — and the "off" year in between (2014) was his own 1-12 disaster. Boom, bust, boom.</div>
+    </div>
+    <div class="record-card">
+      <h3>Back-to-Back Club</h3>
+      <div class="big">2 Managers</div>
+      <div class="detail">Rich (2017-18) and Bill (2022-23) are the only managers to go back-to-back. Scott's three Chemical Toilet titles are separated by at least a year every time.</div>
+    </div>
+    <div class="record-card">
+      <h3>Highest Single Week Ever</h3>
+      <div class="big">246.70</div>
+      <div class="detail">Joe's Thielen my Chubb, Week 12 of 2020 — a mind-melting score nobody else has come within 25 points of, before or since.</div>
+    </div>
+    <div class="record-card">
+      <h3>Lowest Single Week Ever</h3>
+      <div class="big">34.20</div>
+      <div class="detail">Charles Harkins' Murse, Week 11 of 2012 — the floor of the floor.</div>
+    </div>
+    <div class="record-card">
+      <h3>Most Championships</h3>
+      <div class="big">4 — Scott</div>
+      <div class="detail">Chemical Toilet / I Like Turtles, 2010-2024. Nobody else has more than 3.</div>
+    </div>
+    <div class="record-card">
+      <h3>Most Playoff Appearances</h3>
+      <div class="big">17 of 19 — Bob</div>
+      <div class="detail">The Snozzberries have missed the playoffs exactly twice (2019, 2020) in nineteen seasons. Joe is second at 15 of 19.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FRONT OFFICE / MANAGER CAREER STATS -->
+<section class="mgr-band" id="front-office">
+  <div class="section-head">
+    <span class="eyebrow">Career Ledger</span>
+    <h2>The Front Office</h2>
+    <p>Every long-tenured manager's full career record, reconstructed game-by-game from nineteen seasons of Yahoo history. The twist: three of the four multi-champion managers have losing career records. Want the year-by-year breakdown? Check the Managers tab.</p>
+  </div>
+  <div class="mgr-table-wrap">
+    <table class="mgr-table">
+      <thead><tr>
+        <th>Manager</th><th>Seasons</th><th class="num">W-L-T</th><th class="num">Win%</th>
+        <th class="num">Titles</th><th class="num">Playoffs</th><th>Best Season</th><th>Peak / Low Week</th>
+      </tr></thead>
+      <tbody>
+        <tr class="champ"><td>Bob</td><td>19 (2007–25)</td><td class="num">151-100-1</td><td class="num">.599</td><td class="num"><span class="rings">2</span></td><td class="num">17/19</td><td>11-3, 2021</td><td>213.25 (2021 Wk11)</td></tr>
+        <tr class="champ"><td>Joe</td><td>19 (2007–25)</td><td class="num">147-105-0</td><td class="num">.583</td><td class="num"><span class="rings">2</span></td><td class="num">15/19</td><td>11-2, 2017</td><td><strong>246.70</strong> (2020 Wk12) — all-time high</td></tr>
+        <tr class="champ"><td>Rich</td><td>9 (2017–25)</td><td class="num">67-55-0</td><td class="num">.549</td><td class="num"><span class="rings">3</span></td><td class="num">6/9</td><td>10-3, 2017</td><td>182.60 (2024 Wk5)</td></tr>
+        <tr class="champ"><td>Gati (DavidM)</td><td>19 (2007–25)</td><td class="num">137-115-0</td><td class="num">.544</td><td class="num"><span class="rings">2</span></td><td class="num">11/19</td><td>10-3, 2013 &amp; 2019</td><td>187.35 (2022 Wk8)</td></tr>
+        <tr class="champ"><td>Phil <span style="opacity:.5;font-weight:400;">(left 2022)</span></td><td>15 (2008–22)</td><td class="num">105-92-0</td><td class="num">.533</td><td class="num"><span class="rings">2</span></td><td class="num">11/15</td><td>9-4, four times</td><td>189.10 (2018 Wk6)</td></tr>
+        <tr><td>Sean</td><td>8 (2018–25)</td><td class="num">57-52-0</td><td class="num">.523</td><td class="num">0</td><td class="num">6/8</td><td>9-5, 2024</td><td>199.05 (2019 Wk8)</td></tr>
+        <tr class="champ"><td>Scott</td><td>18 (2007–25)*</td><td class="num">111-127-0</td><td class="num">.466</td><td class="num"><span class="rings">4</span></td><td class="num">11/18</td><td>11-2, 2011</td><td>52.90 (2021 Wk14)</td></tr>
+        <tr class="champ"><td>Bill (Max Bet)</td><td>19 (2007–25)</td><td class="num">114-138-0</td><td class="num">.452</td><td class="num"><span class="rings">2</span></td><td class="num">8/19</td><td>9-4, twice</td><td>193.15 (2018 Wk11)</td></tr>
+        <tr class="champ"><td>Chris</td><td>9 (2017–25)</td><td class="num">48-73-1</td><td class="num">.393</td><td class="num"><span class="rings">1</span></td><td class="num">3/9</td><td>9-5, 2025</td><td>54.45 (2019 Wk10)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="mgr-note">*Scott's 2022 season is excluded — the Chemical Toilet name and roster passed to Drew that year while Scott rebuilt as I Like Turtles. Drew (2022–present) and John (2022–present) are the league's newest full-time members; both are still building their career ledgers — see the Managers tab. Harry (2013–17, one title) and eight other managers who left the league before 2018 aren't shown above but appear throughout the Story tab.</p>
+</section>
+
+<!-- SEASON RECORDS -->
+<section id="records-season" style="background:#ece5d4;">
+  <div class="section-head">
+    <span class="eyebrow">All-Time Records, Part II</span>
+    <h2>Season &amp; Streak Records</h2>
+    <p>Reconstructed game-by-game from every regular-season matchup in league history.</p>
+  </div>
+  <div class="records-grid">
+    <div class="record-card">
+      <h3>Highest Season Point Total</h3>
+      <div class="big">1947.15</div>
+      <div class="detail">Joe's Thielen my Chubb, 2018 — the same team that would go on to lose two straight finals the next two years before finally winning it all.</div>
+    </div>
+    <div class="record-card">
+      <h3>Lowest Season Point Total</h3>
+      <div class="big">1060.20</div>
+      <div class="detail">Philly Phighters, 2008 — an early-era guest manager who didn't stick around. Lower scoring across the board in the league's first few years makes this one hard to touch.</div>
+    </div>
+    <div class="record-card">
+      <h3>Best Point Differential</h3>
+      <div class="big">+359.15</div>
+      <div class="detail">Joe's Thielen my Chubb, 2020 (1936.45 scored, 1577.30 allowed) — a genuine juggernaut season that still ended in a finals loss.</div>
+    </div>
+    <div class="record-card">
+      <h3>Worst Point Differential</h3>
+      <div class="big">−469.10</div>
+      <div class="detail">Drew's Stu Pedasso, 2024 (1309.90 scored, 1779.00 allowed) — worse than either of the two 0-win/1-win seasons on the Wall of Shame, despite "only" going 3-11.</div>
+    </div>
+    <div class="record-card">
+      <h3>Longest Win Streak</h3>
+      <div class="big">10 games</div>
+      <div class="detail">Bob's Snozzberries, 2023 — ran the table from Week 5 through the playoffs on the way to a 10-4 finish.</div>
+    </div>
+    <div class="record-card">
+      <h3>Longest Losing Streak</h3>
+      <div class="big">13 games</div>
+      <div class="detail">Premal's One Big McAdoo-do, 2017 — the entire 0-13 season, wire to wire. There was no in-season low point because it was all a low point.</div>
+    </div>
+    <div class="record-card">
+      <h3>Most 200+ Point Weeks (Career)</h3>
+      <div class="big">2 — Joe</div>
+      <div class="detail">Only three 200-point weeks have ever happened in nineteen seasons. Joe has two of them (2017, 2020 — the all-time record); Bob has the other (2021).</div>
+    </div>
+    <div class="record-card">
+      <h3>Most Weeks Leading The League (Career)</h3>
+      <div class="big">40 — Joe</div>
+      <div class="detail">The most times any manager has posted the single highest score in the league in a given week. Bob is second with 37, Gati third with 28.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAMPIONSHIP & RIVALRY RECORDS -->
+<section id="records-champ">
+  <div class="section-head">
+    <span class="eyebrow">All-Time Records, Part III</span>
+    <h2>Championships &amp; Rivalries</h2>
+    <p>Nineteen title games and two decades of grudges, quantified.</p>
+  </div>
+  <div class="records-grid">
+    <div class="record-card">
+      <h3>Highest-Scoring Championship</h3>
+      <div class="big">278.55 combined</div>
+      <div class="detail">2018: Rich's Dream Team2 (160.35) over Bob's Snozzberries (118.20). The highest-combined final in league history.</div>
+    </div>
+    <div class="record-card">
+      <h3>Biggest Championship Blowout</h3>
+      <div class="big">72.60 points</div>
+      <div class="detail">2021: Joe's Thielen my Chubb 153.00, Woolwich Football Team 80.40. Ring #2, and he didn't even need it to be close.</div>
+    </div>
+    <div class="record-card">
+      <h3>Closest Championship</h3>
+      <div class="big">1.25 points</div>
+      <div class="detail">2011: Phil's TiggleBitties 137.40, Joe's Krumb Lord 136.15 — full story in the Storylines tab.</div>
+    </div>
+    <div class="record-card">
+      <h3>Most Championship Appearances</h3>
+      <div class="big">5 — Bob &amp; Scott</div>
+      <div class="detail">Bob: 2-3 in finals (2008, 2012 wins; 2017, 2018, 2024 losses). Scott: 4-1 in finals (2010, 2013, 2015, 2024 wins; 2023 loss).</div>
+    </div>
+    <div class="record-card">
+      <h3>Most-Played Rivalry</h3>
+      <div class="big">Bob vs. Joe</div>
+      <div class="detail">34 head-to-head meetings across nineteen years, division scheduling permitting. Joe leads the all-time series 19-15.</div>
+    </div>
+    <div class="record-card">
+      <h3>Most Lopsided Rivalry</h3>
+      <div class="big">Gati 15-3 daniel</div>
+      <div class="detail">Eighteen meetings before daniel left the league after 2016, and Gati won five out of every six. Among current managers, Bob's 20-11 career edge over Bill is the most one-sided active rivalry.</div>
+    </div>
+  </div>
+</section>
+
+<!-- THE VAULT -->
+<section class="mgr-band" id="vault">
+  <div class="section-head">
+    <span class="eyebrow">Rewind The Tape</span>
+    <h2>The Vault</h2>
+    <p>The lineups behind the two single-week records.</p>
+  </div>
+  <div class="vault-grid">
+    <div class="vault-card record">
+      <span class="vault-tag">All-Time High — 246.70</span>
+      <h3>Joe · Thielen my Chubb</h3>
+      <div class="vault-sub">2020, Week 12 vs. Virginia Eagles (won 246.70–147.45)</div>
+      <div class="vault-lineup">
+        <div><span class="pos">QB</span>Deshaun Watson <span class="pts">43.30</span></div>
+        <div><span class="pos">RB</span>Derrick Henry <span class="pts">41.50</span></div>
+        <div><span class="pos">RB</span>Nick Chubb <span class="pts">28.60</span></div>
+        <div><span class="pos">WR</span>Will Fuller V <span class="pts">34.10</span></div>
+        <div><span class="pos">WR</span>DK Metcalf <span class="pts">22.70</span></div>
+        <div><span class="pos">TE</span>Rob Gronkowski <span class="pts">15.60</span></div>
+        <div><span class="pos">FLEX</span>James Robinson <span class="pts">26.90</span></div>
+        <div><span class="pos">K</span>Jason Myers <span class="pts">15.00</span></div>
+        <div><span class="pos">DEF</span>Dolphins <span class="pts">19.00</span></div>
+      </div>
+    </div>
+    <div class="vault-card record">
+      <span class="vault-tag">All-Time Low — 34.20</span>
+      <h3>Charles Harkins · Murse</h3>
+      <div class="vault-sub">2012, Week 11 vs. Mighty WeeMan (lost 34.20–115.60)</div>
+      <div class="vault-lineup">
+        <div><span class="pos">QB</span>Eli Manning <span class="pts">0.00</span></div>
+        <div><span class="pos">RB</span>Ahmad Bradshaw <span class="pts">0.00</span></div>
+        <div><span class="pos">RB</span>Chris Johnson <span class="pts">0.00</span></div>
+        <div><span class="pos">WR</span>Brandon Marshall <span class="pts">8.10</span></div>
+        <div><span class="pos">WR</span>Steve Smith <span class="pts">6.10</span></div>
+        <div><span class="pos">TE</span>Martellus Bennett <span class="pts">0.00</span></div>
+        <div><span class="pos">K</span>Sebastian Janikowski <span class="pts">9.00</span></div>
+        <div><span class="pos">DEF</span>Steelers <span class="pts">11.00</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+<!-- ================= END STATS TAB ================= -->
+
+<!-- ================= MANAGERS TAB ================= -->
+<div id="tab-managers" class="tab-panel">
+
+<section class="mgr-band" id="managers">
+  <div class="section-head">
+    <span class="eyebrow">2026 Front Office</span>
+    <h2>The Current Managers</h2>
+    <p>The ten managers set to draft this season, each with a full year-by-year log of every season they've played. Click a name to expand.</p>
+    <span class="season-note" id="season-countdown">The 2026 draft is on Labor Day, September 7 — check back for this season's rosters once it happens.</span>
+  </div>
+
+  <div class="mgr-grid">
+
+    <div class="mgr-card">
+      <div class="mgr-card-head">
+        <h3>Joe</h3>
+        <div class="mgr-card-sub"><span class="rings-ct">2 titles</span> · 147-105-0 (.583) · 15/19 playoffs</div>
+      </div>
+      <p class="mgr-take"><span class="label">The Take</span>Owns the single highest-scoring week in league history (246.70) and also once went by "Krumb Lord" for eight straight years, which is either a wrestling heel name or a medical condition. Lost two championship games in a row with the best record in the league both times, which is the fantasy football equivalent of getting a perfect attendance award and then failing the class anyway.</p>
+      <details>
+        <summary>Full season log (19 years)</summary>
+        <div class="season-log-wrap">
+          <table class="season-log">
+            <thead><tr><th>Year</th><th>Team</th><th class="num">Record</th><th class="num">PF</th><th class="num">PA</th><th>Finish</th></tr></thead>
+            <tbody>
+              <tr class="champ-row"><td>2007</td><td>TD King 21</td><td class="num">9-4-0</td><td class="num">1453.95</td><td class="num">1202.80</td><td>Champion</td></tr>
+              <tr><td>2008</td><td>TD King 21</td><td class="num">7-6-0</td><td class="num">1350.05</td><td class="num">1306.70</td><td>Made playoffs (2nd)</td></tr>
+              <tr><td>2009</td><td>Krumb Lord</td><td class="num">6-7-0</td><td class="num">1461.10</td><td class="num">1429.95</td><td>Made playoffs (3rd)</td></tr>
+              <tr><td>2010</td><td>Krumb Lord</td><td class="num">8-5-0</td><td class="num">1409.20</td><td class="num">1307.60</td><td>Made playoffs (2nd)</td></tr>
+              <tr><td>2011</td><td>Krumb Lord</td><td class="num">6-7-0</td><td class="num">1451.50</td><td class="num">1471.80</td><td>Made playoffs (2nd), lost final by 1.25</td></tr>
+              <tr class="missed-row"><td>2012</td><td>Krumb Lord</td><td class="num">4-9-0</td><td class="num">1478.80</td><td class="num">1509.30</td><td>Missed playoffs (10th)</td></tr>
+              <tr class="missed-row"><td>2013</td><td>Krumb Lord</td><td class="num">6-7-0</td><td class="num">1406.55</td><td class="num">1421.50</td><td>Missed playoffs (7th)</td></tr>
+              <tr class="missed-row"><td>2014</td><td>Krumb Lord</td><td class="num">4-9-0</td><td class="num">1307.80</td><td class="num">1384.55</td><td>Missed playoffs (8th)</td></tr>
+              <tr><td>2015</td><td>Krumb Lord</td><td class="num">9-4-0</td><td class="num">1468.25</td><td class="num">1369.90</td><td>Made playoffs (2nd)</td></tr>
+              <tr><td>2016</td><td>Krumb Lord</td><td class="num">8-5-0</td><td class="num">1644.40</td><td class="num">1506.70</td><td>Made playoffs (5th)</td></tr>
+              <tr><td>2017</td><td>Kizer Soze</td><td class="num">11-2-0</td><td class="num">1660.75</td><td class="num">1425.75</td><td>Made playoffs (best record)</td></tr>
+              <tr><td>2018</td><td>Thielen my Chubb</td><td class="num">10-3-0</td><td class="num">1947.15</td><td class="num">1742.10</td><td>Made playoffs (3rd, div.)</td></tr>
+              <tr><td>2019</td><td>Thielen my Chubb</td><td class="num">10-3-0</td><td class="num">1793.50</td><td class="num">1568.85</td><td>Runner-up (best record, lost final)</td></tr>
+              <tr><td>2020</td><td>Thielen my Chubb</td><td class="num">10-3-0</td><td class="num">1936.45</td><td class="num">1577.30</td><td>Runner-up (best record, lost final)</td></tr>
+              <tr class="champ-row"><td>2021</td><td>Thielen my Chubb</td><td class="num">10-4-0</td><td class="num">1872.95</td><td class="num">1578.25</td><td>Champion</td></tr>
+              <tr class="missed-row"><td>2022</td><td>Thielen my Chubb</td><td class="num">6-8-0</td><td class="num">1592.10</td><td class="num">1612.20</td><td>Missed playoffs (10th)</td></tr>
+              <tr><td>2023</td><td>The Bye Week</td><td class="num">8-6-0</td><td class="num">1680.50</td><td class="num">1774.65</td><td>Made playoffs (4th)</td></tr>
+              <tr><td>2024</td><td>The Bye Week</td><td class="num">8-6-0</td><td class="num">1786.30</td><td class="num">1638.20</td><td>Made playoffs (6th)</td></tr>
+              <tr><td>2025</td><td>The Bye Week</td><td class="num">7-7-0</td><td class="num">1767.50</td><td class="num">1755.35</td><td>Made playoffs (6th)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+
+    <div class="mgr-card">
+      <div class="mgr-card-head">
+        <h3>Bob</h3>
+        <div class="mgr-card-sub"><span class="rings-ct">2 titles</span> · 151-100-1 (.599) · 17/19 playoffs</div>
+      </div>
+      <p class="mgr-take"><span class="label">The Take</span>Best career win percentage in the league, seventeen playoff berths in nineteen years, and a team name that has stayed "The Snozzberries" for basically the entire run — the fruit that supposedly "tastes like snozzberries," which tells you exactly as much as this stat line does: technically impressive, functionally mysterious. The definition of a team you forget is good until it's beating you in November.</p>
+      <details>
+        <summary>Full season log (19 years)</summary>
+        <div class="season-log-wrap">
+          <table class="season-log">
+            <thead><tr><th>Year</th><th>Team</th><th class="num">Record</th><th class="num">PF</th><th class="num">PA</th><th>Finish</th></tr></thead>
+            <tbody>
+              <tr><td>2007</td><td>The Beast Killer</td><td class="num">7-6-0</td><td class="num">1391.50</td><td class="num">1358.80</td><td>Made playoffs (6th)</td></tr>
+              <tr class="champ-row"><td>2008</td><td>The Snozzberries</td><td class="num">8-5-0</td><td class="num">1324.45</td><td class="num">1261.50</td><td>Champion</td></tr>
+              <tr><td>2009</td><td>The Snozzberries</td><td class="num">8-5-0</td><td class="num">1355.25</td><td class="num">1316.30</td><td>Made playoffs (5th)</td></tr>
+              <tr><td>2010</td><td>Bull F—ing Sh—</td><td class="num">9-4-0</td><td class="num">1451.75</td><td class="num">1298.55</td><td>Made playoffs (4th)</td></tr>
+              <tr><td>2011</td><td>The Snozzberries</td><td class="num">7-6-0</td><td class="num">1308.10</td><td class="num">1405.50</td><td>Made playoffs (5th)</td></tr>
+              <tr class="champ-row"><td>2012</td><td>The Snozzberries</td><td class="num">10-3-0</td><td class="num">1544.20</td><td class="num">1347.70</td><td>Champion</td></tr>
+              <tr><td>2013</td><td>The Snozzberries</td><td class="num">9-4-0</td><td class="num">1540.35</td><td class="num">1430.25</td><td>Made playoffs (4th)</td></tr>
+              <tr><td>2014</td><td>The Snozzberries</td><td class="num">9-4-0</td><td class="num">1525.05</td><td class="num">1311.70</td><td>Made playoffs (4th)</td></tr>
+              <tr><td>2015</td><td>The Snozzberries</td><td class="num">6-7-0</td><td class="num">1422.95</td><td class="num">1306.60</td><td>Made playoffs (4th)</td></tr>
+              <tr><td>2016</td><td>The Snozzberries</td><td class="num">7-6-0</td><td class="num">1572.75</td><td class="num">1562.30</td><td>Made playoffs (3rd)</td></tr>
+              <tr><td>2017</td><td>The Snozzberries</td><td class="num">7-5-1</td><td class="num">1504.85</td><td class="num">1393.95</td><td>Made playoffs (2nd)</td></tr>
+              <tr><td>2018</td><td>The Snozzberries</td><td class="num">9-4-0</td><td class="num">1673.90</td><td class="num">1577.15</td><td>Made playoffs (2nd)</td></tr>
+              <tr class="missed-row"><td>2019</td><td>The Snozzberries</td><td class="num">5-8-0</td><td class="num">1541.70</td><td class="num">1623.00</td><td>Missed playoffs (10th)</td></tr>
+              <tr class="missed-row"><td>2020</td><td>The Snozzberries</td><td class="num">5-8-0</td><td class="num">1428.55</td><td class="num">1497.70</td><td>Missed playoffs (9th)</td></tr>
+              <tr><td>2021</td><td>The Snozzberries</td><td class="num">11-3-0</td><td class="num">1929.65</td><td class="num">1638.75</td><td>Made playoffs (3rd)</td></tr>
+              <tr><td>2022</td><td>The Snozzberries</td><td class="num">6-8-0</td><td class="num">1664.65</td><td class="num">1744.60</td><td>Made playoffs (5th)</td></tr>
+              <tr><td>2023</td><td>The Snozzberries</td><td class="num">10-4-0</td><td class="num">1688.00</td><td class="num">1599.95</td><td>Made playoffs (3rd)</td></tr>
+              <tr><td>2024</td><td>The Snozzberries</td><td class="num">8-6-0</td><td class="num">1703.20</td><td class="num">1608.80</td><td>Runner-up (2nd)</td></tr>
+              <tr><td>2025</td><td>The Snozzberries</td><td class="num">10-4-0</td><td class="num">1789.40</td><td class="num">1431.20</td><td>Made playoffs (3rd)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+
+    <div class="mgr-card">
+      <div class="mgr-card-head">
+        <h3>Gati (DavidM)</h3>
+        <div class="mgr-card-sub"><span class="rings-ct">2 titles</span> · 137-115-0 (.544) · 11/19 playoffs</div>
+      </div>
+      <p class="mgr-take"><span class="label">The Take</span>Eleven different team names in nineteen years — Harry Plopper, Team Browhole, Gangsta Panda, Dr. Chim Richells, Thank You Come Again, Bob Sucks, Sex Panther, Fat Ewoks — suggesting either a serious identity crisis or the league's most committed bit. Somehow found two championships in there, which means at least two of those personas knew what they were doing.</p>
+      <details>
+        <summary>Full season log (19 years)</summary>
+        <div class="season-log-wrap">
+          <table class="season-log">
+            <thead><tr><th>Year</th><th>Team</th><th class="num">Record</th><th class="num">PF</th><th class="num">PA</th><th>Finish</th></tr></thead>
+            <tbody>
+              <tr><td>2007</td><td>Harry Plopper</td><td class="num">8-5-0</td><td class="num">1520.80</td><td class="num">1431.20</td><td>Runner-up (2nd)</td></tr>
+              <tr><td>2008</td><td>Team Browhole</td><td class="num">9-4-0</td><td class="num">1472.90</td><td class="num">1245.10</td><td>Made playoffs (4th)</td></tr>
+              <tr class="champ-row"><td>2009</td><td>Harry Plopper</td><td class="num">9-4-0</td><td class="num">1567.30</td><td class="num">1529.80</td><td>Champion</td></tr>
+              <tr class="missed-row"><td>2010</td><td>Plopper da Champ</td><td class="num">5-8-0</td><td class="num">1315.35</td><td class="num">1445.85</td><td>Missed playoffs (7th)</td></tr>
+              <tr class="missed-row"><td>2011</td><td>Plopper Power</td><td class="num">6-7-0</td><td class="num">1432.15</td><td class="num">1393.20</td><td>Missed playoffs (8th)</td></tr>
+              <tr class="missed-row"><td>2012</td><td>Gangsta Panda</td><td class="num">5-8-0</td><td class="num">1383.75</td><td class="num">1523.35</td><td>Missed playoffs (7th)</td></tr>
+              <tr><td>2013</td><td>Dr. Chim Richells</td><td class="num">10-3-0</td><td class="num">1657.15</td><td class="num">1346.95</td><td>Made playoffs (best record, 3rd)</td></tr>
+              <tr><td>2014</td><td>Thank You Come Again</td><td class="num">7-6-0</td><td class="num">1652.60</td><td class="num">1492.45</td><td>Made playoffs (5th)</td></tr>
+              <tr><td>2015</td><td>Bob Sucks</td><td class="num">7-6-0</td><td class="num">1420.40</td><td class="num">1431.10</td><td>Made playoffs (5th)</td></tr>
+              <tr><td>2016</td><td>Sex Panther</td><td class="num">7-6-0</td><td class="num">1715.15</td><td class="num">1531.05</td><td>Made playoffs (2nd)</td></tr>
+              <tr class="missed-row"><td>2017</td><td>Sex Panther</td><td class="num">3-10-0</td><td class="num">1427.70</td><td class="num">1623.30</td><td>Missed playoffs (9th)</td></tr>
+              <tr class="missed-row"><td>2018</td><td>Sex Panther</td><td class="num">6-7-0</td><td class="num">1560.50</td><td class="num">1466.95</td><td>Missed playoffs (7th)</td></tr>
+              <tr class="champ-row"><td>2019</td><td>Fat Ewoks</td><td class="num">10-3-0</td><td class="num">1648.35</td><td class="num">1453.10</td><td>Champion</td></tr>
+              <tr class="missed-row"><td>2020</td><td>Woolwich Football Te</td><td class="num">5-8-0</td><td class="num">1371.00</td><td class="num">1548.85</td><td>Missed playoffs (7th)</td></tr>
+              <tr><td>2021</td><td>Woolwich Football Te</td><td class="num">8-6-0</td><td class="num">1665.95</td><td class="num">1640.65</td><td>Made playoffs (2nd)</td></tr>
+              <tr><td>2022</td><td>Woolwich Football Te</td><td class="num">9-5-0</td><td class="num">1669.40</td><td class="num">1536.80</td><td>Made playoffs (6th)</td></tr>
+              <tr class="missed-row"><td>2023</td><td>Woolwich Fighting Chickens</td><td class="num">7-7-0</td><td class="num">1577.60</td><td class="num">1646.50</td><td>Missed playoffs (7th)</td></tr>
+              <tr><td>2024</td><td>Woolwich Fighting Chickens</td><td class="num">10-4-0</td><td class="num">1591.60</td><td class="num">1557.95</td><td>Made playoffs (3rd)</td></tr>
+              <tr class="missed-row"><td>2025</td><td>Woolwich Fighting Chickens</td><td class="num">6-8-0</td><td class="num">1748.45</td><td class="num">1741.95</td><td>Missed playoffs (9th)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+
+    <div class="mgr-card">
+      <div class="mgr-card-head">
+        <h3>Scott</h3>
+        <div class="mgr-card-sub"><span class="rings-ct">4 titles</span> · 111-127-0 (.466) · 11/18 playoffs (sat out 2022)</div>
+      </div>
+      <p class="mgr-take"><span class="label">The Take</span>More championships than anyone else in league history and a losing career record — Scott has somehow been both the best and the worst manager in this league, occasionally in back-to-back seasons. Went 1-12 the year after a title, then 1-13 eight years later, and rebuilt into a champion both times. A team named Chemical Toilet clogging and unclogging itself on a semi-regular basis is, at this point, just the natural order of things.</p>
+      <details>
+        <summary>Full season log (18 years played)</summary>
+        <div class="season-log-wrap">
+          <table class="season-log">
+            <thead><tr><th>Year</th><th>Team</th><th class="num">Record</th><th class="num">PF</th><th class="num">PA</th><th>Finish</th></tr></thead>
+            <tbody>
+              <tr><td>2007</td><td>Banana Hammocks</td><td class="num">8-5-0</td><td class="num">1373.55</td><td class="num">1296.35</td><td>Made playoffs (4th)</td></tr>
+              <tr class="missed-row"><td>2008</td><td>Pubie Salads</td><td class="num">4-9-0</td><td class="num">1110.35</td><td class="num">1281.05</td><td>Missed playoffs (8th)</td></tr>
+              <tr class="missed-row"><td>2009</td><td>Chemical Toilet</td><td class="num">6-7-0</td><td class="num">1310.45</td><td class="num">1462.40</td><td>Missed playoffs (7th)</td></tr>
+              <tr class="champ-row"><td>2010</td><td>Chemical Toilet</td><td class="num">7-6-0</td><td class="num">1460.60</td><td class="num">1444.45</td><td>Champion</td></tr>
+              <tr><td>2011</td><td>Chemical Toilet</td><td class="num">11-2-0</td><td class="num">1434.70</td><td class="num">1322.85</td><td>Made playoffs (best record, 3rd)</td></tr>
+              <tr><td>2012</td><td>Chemical Toilet</td><td class="num">6-7-0</td><td class="num">1381.80</td><td class="num">1425.30</td><td>Made playoffs (3rd)</td></tr>
+              <tr class="champ-row"><td>2013</td><td>Chemical Toilet</td><td class="num">7-6-0</td><td class="num">1415.00</td><td class="num">1419.55</td><td>Champion</td></tr>
+              <tr class="missed-row"><td>2014</td><td>Chemical Toilet</td><td class="num">1-12-0</td><td class="num">1143.55</td><td class="num">1627.95</td><td>Missed playoffs (10th)</td></tr>
+              <tr class="champ-row"><td>2015</td><td>Chemical Toilet</td><td class="num">10-3-0</td><td class="num">1537.70</td><td class="num">1320.85</td><td>Champion</td></tr>
+              <tr class="missed-row"><td>2016</td><td>Chemical Toilet</td><td class="num">5-8-0</td><td class="num">1485.40</td><td class="num">1482.05</td><td>Missed playoffs (8th)</td></tr>
+              <tr><td>2017</td><td>Chemical Toilet</td><td class="num">9-4-0</td><td class="num">1487.25</td><td class="num">1270.15</td><td>Made playoffs (6th)</td></tr>
+              <tr class="missed-row"><td>2018</td><td>Chemical Toilet</td><td class="num">3-10-0</td><td class="num">1377.40</td><td class="num">1682.35</td><td>Missed playoffs (10th)</td></tr>
+              <tr><td>2019</td><td>Chemical Toilet</td><td class="num">7-6-0</td><td class="num">1609.35</td><td class="num">1409.80</td><td>Made playoffs (5th)</td></tr>
+              <tr><td>2020</td><td>Let Russ Cook</td><td class="num">7-6-0</td><td class="num">1525.20</td><td class="num">1640.75</td><td>Made playoffs (6th)</td></tr>
+              <tr class="missed-row"><td>2021</td><td>Chemical Toilet</td><td class="num">1-13-0</td><td class="num">1194.90</td><td class="num">1516.80</td><td>Missed playoffs (10th) — worst regular season under his own name</td></tr>
+              <tr class="missed-row" style="opacity:.55;"><td>2022</td><td colspan="5">Sat out — Chemical Toilet name/roster passed to Drew</td></tr>
+              <tr><td>2023</td><td>I Like Turtles</td><td class="num">8-6-0</td><td class="num">1631.85</td><td class="num">1443.60</td><td>Runner-up (2nd)</td></tr>
+              <tr class="champ-row"><td>2024</td><td>I Like Turtles</td><td class="num">7-7-0</td><td class="num">1740.45</td><td class="num">1623.75</td><td>Champion</td></tr>
+              <tr class="missed-row"><td>2025</td><td>I Like Turtles</td><td class="num">4-10-0</td><td class="num">1390.95</td><td class="num">1678.25</td><td>Missed playoffs (7th) — title defense collapse</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+
+    <div class="mgr-card">
+      <div class="mgr-card-head">
+        <h3>Bill (Max Bet)</h3>
+        <div class="mgr-card-sub"><span class="rings-ct">2 titles</span> · 114-138-0 (.452) · 8/19 playoffs · League Commissioner</div>
+      </div>
+      <p class="mgr-take"><span class="label">The Take</span>Worst career win percentage of any multi-time champion, and also the guy who writes the rules — draw your own conclusions. Went by "Bearack Obearma" for three years, which is a genuinely unhinged commish alter ego to trot out unprompted. Somehow still has two rings despite a losing record, proof that fantasy football rewards showing up in December more than showing up all season.</p>
+      <details>
+        <summary>Full season log (19 years)</summary>
+        <div class="season-log-wrap">
+          <table class="season-log">
+            <thead><tr><th>Year</th><th>Team</th><th class="num">Record</th><th class="num">PF</th><th class="num">PA</th><th>Finish</th></tr></thead>
+            <tbody>
+              <tr class="missed-row"><td>2007</td><td>Plow King</td><td class="num">4-9-0</td><td class="num">1369.30</td><td class="num">1465.40</td><td>Missed playoffs (8th)</td></tr>
+              <tr><td>2008</td><td>Raw Plower</td><td class="num">8-5-0</td><td class="num">1483.80</td><td class="num">1467.00</td><td>Made playoffs (5th)</td></tr>
+              <tr class="missed-row"><td>2009</td><td>Bearack Obearma</td><td class="num">3-10-0</td><td class="num">1291.45</td><td class="num">1338.65</td><td>Missed playoffs (10th)</td></tr>
+              <tr class="missed-row"><td>2010</td><td>Bearack Obearma</td><td class="num">5-8-0</td><td class="num">1322.50</td><td class="num">1335.30</td><td>Missed playoffs (8th)</td></tr>
+              <tr class="missed-row"><td>2011</td><td>Bearack Obearma</td><td class="num">4-9-0</td><td class="num">1372.45</td><td class="num">1501.50</td><td>Missed playoffs (10th)</td></tr>
+              <tr><td>2012</td><td>Max Bet</td><td class="num">9-4-0</td><td class="num">1555.80</td><td class="num">1346.55</td><td>Made playoffs (5th)</td></tr>
+              <tr class="missed-row"><td>2013</td><td>Max Bet</td><td class="num">6-7-0</td><td class="num">1530.95</td><td class="num">1502.35</td><td>Missed playoffs (8th)</td></tr>
+              <tr class="missed-row"><td>2014</td><td>Max Bet</td><td class="num">7-6-0</td><td class="num">1440.00</td><td class="num">1402.50</td><td>Missed playoffs (7th)</td></tr>
+              <tr class="missed-row"><td>2015</td><td>Max Bet</td><td class="num">3-10-0</td><td class="num">1252.10</td><td class="num">1466.75</td><td>Missed playoffs (9th)</td></tr>
+              <tr><td>2016</td><td>Max Bet</td><td class="num">8-5-0</td><td class="num">1651.35</td><td class="num">1598.10</td><td>Made playoffs (4th)</td></tr>
+              <tr class="missed-row"><td>2017</td><td>Max Bet</td><td class="num">6-7-0</td><td class="num">1465.65</td><td class="num">1537.50</td><td>Missed playoffs (7th)</td></tr>
+              <tr><td>2018</td><td>Max Bet</td><td class="num">7-6-0</td><td class="num">1660.00</td><td class="num">1499.35</td><td>Made playoffs (6th)</td></tr>
+              <tr class="missed-row"><td>2019</td><td>Max Bet</td><td class="num">6-7-0</td><td class="num">1344.30</td><td class="num">1496.05</td><td>Missed playoffs (6th, div.)</td></tr>
+              <tr><td>2020</td><td>Max Bet</td><td class="num">8-5-0</td><td class="num">1601.05</td><td class="num">1476.60</td><td>Made playoffs (3rd)</td></tr>
+              <tr class="missed-row"><td>2021</td><td>Max Bet</td><td class="num">5-9-0</td><td class="num">1468.80</td><td class="num">1695.70</td><td>Missed playoffs (8th)</td></tr>
+              <tr class="champ-row"><td>2022</td><td>Max Bet</td><td class="num">7-7-0</td><td class="num">1630.75</td><td class="num">1628.25</td><td>Champion</td></tr>
+              <tr class="champ-row"><td>2023</td><td>Max Bet</td><td class="num">9-5-0</td><td class="num">1727.85</td><td class="num">1655.40</td><td>Champion</td></tr>
+              <tr class="missed-row"><td>2024</td><td>Max Bet</td><td class="num">6-8-0</td><td class="num">1541.70</td><td class="num">1595.50</td><td>Missed playoffs (8th)</td></tr>
+              <tr class="missed-row"><td>2025</td><td>Max Bet</td><td class="num">3-11-0</td><td class="num">1350.30</td><td class="num">1618.10</td><td>Missed playoffs (8th) — title defense collapse</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+
+    <div class="mgr-card">
+      <div class="mgr-card-head">
+        <h3>Rich</h3>
+        <div class="mgr-card-sub"><span class="rings-ct">3 titles</span> · 67-55-0 (.549) · 6/9 playoffs</div>
+      </div>
+      <p class="mgr-take"><span class="label">The Take</span>Joined the league a decade late and won the title in his first season anyway, like showing up to a poker game you've never played and taking the pot on hand one. Three rings in nine years is the best rate of return anybody in this league has ever posted. Also happens to be Bob's dad, so somewhere there's a family group chat that has been extremely petty for two generations running.</p>
+      <details>
+        <summary>Full season log (9 years)</summary>
+        <div class="season-log-wrap">
+          <table class="season-log">
+            <thead><tr><th>Year</th><th>Team</th><th class="num">Record</th><th class="num">PF</th><th class="num">PA</th><th>Finish</th></tr></thead>
+            <tbody>
+              <tr class="champ-row"><td>2017</td><td>Dream Team2</td><td class="num">10-3-0</td><td class="num">1411.65</td><td class="num">1405.25</td><td>Champion, first year in league</td></tr>
+              <tr class="champ-row"><td>2018</td><td>Dream Team2</td><td class="num">7-6-0</td><td class="num">1747.35</td><td class="num">1667.90</td><td>Champion, back-to-back</td></tr>
+              <tr class="missed-row"><td>2019</td><td>Dream Team2</td><td class="num">5-8-0</td><td class="num">1428.60</td><td class="num">1510.35</td><td>Missed playoffs (8th)</td></tr>
+              <tr class="champ-row"><td>2020</td><td>Dream Team2</td><td class="num">9-4-0</td><td class="num">1558.95</td><td class="num">1410.05</td><td>Champion</td></tr>
+              <tr class="missed-row"><td>2021</td><td>Dream Team2</td><td class="num">5-9-0</td><td class="num">1554.85</td><td class="num">1727.85</td><td>Missed playoffs (9th)</td></tr>
+              <tr><td>2022</td><td>Dream Team2</td><td class="num">10-4-0</td><td class="num">1727.60</td><td class="num">1573.10</td><td>Made playoffs (3rd)</td></tr>
+              <tr class="missed-row"><td>2023</td><td>Dream Team2</td><td class="num">4-10-0</td><td class="num">1546.90</td><td class="num">1635.00</td><td>Missed playoffs (8th)</td></tr>
+              <tr><td>2024</td><td>Eagles Rock 2</td><td class="num">10-4-0</td><td class="num">1835.35</td><td class="num">1480.85</td><td>Made playoffs (best record, 3rd)</td></tr>
+              <tr><td>2025</td><td>Eagles Rock 2</td><td class="num">7-7-0</td><td class="num">1615.55</td><td class="num">1562.30</td><td>Made playoffs (4th)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+
+    <div class="mgr-card">
+      <div class="mgr-card-head">
+        <h3>Chris</h3>
+        <div class="mgr-card-sub"><span class="rings-ct">1 title</span> · 48-73-1 (.393) · 3/9 playoffs</div>
+      </div>
+      <p class="mgr-take"><span class="label">The Take</span>The worst career winning percentage of any current manager, one measly playoff appearance in five of the last six years, an actual 1-12 season on the ledger — and somehow also a champion. Never changed the team name once in nine years, which either means unshakable brand loyalty or a complete inability to admit Cheesesteak's was cursed for half a decade. Vindicated in the end.</p>
+      <details>
+        <summary>Full season log (9 years)</summary>
+        <div class="season-log-wrap">
+          <table class="season-log">
+            <thead><tr><th>Year</th><th>Team</th><th class="num">Record</th><th class="num">PF</th><th class="num">PA</th><th>Finish</th></tr></thead>
+            <tbody>
+              <tr><td>2017</td><td>Cheesesteak's</td><td class="num">6-6-1</td><td class="num">1548.20</td><td class="num">1527.10</td><td>Made playoffs (5th)</td></tr>
+              <tr><td>2018</td><td>Cheesesteak's</td><td class="num">7-6-0</td><td class="num">1613.40</td><td class="num">1654.60</td><td>Made playoffs (5th)</td></tr>
+              <tr class="missed-row"><td>2019</td><td>Cheesesteak's</td><td class="num">4-9-0</td><td class="num">1361.15</td><td class="num">1569.80</td><td>Missed playoffs (9th)</td></tr>
+              <tr class="missed-row"><td>2020</td><td>Cheesesteak's</td><td class="num">1-12-0</td><td class="num">1294.95</td><td class="num">1642.55</td><td>Missed playoffs (10th) — rock bottom</td></tr>
+              <tr class="missed-row"><td>2021</td><td>Cheesesteak's</td><td class="num">6-8-0</td><td class="num">1596.55</td><td class="num">1726.85</td><td>Missed playoffs (7th)</td></tr>
+              <tr class="missed-row"><td>2022</td><td>Cheesesteak's</td><td class="num">5-9-0</td><td class="num">1686.45</td><td class="num">1771.10</td><td>Missed playoffs (9th)</td></tr>
+              <tr class="missed-row"><td>2023</td><td>Cheesesteak's</td><td class="num">6-8-0</td><td class="num">1475.85</td><td class="num">1590.40</td><td>Missed playoffs (9th)</td></tr>
+              <tr class="missed-row"><td>2024</td><td>Cheesesteak's</td><td class="num">4-10-0</td><td class="num">1514.40</td><td class="num">1735.05</td><td>Missed playoffs (7th)</td></tr>
+              <tr class="champ-row"><td>2025</td><td>Cheesesteak's</td><td class="num">9-5-0</td><td class="num">1667.60</td><td class="num">1566.65</td><td>Champion</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+
+    <div class="mgr-card">
+      <div class="mgr-card-head">
+        <h3>Sean</h3>
+        <div class="mgr-card-sub">0 titles · 57-52-0 (.523) · 6/8 playoffs</div>
+      </div>
+      <p class="mgr-take"><span class="label">The Take</span>A winning record, six playoff trips in eight tries, one runner-up finish, zero rings, and the exact same team name (Virginia Eagles) since the day he joined — the fantasy football equivalent of being the reliable coworker who's never once late but also never gets the promotion. At some point this stops being bad luck and starts being a personality trait.</p>
+      <details>
+        <summary>Full season log (8 years)</summary>
+        <div class="season-log-wrap">
+          <table class="season-log">
+            <thead><tr><th>Year</th><th>Team</th><th class="num">Record</th><th class="num">PF</th><th class="num">PA</th><th>Finish</th></tr></thead>
+            <tbody>
+              <tr class="missed-row"><td>2018</td><td>Virginia Eagles</td><td class="num">5-8-0</td><td class="num">1552.40</td><td class="num">1673.45</td><td>Missed playoffs (9th)</td></tr>
+              <tr><td>2019</td><td>Virginia Eagles</td><td class="num">6-7-0</td><td class="num">1544.45</td><td class="num">1595.80</td><td>Made playoffs (4th)</td></tr>
+              <tr><td>2020</td><td>Virginia Eagles</td><td class="num">8-5-0</td><td class="num">1671.75</td><td class="num">1683.85</td><td>Made playoffs (4th)</td></tr>
+              <tr><td>2021</td><td>Virginia Eagles</td><td class="num">8-6-0</td><td class="num">1648.30</td><td class="num">1602.20</td><td>Made playoffs (6th)</td></tr>
+              <tr class="missed-row"><td>2022</td><td>Virginia Eagles</td><td class="num">6-8-0</td><td class="num">1493.10</td><td class="num">1663.50</td><td>Missed playoffs (8th)</td></tr>
+              <tr><td>2023</td><td>Virginia Eagles</td><td class="num">7-7-0</td><td class="num">1663.40</td><td class="num">1646.65</td><td>Made playoffs (5th)</td></tr>
+              <tr><td>2024</td><td>Virginia Eagles</td><td class="num">9-5-0</td><td class="num">1637.55</td><td class="num">1536.60</td><td>Made playoffs (5th)</td></tr>
+              <tr><td>2025</td><td>Virginia Eagles</td><td class="num">8-6-0</td><td class="num">1560.00</td><td class="num">1598.05</td><td>Runner-up (2nd)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+
+    <div class="mgr-card">
+      <div class="mgr-card-head">
+        <h3>Drew</h3>
+        <div class="mgr-card-sub">0 titles · in the league since 2022</div>
+      </div>
+      <p class="mgr-take"><span class="label">The Take</span>Inherited a haunted franchise — Chemical Toilet, fresh off a 1-13 season — made the playoffs with it anyway, and then fled to a brand-new team named Stu Pedasso, which promptly went 3-11. There's a real chance Drew is just cursed, or there's a real chance "Stu Pedasso" is simply a worse name to play under than "Chemical Toilet," which is a genuinely remarkable sentence to be able to write.</p>
+      <details>
+        <summary>Full season log (4 years)</summary>
+        <div class="season-log-wrap">
+          <table class="season-log">
+            <thead><tr><th>Year</th><th>Team</th><th class="num">Record</th><th class="num">PF</th><th class="num">PA</th><th>Finish</th></tr></thead>
+            <tbody>
+              <tr class="missed-row"><td>2022</td><td>Chemical Toilet</td><td class="num">4-10-0</td><td class="num">1451.55</td><td class="num">1618.20</td><td>Missed playoffs (7th) — inherited the name from Scott</td></tr>
+              <tr><td>2023</td><td>Chemical Toilet</td><td class="num">7-7-0</td><td class="num">1698.95</td><td class="num">1585.10</td><td>Made playoffs (6th)</td></tr>
+              <tr class="missed-row"><td>2024</td><td>Stu Pedasso</td><td class="num">3-11-0</td><td class="num">1309.90</td><td class="num">1779.00</td><td>Missed playoffs (10th)</td></tr>
+              <tr class="missed-row"><td>2025</td><td>Stu Pedasso</td><td class="num">7-7-0</td><td class="num">1548.45</td><td class="num">1598.15</td><td>Missed playoffs (10th, div.)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+
+    <div class="mgr-card">
+      <div class="mgr-card-head">
+        <h3>John</h3>
+        <div class="mgr-card-sub">0 titles · in the league since 2022</div>
+      </div>
+      <p class="mgr-take"><span class="label">The Take</span>Made the championship game in his very first season in the league, which is either a great omen or the single worst thing that could've happened to him — he followed it up with back-to-back last-place-adjacent finishes before finally clawing back to respectable in 2025. Classic sophomore slump, except it lasted two extra years and the team is named after a bird that dives at 240 miles per hour, which is faster than his win rate has ever moved.</p>
+      <details>
+        <summary>Full season log (4 years)</summary>
+        <div class="season-log-wrap">
+          <table class="season-log">
+            <thead><tr><th>Year</th><th>Team</th><th class="num">Record</th><th class="num">PF</th><th class="num">PA</th><th>Finish</th></tr></thead>
+            <tbody>
+              <tr><td>2022</td><td>Hawk Time</td><td class="num">7-7-0</td><td class="num">1654.70</td><td class="num">1643.55</td><td>Made playoffs (2nd), debut season final appearance</td></tr>
+              <tr class="missed-row"><td>2023</td><td>Hawk Time</td><td class="num">4-10-0</td><td class="num">1425.00</td><td class="num">1538.65</td><td>Missed playoffs (10th)</td></tr>
+              <tr class="missed-row"><td>2024</td><td>Hawk Time</td><td class="num">5-9-0</td><td class="num">1553.40</td><td class="num">1658.15</td><td>Missed playoffs (9th)</td></tr>
+              <tr><td>2025</td><td>Hawk Time</td><td class="num">9-5-0</td><td class="num">1578.40</td><td class="num">1466.60</td><td>Made playoffs (5th)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+</div>
+<!-- ================= END MANAGERS TAB ================= -->
+
+<!-- ================= 2026 SEASON TAB ================= -->
+<div id="tab-season2026" class="tab-panel">
+
+<section id="draft-board-section">
+  <div class="section-head">
+    <span class="eyebrow">Sept 7, 2026 &nbsp;•&nbsp; Offline Draft</span>
+    <h2>Draft Board</h2>
+    <p>A live board to run during the draft. Set the pick order below (defaults to a worst&#8209;to&#8209;first guess off 2025's final standings — fix it once Yahoo assigns the real order), then fill in picks as they happen. Players already taken are grayed out everywhere else. Everything autosaves to this browser.</p>
+    <span class="season-note" id="draft-countdown"></span>
+  </div>
+
+  <div class="season-banner" id="keeper-banner">
+    <strong>Keeper deadline: Tuesday, Sept 8, 2026, 3:00am ET</strong> — the day after the draft. Max 3 keepers per team, 2 years max per player, round-1 picks aren't keeper-eligible. The roster snapshot below auto-projects each player's 2026 keeper cost from the 2025 draft board — it's best-effort name-matching against a hand-typed sheet, so double-check anything that looks off. Full rules on the <button type="button" id="rulesJumpBtn" style="background:none;border:none;color:var(--gold-bright);text-decoration:underline;cursor:pointer;font:inherit;padding:0;">Rules tab</button>.
+  </div>
+
+  <div class="draft-toolbar">
+    <button type="button" id="btnClearPicks" class="ghost">Clear All Picks</button>
+    <button type="button" id="btnCopyPicks">Copy Results As Text</button>
+    <span class="save-status" id="saveStatus">All picks save automatically to this browser.</span>
+  </div>
+
+  <div class="subhead" style="font-size:1.05rem; margin-top:0;">Pick Order (Round 1)</div>
+  <div class="order-grid" id="orderGrid"></div>
+
+  <div class="draft-board-wrap">
+    <table class="draft-board" id="draftBoardTable"></table>
+  </div>
+</section>
+
+<section id="roster-snapshot-section" style="background:#ece5d4;">
+  <div class="section-head">
+    <span class="eyebrow">Pre-Draft Reference</span>
+    <h2>Current Rosters (Snapshot)</h2>
+    <p class="sub-note" id="rosterSnapNote">Pulled from Yahoo's league Players page. This reflects rosters as they stood before keepers were finalized — not a prediction of who's actually kept.</p>
+  </div>
+  <div class="roster-snap-grid" id="rosterSnapGrid"></div>
+</section>
+
+<section id="standings-2026-section">
+  <div class="section-head">
+    <span class="eyebrow">2026 Regular Season</span>
+    <h2>Current Standings</h2>
+    <p class="sub-note" id="standingsNote">The season hasn't kicked off yet — check back after Week 1. This table will get updated with real records, points for/against, and streaks as the year plays out.</p>
+  </div>
+  <div style="max-width:1080px; overflow-x:auto;">
+    <table class="standings-table" id="standingsTable">
+      <thead><tr><th>Rank</th><th>Team</th><th>Manager</th><th class="num">W-L-T</th><th class="num">PF</th><th class="num">PA</th><th>Streak</th></tr></thead>
+      <tbody id="standingsBody"></tbody>
+    </table>
+  </div>
+</section>
+
+<section id="waivers-2026-section" style="background:#ece5d4;">
+  <div class="section-head">
+    <span class="eyebrow">Transaction Log</span>
+    <h2>Waivers &amp; Trades</h2>
+    <p class="sub-note">Nothing to report yet — the wire opens once the season starts. This section will fill in with adds, drops, and trades as they happen.</p>
+  </div>
+  <div class="waiver-empty" id="waiverEmpty">No transactions yet. First waiver run is Tuesday of Week 1.</div>
+</section>
+
+</div>
+<!-- ================= END 2026 SEASON TAB ================= -->
+
+<!-- ================= RULES TAB ================= -->
+<div id="tab-rules" class="tab-panel">
+
+<section id="rules-keeper">
+  <div class="section-head">
+    <span class="eyebrow">The Rulebook</span>
+    <h2>Keeper League Rules</h2>
+    <p>Straight from the league's official rules doc. Money and league-officer details are historical (2016) and may be out of date — the football rules below still govern play.</p>
+  </div>
+
+  <div class="records-grid">
+    <div class="record-card">
+      <h3>Keeper Basics</h3>
+      <p class="detail" style="margin-top:0;">You may keep <strong>3 players</strong> per season. Each player can be held for a <strong>maximum of 2 years</strong>. Only players on your final roster from the previous season are keeper-eligible.</p>
+    </div>
+    <div class="record-card">
+      <h3>Keeper Cost</h3>
+      <p class="detail" style="margin-top:0;">Keeping a player costs a draft pick <strong>one round earlier</strong> than the round they were drafted. A 1st-round pick can never be kept. Example: a 3rd-round pick costs your 2nd-round pick to keep.</p>
+    </div>
+    <div class="record-card">
+      <h3>2nd Year Keepers</h3>
+      <p class="detail" style="margin-top:0;">Holding a player for a <strong>second season</strong> costs another round earlier than what it cost the first time. Example: an original 4th-round pick, kept once already at 3rd round, costs your 2nd-round pick to keep again.</p>
+    </div>
+    <div class="record-card">
+      <h3>Undrafted / Traded Keepers</h3>
+      <p class="detail" style="margin-top:0;">An undrafted (waiver-acquired) player held as a keeper costs a flat <strong>6th-round</strong> pick. A player acquired by trade, or drafted-and-dropped then picked up elsewhere, costs a pick in the round prior to whatever round they were <em>originally</em> drafted in. You can't trade for a pick after the season ends just to make a keeper cost work.</p>
+    </div>
+  </div>
+</section>
+
+<section id="rules-business" style="background:#ece5d4;">
+  <div class="section-head">
+    <span class="eyebrow">League Officers &amp; Fees</span>
+    <h2>The Business Side</h2>
+  </div>
+  <div class="story">
+    <p><strong>Officers (2016):</strong> Commissioner/Treasurer Bill Smitheman · League Secretary Dave "Gati" Morgado · Trade Committee: Bill Smitheman, Dave Morgado, Joe Segrist, alternate Bob Baitzel.</p>
+  </div>
+  <div class="story">
+    <p><strong>Fees:</strong> $100 entry fee; $3 per player traded or dropped/added (e.g. a 2-player trade between 2 teams costs each team $3). Fines are $5 per infraction.</p>
+  </div>
+  <div class="story">
+    <p><strong>Prize fund:</strong> 1st place — $550 + 25% of transaction fees. 2nd place — $250. 3rd place — $150. Consolation bracket winner — $50 plus first choice of draft slot (picks 1–4). Transaction fees also fund the league's high-game and season-high-points bonuses (25% / 50% splits).</p>
+  </div>
+  <div class="story">
+    <p><strong>New rules:</strong> Voted on by online survey each year, run by the league secretary. Proposed rule changes go to the secretary or commissioner before the survey is created, and take effect the same season.</p>
+  </div>
+</section>
+
+<section id="rules-trades">
+  <div class="section-head">
+    <span class="eyebrow">Trading</span>
+    <h2>Players &amp; Draft Picks</h2>
+  </div>
+  <div class="story">
+    <h3>Trading Players</h3>
+    <p>Propose a trade from your team page; the other manager can accept, decline, or counter. Both managers must consent — an unanswered offer auto-cancels after 10 days. Accepted trades are reviewed by the commissioner (veto window per league config) before processing. A trade is voided if any involved player has moved off the team they were on when the deal was accepted. No manager may have more than 5 pending trades at once. Trade deadline is <strong>11:59pm PT every Wednesday</strong>, reviewed by the Trade Committee (Commissioner, Dave Morgado, Joe Segrist, plus Bob Baitzel as alternate when a committee member is involved) by majority vote — a unanimous vote is required if two committee members are part of the trade. Last day for trades is after Week 10.</p>
+  </div>
+  <div class="story">
+    <h3>Trading Draft Picks</h3>
+    <p>Allowed during the draft and league year only. Trading away a Round 1–2 pick requires pre-paying the full next-season league fee; Rounds 3–5 require half. That prepayment carries forward to next season (or offsets an incoming manager's fee if the original manager doesn't return).</p>
+  </div>
+</section>
+
+<section id="rules-waivers" style="background:#ece5d4;">
+  <div class="section-head">
+    <span class="eyebrow">Free Agency</span>
+    <h2>Waivers &amp; Free Agents</h2>
+  </div>
+  <div class="story">
+    <p>Waiver priority starts as the reverse of the draft order, then rolls: every successful claim sends that team to the back of the list. Un-owned players who've cleared waivers are free agents, available first-come-first-served. Dropped players go on waivers immediately and can't be reclaimed by the dropping team until the waiver period expires.</p>
+  </div>
+  <div class="story">
+    <h3>Game-Time Waivers</h3>
+    <p>Each free agent hits waivers as soon as their game starts that week. Claims process at <strong>11:59pm ET Tuesday</strong>. Bye-week players hit waivers at 8:30pm ET Monday. Bench players can be dropped any time, even mid-game — but active/starting players can't be touched within 5 minutes of their game's kickoff.</p>
+  </div>
+</section>
+
+<section id="rules-roster">
+  <div class="section-head">
+    <span class="eyebrow">In-Season</span>
+    <h2>Roster Notes</h2>
+  </div>
+  <div class="story">
+    <p>Every roster position must be filled — an empty starting spot is a $5 fine. You may claim-then-waive the same player at most twice in 24 hours. Bench players score no points. Future lineups you've pre-set will be wiped if you make any roster move (add/drop/trade) before then.</p>
+  </div>
+</section>
+
+<section id="rules-playoffs" style="background:#ece5d4;">
+  <div class="section-head">
+    <span class="eyebrow">Postseason</span>
+    <h2>Tiebreakers, Playoffs &amp; Draft Order</h2>
+  </div>
+  <div class="story">
+    <h3>Tiebreakers</h3>
+    <p>Regular-season ties break by: overall win %, total points, then points scored in each week from Week 17 backward to Week 1, then a coin flip. Playoff-game ties break by: total starting-roster touchdowns, then QB points, then DEF points, then WR points, then RB points, then TE points, then K points, then a coin flip.</p>
+  </div>
+  <div class="story">
+    <h3>Playoffs — Top 6 Teams</h3>
+    <p>Week 14: #1 seed bye, #4 vs #5, #3 vs #6, #2 seed bye. Week 15: #1 vs winner of (4/5), #2 vs winner of (3/6); losers of those two play for 5th place. Week 16: winners play the Championship; losers play for 3rd place.</p>
+  </div>
+  <div class="story">
+    <h3>Next Season's Draft Order</h3>
+    <p>Reverse of this season's standings for playoff teams (the 5th-place slot goes to the winner of the 5th/6th place game). Non-playoff teams choose their draft slot from picks 1–4, in order starting with the worst finisher — each team's choice must be made a week before the draft, or they forfeit the choice and drop to last priority.</p>
+  </div>
+</section>
+
+<section id="rules-misc">
+  <div class="section-head">
+    <span class="eyebrow">The Fine Print</span>
+    <h2>Disputes &amp; Commissioner Control</h2>
+  </div>
+  <div class="story">
+    <p>Disputes are decided by Trade Committee majority vote — file a complaint with the commissioner within 3 days of the disputed event; the committee has 2 days to rule. Anything not covered by these rules is also decided by committee vote. The commissioner can edit any roster or result at any time; joining the league means accepting that.</p>
+  </div>
+  <div class="story" style="border-bottom:none;">
+    <h3>Other League Rules</h3>
+    <p>Dave "Gati" Morgado is required to wear the small MJD jersey during each draft.</p>
+  </div>
+</section>
+
+</div>
+<!-- ================= END RULES TAB ================= -->
+
+<footer>
+  Nineteen seasons and counting. <strong>The League</strong>, est. 2007. Draft never sleeps.
+</footer>
+
+<script>
+  // Tab switching
+  var tabBtns = document.querySelectorAll('.tab-btn');
+  var tabPanels = document.querySelectorAll('.tab-panel');
+  tabBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      tabBtns.forEach(function(b){ b.classList.remove('active'); });
+      tabPanels.forEach(function(p){ p.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      window.scrollTo({top:0, behavior:'instant'});
+    });
+  });
+
+  // Live countdown to the 2026 draft (Labor Day, September 7, 2026)
+  (function(){
+    var target = new Date('2026-09-07T00:00:00');
+    var now = new Date();
+    var days = Math.ceil((target - now) / (1000*60*60*24));
+    var el = document.getElementById('season-countdown');
+    if(el && days > 0){
+      el.textContent = 'The 2026 draft is on Labor Day, September 7 — ' + days + ' day' + (days===1?'':'s') + ' away. Check back for this season\'s rosters once it happens.';
+    } else if (el && days <= 0) {
+      el.textContent = 'The 2026 draft has happened — rosters below reflect the 2025 season and earlier.';
+    }
+  })();
+</script>
+
+<script>
+(function(){
+try {
+
+  // ---- Team registry (index order = 2025 final standings, best to worst) ----
+  var TEAMS = [
+    {name:"Cheesesteak's", manager:"Chris"},
+    {name:"Virginia Eagles", manager:"Sean"},
+    {name:"The Snozzberries", manager:"Bob"},
+    {name:"Eagles Rock 2", manager:"Rich"},
+    {name:"Hawk Time", manager:"John"},
+    {name:"The Bye Week", manager:"Joe"},
+    {name:"I Like Turtles", manager:"Scott"},
+    {name:"Max Bet", manager:"Bill"},
+    {name:"Woolwich Fighting Chickens", manager:"Gati"},
+    {name:"Stu Pedasso", manager:"Drew"}
+  ];
+  var TEAM_COLORS = ["#d6a63d","#4f8fc0","#a8342a","#5b8c5a","#8a5fb0","#c76b3f","#3d7a7a","#b0587a","#8a8a3f","#46608a"];
+  var DEFAULT_ORDER = [9,8,7,6,5,4,3,2,1,0]; // pick position 1-10 -> team index (worst-to-first guess)
+  var ROUNDS = 20;
+  var STORE_KEY = 'leagueDraftBoard2026';
+
+  // ---- Keeper-year projections (matched against the 2025 draft board + league keeper rule) ----
+  var KEEPER_INFO = {
+'Jahmyr Gibbs':{eligible:false,cost:null,note:'Drafted round 1 in 2025 - round 1 picks aren\'t keeper-eligible'},
+'Bijan Robinson':{eligible:false,cost:null,note:'Drafted round 1 in 2025 - round 1 picks aren\'t keeper-eligible'},
+'Ja\'Marr Chase':{eligible:false,cost:null,note:'Drafted round 1 in 2025 - round 1 picks aren\'t keeper-eligible'},
+'Puka Nacua':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Christian McCaffrey':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Amon-Ra St. Brown':{eligible:true,cost:1,note:'Would be 1st keeper year - costs Round 1 in 2026'},
+'Jaxon Smith-Njigba':{eligible:true,cost:9,note:'Would be 2nd (final) keeper year - costs Round 9 in 2026'},
+'Jonathan Taylor':{eligible:true,cost:1,note:'Would be 1st keeper year - costs Round 1 in 2026'},
+'CeeDee Lamb':{eligible:false,cost:null,note:'Drafted round 1 in 2025 - round 1 picks aren\'t keeper-eligible'},
+'James Cook III':{eligible:true,cost:1,note:'Would be 1st keeper year - costs Round 1 in 2026'},
+'Saquon Barkley':{eligible:false,cost:null,note:'Drafted round 1 in 2025 - round 1 picks aren\'t keeper-eligible'},
+'Justin Jefferson':{eligible:false,cost:null,note:'Drafted round 1 in 2025 - round 1 picks aren\'t keeper-eligible'},
+'Kenneth Walker III':{eligible:true,cost:2,note:'Would be 1st keeper year - costs Round 2 in 2026'},
+'Ashton Jeanty':{eligible:false,cost:null,note:'Drafted round 1 in 2025 - round 1 picks aren\'t keeper-eligible'},
+'Chase Brown':{eligible:false,cost:null,note:'2025 was already this player\'s 2nd keeper year (max) - not eligible to keep in 2026'},
+'De\'Von Achane':{eligible:false,cost:null,note:'2025 was already this player\'s 2nd keeper year (max) - not eligible to keep in 2026'},
+'Drake London':{eligible:true,cost:1,note:'Would be 1st keeper year - costs Round 1 in 2026'},
+'Omarion Hampton':{eligible:true,cost:1,note:'Would be 1st keeper year - costs Round 1 in 2026'},
+'Derrick Henry':{eligible:false,cost:null,note:'Drafted round 1 in 2025 - round 1 picks aren\'t keeper-eligible'},
+'Brock Bowers':{eligible:true,cost:7,note:'Would be 2nd (final) keeper year - costs Round 7 in 2026'},
+'Nico Collins':{eligible:true,cost:1,note:'Would be 1st keeper year - costs Round 1 in 2026'},
+'George Pickens':{eligible:true,cost:5,note:'Would be 1st keeper year - costs Round 5 in 2026'},
+'A.J. Brown':{eligible:true,cost:1,note:'Would be 1st keeper year - costs Round 1 in 2026'},
+'DeVonta Smith':{eligible:true,cost:6,note:'Would be 1st keeper year - costs Round 6 in 2026'},
+'Breece Hall':{eligible:true,cost:2,note:'Would be 1st keeper year - costs Round 2 in 2026'},
+'Josh Allen':{eligible:true,cost:4,note:'Would be 2nd (final) keeper year - costs Round 4 in 2026'},
+'Tee Higgins':{eligible:true,cost:2,note:'Would be 1st keeper year - costs Round 2 in 2026'},
+'Zay Flowers':{eligible:false,cost:null,note:'2025 was already this player\'s 2nd keeper year (max) - not eligible to keep in 2026'},
+'Kyren Williams':{eligible:false,cost:null,note:'2025 was already this player\'s 2nd keeper year (max) - not eligible to keep in 2026'},
+'Trey McBride':{eligible:false,cost:null,note:'2025 was already this player\'s 2nd keeper year (max) - not eligible to keep in 2026'},
+'Jaylen Waddle':{eligible:true,cost:4,note:'Would be 1st keeper year - costs Round 4 in 2026'},
+'Chris Olave':{eligible:true,cost:5,note:'Would be 1st keeper year - costs Round 5 in 2026'},
+'Rashee Rice':{eligible:true,cost:6,note:'Would be 1st keeper year - costs Round 6 in 2026'},
+'Javonte Williams':{eligible:true,cost:7,note:'Would be 1st keeper year - costs Round 7 in 2026'},
+'Josh Jacobs':{eligible:false,cost:null,note:'Drafted round 1 in 2025 - round 1 picks aren\'t keeper-eligible'},
+'Emeka Egbuka':{eligible:true,cost:5,note:'Would be 1st keeper year - costs Round 5 in 2026'},
+'Tetairoa McMillan':{eligible:true,cost:3,note:'Would be 1st keeper year - costs Round 3 in 2026'},
+'Ladd McConkey':{eligible:true,cost:6,note:'Would be 2nd (final) keeper year - costs Round 6 in 2026'},
+'Garrett Wilson':{eligible:true,cost:3,note:'Would be 1st keeper year - costs Round 3 in 2026'},
+'D\'Andre Swift':{eligible:true,cost:5,note:'Would be 1st keeper year - costs Round 5 in 2026'},
+'Travis Etienne Jr.':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Terry McLaurin':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Cam Skattebo':{eligible:true,cost:11,note:'Would be 1st keeper year - costs Round 11 in 2026'},
+'Tyler Warren':{eligible:true,cost:6,note:'Would be 1st keeper year - costs Round 6 in 2026'},
+'Lamar Jackson':{eligible:true,cost:5,note:'Would be 2nd (final) keeper year - costs Round 5 in 2026'},
+'David Montgomery':{eligible:true,cost:2,note:'Would be 1st keeper year - costs Round 2 in 2026'},
+'DJ Moore':{eligible:true,cost:5,note:'Would be 1st keeper year - costs Round 5 in 2026'},
+'Quinshon Judkins':{eligible:true,cost:12,note:'Would be 1st keeper year - costs Round 12 in 2026'},
+'Rome Odunze':{eligible:true,cost:6,note:'Would be 1st keeper year - costs Round 6 in 2026'},
+'Christian Watson':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Jameson Williams':{eligible:true,cost:10,note:'Would be 2nd (final) keeper year - costs Round 10 in 2026'},
+'Davante Adams':{eligible:true,cost:3,note:'Would be 1st keeper year - costs Round 3 in 2026'},
+'Bhayshul Tuten':{eligible:true,cost:14,note:'Would be 1st keeper year - costs Round 14 in 2026'},
+'Mike Evans':{eligible:true,cost:4,note:'Would be 2nd (final) keeper year - costs Round 4 in 2026'},
+'Bucky Irving':{eligible:true,cost:15,note:'Would be 2nd (final) keeper year - costs Round 15 in 2026'},
+'Drake Maye':{eligible:true,cost:11,note:'Would be 1st keeper year - costs Round 11 in 2026'},
+'Jayden Daniels':{eligible:true,cost:10,note:'Would be 2nd (final) keeper year - costs Round 10 in 2026'},
+'Joe Burrow':{eligible:true,cost:3,note:'Would be 2nd (final) keeper year - costs Round 3 in 2026'},
+'TreVeyon Henderson':{eligible:true,cost:2,note:'Would be 1st keeper year - costs Round 2 in 2026'},
+'Jalen Hurts':{eligible:true,cost:3,note:'Would be 2nd (final) keeper year - costs Round 3 in 2026'},
+'Marvin Harrison Jr.':{eligible:true,cost:3,note:'Would be 1st keeper year - costs Round 3 in 2026'},
+'Rhamondre Stevenson':{eligible:true,cost:15,note:'Would be 1st keeper year - costs Round 15 in 2026'},
+'Tucker Kraft':{eligible:true,cost:13,note:'Would be 1st keeper year - costs Round 13 in 2026'},
+'Brian Thomas Jr.':{eligible:true,cost:10,note:'Would be 2nd (final) keeper year - costs Round 10 in 2026'},
+'Sam LaPorta':{eligible:false,cost:null,note:'2025 was already this player\'s 2nd keeper year (max) - not eligible to keep in 2026'},
+'Caleb Williams':{eligible:true,cost:11,note:'Would be 2nd (final) keeper year - costs Round 11 in 2026'},
+'Jaylen Warren':{eligible:true,cost:7,note:'Would be 1st keeper year - costs Round 7 in 2026'},
+'Justin Herbert':{eligible:true,cost:14,note:'Would be 2nd (final) keeper year - costs Round 14 in 2026'},
+'Tony Pollard':{eligible:true,cost:5,note:'Would be 1st keeper year - costs Round 5 in 2026'},
+'Harold Fannin Jr.':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'DK Metcalf':{eligible:true,cost:2,note:'Would be 1st keeper year - costs Round 2 in 2026'},
+'Trevor Lawrence':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Josh Downs':{eligible:true,cost:11,note:'Would be 1st keeper year - costs Round 11 in 2026'},
+'Dak Prescott':{eligible:false,cost:null,note:'2025 was already this player\'s 2nd keeper year (max) - not eligible to keep in 2026'},
+'Kyle Pitts Sr.':{eligible:true,cost:9,note:'Would be 1st keeper year - costs Round 9 in 2026'},
+'Chris Godwin Jr.':{eligible:true,cost:8,note:'Would be 1st keeper year - costs Round 8 in 2026'},
+'Stefon Diggs':{eligible:true,cost:9,note:'Would be 1st keeper year - costs Round 9 in 2026'},
+'Michael Wilson':{eligible:true,cost:19,note:'Would be 1st keeper year - costs Round 19 in 2026'},
+'J.K. Dobbins':{eligible:true,cost:8,note:'Would be 1st keeper year - costs Round 8 in 2026'},
+'Rico Dowdle':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'George Kittle':{eligible:true,cost:2,note:'Would be 1st keeper year - costs Round 2 in 2026'},
+'Jacory Croskey-Merritt':{eligible:true,cost:7,note:'Would be 1st keeper year - costs Round 7 in 2026'},
+'Brock Purdy':{eligible:true,cost:16,note:'Would be 1st keeper year - costs Round 16 in 2026'},
+'Chuba Hubbard':{eligible:true,cost:1,note:'Would be 1st keeper year - costs Round 1 in 2026'},
+'Jordan Addison':{eligible:true,cost:10,note:'Would be 1st keeper year - costs Round 10 in 2026'},
+'Michael Pittman Jr.':{eligible:true,cost:7,note:'Would be 1st keeper year - costs Round 7 in 2026'},
+'Bo Nix':{eligible:true,cost:16,note:'Would be 2nd (final) keeper year - costs Round 16 in 2026'},
+'Jordan Mason':{eligible:true,cost:8,note:'Would be 1st keeper year - costs Round 8 in 2026'},
+'Jaxson Dart':{eligible:true,cost:18,note:'Would be 1st keeper year - costs Round 18 in 2026'},
+'RJ Harvey':{eligible:true,cost:3,note:'Would be 1st keeper year - costs Round 3 in 2026'},
+'Courtland Sutton':{eligible:true,cost:4,note:'Would be 1st keeper year - costs Round 4 in 2026'},
+'Jayden Reed':{eligible:true,cost:11,note:'Would be 1st keeper year - costs Round 11 in 2026'},
+'Kyle Monangai':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Matthew Golden':{eligible:true,cost:6,note:'Would be 1st keeper year - costs Round 6 in 2026'},
+'Dalton Kincaid':{eligible:true,cost:19,note:'Would be 1st keeper year - costs Round 19 in 2026'},
+'Kyler Murray':{eligible:true,cost:19,note:'Would be 1st keeper year - costs Round 19 in 2026'},
+'Rachaad White':{eligible:true,cost:13,note:'Would be 1st keeper year - costs Round 13 in 2026'},
+'Matthew Stafford':{eligible:true,cost:15,note:'Would be 2nd (final) keeper year - costs Round 15 in 2026'},
+'Chris Rodriguez Jr.':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Patrick Mahomes':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Jalen Coker':{eligible:true,cost:15,note:'Would be 1st keeper year - costs Round 15 in 2026'},
+'Kenny Gainwell':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Travis Kelce':{eligible:true,cost:7,note:'Would be 1st keeper year - costs Round 7 in 2026'},
+'Jared Goff':{eligible:true,cost:14,note:'Would be 2nd (final) keeper year - costs Round 14 in 2026'},
+'Jakobi Meyers':{eligible:true,cost:11,note:'Would be 1st keeper year - costs Round 11 in 2026'},
+'Dallas Goedert':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Jayden Higgins':{eligible:true,cost:10,note:'Would be 1st keeper year - costs Round 10 in 2026'},
+'Romeo Doubs':{eligible:true,cost:18,note:'Would be 1st keeper year - costs Round 18 in 2026'},
+'Mark Andrews':{eligible:true,cost:4,note:'Would be 1st keeper year - costs Round 4 in 2026'},
+'Xavier Worthy':{eligible:true,cost:8,note:'Would be 2nd (final) keeper year - costs Round 8 in 2026'},
+'Aaron Jones Sr.':{eligible:true,cost:3,note:'Would be 1st keeper year - costs Round 3 in 2026'},
+'Jordan Love':{eligible:true,cost:17,note:'Would be 1st keeper year - costs Round 17 in 2026'},
+'Tyrone Tracy Jr.':{eligible:true,cost:7,note:'Would be 1st keeper year - costs Round 7 in 2026'},
+'Baker Mayfield':{eligible:true,cost:13,note:'Would be 1st keeper year - costs Round 13 in 2026'},
+'Rashid Shaheed':{eligible:true,cost:14,note:'Would be 1st keeper year - costs Round 14 in 2026'},
+'Tank Bigsby':{eligible:true,cost:12,note:'Would be 1st keeper year - costs Round 12 in 2026'},
+'Deebo Samuel Sr.':{eligible:true,cost:6,note:'Would be 1st keeper year - costs Round 6 in 2026'},
+'Zach Charbonnet':{eligible:true,cost:4,note:'Would be 1st keeper year - costs Round 4 in 2026'},
+'Jake Ferguson':{eligible:true,cost:15,note:'Would be 1st keeper year - costs Round 15 in 2026'},
+'Tyler Allgeier':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Woody Marks':{eligible:true,cost:15,note:'Would be 1st keeper year - costs Round 15 in 2026'},
+'Khalil Shakir':{eligible:true,cost:8,note:'Would be 1st keeper year - costs Round 8 in 2026'},
+'Chig Okonkwo':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Juwan Johnson':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Alvin Kamara':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Daniel Jones':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Brian Robinson':{eligible:true,cost:12,note:'Would be 1st keeper year - costs Round 12 in 2026'},
+'Sam Darnold':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Cam Ward':{eligible:true,cost:10,note:'Would be 1st keeper year - costs Round 10 in 2026'},
+'C.J. Stroud':{eligible:true,cost:17,note:'Would be 1st keeper year - costs Round 17 in 2026'},
+'Brenton Strange':{eligible:true,cost:13,note:'Would be 1st keeper year - costs Round 13 in 2026'},
+'Hunter Henry':{eligible:true,cost:12,note:'Would be 1st keeper year - costs Round 12 in 2026'},
+'Jaydon Blue':{eligible:true,cost:13,note:'Would be 1st keeper year - costs Round 13 in 2026'},
+'Isiah Pacheco':{eligible:true,cost:4,note:'Would be 1st keeper year - costs Round 4 in 2026'},
+'Ray Davis':{eligible:true,cost:17,note:'Would be 1st keeper year - costs Round 17 in 2026'},
+'Oronde Gadsden':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'T.J. Hockenson':{eligible:true,cost:5,note:'Would be 1st keeper year - costs Round 5 in 2026'},
+'Jauan Jennings':{eligible:true,cost:11,note:'Would be 1st keeper year - costs Round 11 in 2026'},
+'Jerry Jeudy':{eligible:true,cost:12,note:'Would be 1st keeper year - costs Round 12 in 2026'},
+'Ollie Gordon II':{eligible:true,cost:12,note:'Would be 1st keeper year - costs Round 12 in 2026'},
+'Sean Tucker':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Darnell Mooney':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Kimani Vidal':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Tory Horton':{eligible:true,cost:14,note:'Would be 1st keeper year - costs Round 14 in 2026'},
+'Keenan Allen':{eligible:true,cost:16,note:'Would be 1st keeper year - costs Round 16 in 2026'},
+'Troy Franklin':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Aaron Rodgers':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Shedeur Sanders':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Emanuel Wilson':{eligible:true,cost:18,note:'Would be 1st keeper year - costs Round 18 in 2026'},
+'Evan Engram':{eligible:true,cost:8,note:'Would be 1st keeper year - costs Round 8 in 2026'},
+'Keon Coleman':{eligible:true,cost:6,note:'Would be 1st keeper year - costs Round 6 in 2026'},
+'Brandon Aiyuk':{eligible:true,cost:11,note:'Would be 1st keeper year - costs Round 11 in 2026'},
+'David Njoku':{eligible:true,cost:7,note:'Would be 1st keeper year - costs Round 7 in 2026'},
+'Mason Taylor':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Jake Tonges':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Kaleb Johnson':{eligible:true,cost:4,note:'Would be 1st keeper year - costs Round 4 in 2026'},
+'Trey Benson':{eligible:true,cost:12,note:'Would be 1st keeper year - costs Round 12 in 2026'},
+'Theo Johnson':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Hollywood Brown':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Darren Waller':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Kareem Hunt':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Ricky Pearsall':{eligible:true,cost:15,note:'Would be 2nd (final) keeper year - costs Round 15 in 2026'},
+'Joe Flacco':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Nick Chubb':{eligible:true,cost:8,note:'Would be 1st keeper year - costs Round 8 in 2026'},
+'J.J. McCarthy':{eligible:true,cost:16,note:'Would be 1st keeper year - costs Round 16 in 2026'},
+'Dyami Brown':{eligible:true,cost:15,note:'Would be 1st keeper year - costs Round 15 in 2026'},
+'Brandon Aubrey':{eligible:true,cost:9,note:'Would be 1st keeper year - costs Round 9 in 2026'},
+'Ka\'imi Fairbairn':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Jason Myers':{eligible:true,cost:16,note:'Would be 1st keeper year - costs Round 16 in 2026'},
+'Cam Little':{eligible:true,cost:14,note:'Would be 1st keeper year - costs Round 14 in 2026'},
+'Tyler Loop':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Cairo Santos':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Jake Bates':{eligible:true,cost:10,note:'Would be 1st keeper year - costs Round 10 in 2026'},
+'Harrison Mevis':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Chris Boswell':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Chase McLaughlin':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Harrison Butker':{eligible:true,cost:15,note:'Would be 1st keeper year - costs Round 15 in 2026'},
+'Jake Elliott':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Texans':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Rams':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Broncos':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Seahawks':{eligible:true,cost:13,note:'Would be 1st keeper year - costs Round 13 in 2026'},
+'Eagles':{eligible:true,cost:9,note:'Would be 1st keeper year - costs Round 9 in 2026'},
+'Patriots':{eligible:true,cost:16,note:'Would be 1st keeper year - costs Round 16 in 2026'},
+'Jaguars':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Steelers':{eligible:true,cost:9,note:'Would be 1st keeper year - costs Round 9 in 2026'},
+'Ravens':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Chargers':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Packers':{eligible:true,cost:16,note:'Would be 1st keeper year - costs Round 16 in 2026'},
+'Cowboys':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Chiefs':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Lions':{eligible:true,cost:13,note:'Would be 1st keeper year - costs Round 13 in 2026'},
+'49ers':{eligible:true,cost:13,note:'Would be 1st keeper year - costs Round 13 in 2026'},
+'Falcons':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Buccaneers':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Giants':{eligible:true,cost:18,note:'Would be 1st keeper year - costs Round 18 in 2026'},
+'Bears':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Browns':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'},
+'Saints':{eligible:null,cost:null,note:'Not found in 2025 draft board (likely a waiver/FA pickup during 2025) - if undrafted, league rule sets keeper cost at a flat Round 6'}
+};
+
+  // ---- Player database (from Yahoo, ranked by projected 2026 season points) ----
+  var PLAYERS = [
+{name:'Jahmyr Gibbs',pos:'RB',team:'Det',bye:6,pts:276.12,rank:1,owner:'The Snozzberries'},
+{name:'Bijan Robinson',pos:'RB',team:'Atl',bye:11,pts:272.88,rank:2,owner:'The Snozzberries'},
+{name:'Ja\'Marr Chase',pos:'WR',team:'Cin',bye:6,pts:211.35,rank:3,owner:'The Snozzberries'},
+{name:'Puka Nacua',pos:'WR',team:'LAR',bye:11,pts:218.48,rank:4,owner:'Eagles Rock 2'},
+{name:'Christian McCaffrey',pos:'RB',team:'SF',bye:8,pts:243.77,rank:5,owner:'The Bye Week'},
+{name:'Amon-Ra St. Brown',pos:'WR',team:'Det',bye:6,pts:205.42,rank:6,owner:'Hawk Time'},
+{name:'Jaxon Smith-Njigba',pos:'WR',team:'Sea',bye:11,pts:217.21,rank:7,owner:'The Bye Week'},
+{name:'Jonathan Taylor',pos:'RB',team:'Ind',bye:13,pts:248.38,rank:8,owner:'Woolwich Fighting Chickens'},
+{name:'CeeDee Lamb',pos:'WR',team:'Dal',bye:14,pts:186.64,rank:9,owner:'Woolwich Fighting Chickens'},
+{name:'James Cook III',pos:'RB',team:'Buf',bye:7,pts:224.62,rank:10,owner:'Virginia Eagles'},
+{name:'Saquon Barkley',pos:'RB',team:'Phi',bye:10,pts:202.54,rank:11,owner:'Stu Pedasso'},
+{name:'Justin Jefferson',pos:'WR',team:'Min',bye:6,pts:183.18,rank:12,owner:'Virginia Eagles'},
+{name:'Kenneth Walker III',pos:'RB',team:'KC',bye:5,pts:199.62,rank:13,owner:'The Bye Week'},
+{name:'Ashton Jeanty',pos:'RB',team:'LV',bye:13,pts:186.69,rank:14,owner:'Hawk Time'},
+{name:'Chase Brown',pos:'RB',team:'Cin',bye:6,pts:204.01,rank:15,owner:'Woolwich Fighting Chickens'},
+{name:'De\'Von Achane',pos:'RB',team:'Mia',bye:6,pts:218.55,rank:16,owner:'Cheesesteak\'s'},
+{name:'Drake London',pos:'WR',team:'Atl',bye:11,pts:181.48,rank:17,owner:'The Snozzberries'},
+{name:'Omarion Hampton',pos:'RB',team:'LAC',bye:7,pts:186.75,rank:18,owner:'The Bye Week'},
+{name:'Derrick Henry',pos:'RB',team:'Bal',bye:13,pts:222.27,rank:19,owner:'Eagles Rock 2'},
+{name:'Brock Bowers',pos:'TE',team:'LV',bye:13,pts:140.23,rank:20,owner:'Eagles Rock 2'},
+{name:'Nico Collins',pos:'WR',team:'Hou',bye:8,pts:176.25,rank:21,owner:'Cheesesteak\'s'},
+{name:'George Pickens',pos:'WR',team:'Dal',bye:14,pts:181.46,rank:22,owner:'Cheesesteak\'s'},
+{name:'A.J. Brown',pos:'WR',team:'NE',bye:11,pts:156.79,rank:23,owner:'Stu Pedasso'},
+{name:'Malik Nabers',pos:'WR',team:'NYG',bye:8,pts:141.32,rank:24,owner:''},
+{name:'DeVonta Smith',pos:'WR',team:'Phi',bye:10,pts:152.77,rank:25,owner:'The Bye Week'},
+{name:'Jeremiyah Love',pos:'RB',team:'Ari',bye:14,pts:186.27,rank:26,owner:''},
+{name:'Breece Hall',pos:'RB',team:'NYJ',bye:13,pts:191.46,rank:27,owner:'Woolwich Fighting Chickens'},
+{name:'Josh Allen',pos:'QB',team:'Buf',bye:7,pts:379.10,rank:28,owner:'Woolwich Fighting Chickens'},
+{name:'Tee Higgins',pos:'WR',team:'Cin',bye:6,pts:151.28,rank:29,owner:'Virginia Eagles'},
+{name:'Zay Flowers',pos:'WR',team:'Bal',bye:13,pts:169.11,rank:30,owner:'Cheesesteak\'s'},
+{name:'Kyren Williams',pos:'RB',team:'LAR',bye:11,pts:189.52,rank:31,owner:'Virginia Eagles'},
+{name:'Trey McBride',pos:'TE',team:'Ari',bye:14,pts:147.48,rank:32,owner:'The Snozzberries'},
+{name:'Jaylen Waddle',pos:'WR',team:'Den',bye:10,pts:150.38,rank:33,owner:'Stu Pedasso'},
+{name:'Chris Olave',pos:'WR',team:'NO',bye:8,pts:154.05,rank:34,owner:'Hawk Time'},
+{name:'Rashee Rice',pos:'WR',team:'KC',bye:5,pts:163.27,rank:35,owner:'The Snozzberries'},
+{name:'Javonte Williams',pos:'RB',team:'Dal',bye:14,pts:187.82,rank:36,owner:'Max Bet'},
+{name:'Josh Jacobs',pos:'RB',team:'GB',bye:11,pts:197.85,rank:37,owner:'The Bye Week'},
+{name:'Emeka Egbuka',pos:'WR',team:'TB',bye:10,pts:130.37,rank:38,owner:'Stu Pedasso'},
+{name:'Colston Loveland',pos:'TE',team:'Chi',bye:10,pts:130.24,rank:39,owner:''},
+{name:'Tetairoa McMillan',pos:'WR',team:'Car',bye:5,pts:150.81,rank:40,owner:'Eagles Rock 2'},
+{name:'Ladd McConkey',pos:'WR',team:'LAC',bye:7,pts:130.10,rank:41,owner:'Stu Pedasso'},
+{name:'Garrett Wilson',pos:'WR',team:'NYJ',bye:13,pts:121.45,rank:42,owner:'Hawk Time'},
+{name:'D\'Andre Swift',pos:'RB',team:'Chi',bye:10,pts:163.64,rank:43,owner:'I Like Turtles'},
+{name:'Travis Etienne Jr.',pos:'RB',team:'NO',bye:8,pts:170.56,rank:44,owner:'Cheesesteak\'s'},
+{name:'Terry McLaurin',pos:'WR',team:'Was',bye:7,pts:140.26,rank:45,owner:'Cheesesteak\'s'},
+{name:'Luther Burden III',pos:'WR',team:'Chi',bye:10,pts:148.63,rank:46,owner:''},
+{name:'Cam Skattebo',pos:'RB',team:'NYG',bye:8,pts:172.51,rank:47,owner:'I Like Turtles'},
+{name:'Tyler Warren',pos:'TE',team:'Ind',bye:13,pts:126.61,rank:48,owner:'Hawk Time'},
+{name:'Lamar Jackson',pos:'QB',team:'Bal',bye:13,pts:343.58,rank:49,owner:'Eagles Rock 2'},
+{name:'David Montgomery',pos:'RB',team:'Hou',bye:8,pts:165.53,rank:50,owner:'Stu Pedasso'},
+{name:'DJ Moore',pos:'WR',team:'Buf',bye:7,pts:125.07,rank:51,owner:'Max Bet'},
+{name:'Quinshon Judkins',pos:'RB',team:'Cle',bye:11,pts:163.44,rank:52,owner:'Woolwich Fighting Chickens'},
+{name:'Rome Odunze',pos:'WR',team:'Chi',bye:10,pts:129.73,rank:53,owner:'Virginia Eagles'},
+{name:'Christian Watson',pos:'WR',team:'GB',bye:11,pts:143.30,rank:54,owner:'The Snozzberries'},
+{name:'Jameson Williams',pos:'WR',team:'Det',bye:6,pts:136.84,rank:55,owner:'Woolwich Fighting Chickens'},
+{name:'Davante Adams',pos:'WR',team:'LAR',bye:11,pts:140.04,rank:56,owner:'Woolwich Fighting Chickens'},
+{name:'Bhayshul Tuten',pos:'RB',team:'Jax',bye:7,pts:145.39,rank:57,owner:'Eagles Rock 2'},
+{name:'Mike Evans',pos:'WR',team:'SF',bye:8,pts:132.84,rank:58,owner:'The Bye Week'},
+{name:'Parker Washington',pos:'WR',team:'Jax',bye:7,pts:127.56,rank:59,owner:''},
+{name:'Bucky Irving',pos:'RB',team:'TB',bye:10,pts:161.50,rank:60,owner:'Eagles Rock 2'},
+{name:'Drake Maye',pos:'QB',team:'NE',bye:11,pts:344.75,rank:61,owner:'Eagles Rock 2'},
+{name:'Jayden Daniels',pos:'QB',team:'Was',bye:7,pts:349.97,rank:62,owner:'I Like Turtles'},
+{name:'Joe Burrow',pos:'QB',team:'Cin',bye:6,pts:345.26,rank:63,owner:'Stu Pedasso'},
+{name:'TreVeyon Henderson',pos:'RB',team:'NE',bye:11,pts:149.57,rank:64,owner:'Eagles Rock 2'},
+{name:'Jalen Hurts',pos:'QB',team:'Phi',bye:10,pts:336.47,rank:65,owner:'Stu Pedasso'},
+{name:'Jadarian Price',pos:'RB',team:'Sea',bye:11,pts:152.21,rank:66,owner:''},
+{name:'Marvin Harrison Jr.',pos:'WR',team:'Ari',bye:14,pts:116.55,rank:67,owner:'Virginia Eagles'},
+{name:'Rhamondre Stevenson',pos:'RB',team:'NE',bye:11,pts:143.11,rank:68,owner:'I Like Turtles'},
+{name:'Tucker Kraft',pos:'TE',team:'GB',bye:11,pts:117.37,rank:69,owner:'Stu Pedasso'},
+{name:'Brian Thomas Jr.',pos:'WR',team:'Jax',bye:7,pts:115.19,rank:70,owner:'Max Bet'},
+{name:'Sam LaPorta',pos:'TE',team:'Det',bye:6,pts:107.52,rank:71,owner:'Stu Pedasso'},
+{name:'Carnell Tate',pos:'WR',team:'Ten',bye:9,pts:115.63,rank:72,owner:''},
+{name:'Caleb Williams',pos:'QB',team:'Chi',bye:10,pts:332.47,rank:73,owner:'Woolwich Fighting Chickens'},
+{name:'Jaylen Warren',pos:'RB',team:'Pit',bye:9,pts:154.73,rank:74,owner:'Virginia Eagles'},
+{name:'Justin Herbert',pos:'QB',team:'LAC',bye:7,pts:319.26,rank:75,owner:'Virginia Eagles'},
+{name:'Tony Pollard',pos:'RB',team:'Ten',bye:9,pts:138.54,rank:76,owner:'Virginia Eagles'},
+{name:'Jonathon Brooks',pos:'RB',team:'Car',bye:5,pts:114.55,rank:77,owner:''},
+{name:'Jordyn Tyson',pos:'WR',team:'NO',bye:8,pts:103.30,rank:78,owner:''},
+{name:'Harold Fannin Jr.',pos:'TE',team:'Cle',bye:11,pts:104.94,rank:79,owner:'The Bye Week'},
+{name:'DK Metcalf',pos:'WR',team:'Pit',bye:9,pts:122.42,rank:80,owner:'Hawk Time'},
+{name:'Trevor Lawrence',pos:'QB',team:'Jax',bye:7,pts:320.66,rank:81,owner:'I Like Turtles'},
+{name:'Josh Downs',pos:'WR',team:'Ind',bye:13,pts:116.28,rank:82,owner:'Cheesesteak\'s'},
+{name:'Dak Prescott',pos:'QB',team:'Dal',bye:14,pts:343.75,rank:83,owner:'Virginia Eagles'},
+{name:'Kyle Pitts Sr.',pos:'TE',team:'Atl',bye:11,pts:110.62,rank:84,owner:'Virginia Eagles'},
+{name:'Chris Godwin Jr.',pos:'WR',team:'TB',bye:10,pts:106.03,rank:85,owner:'Eagles Rock 2'},
+{name:'Stefon Diggs',pos:'WR',team:'Was',bye:7,pts:101.95,rank:86,owner:'I Like Turtles'},
+{name:'Michael Wilson',pos:'WR',team:'Ari',bye:14,pts:109.10,rank:87,owner:'The Bye Week'},
+{name:'Quentin Johnston',pos:'WR',team:'LAC',bye:7,pts:101.76,rank:88,owner:''},
+{name:'J.K. Dobbins',pos:'RB',team:'Den',bye:10,pts:123.38,rank:89,owner:'Hawk Time'},
+{name:'Rico Dowdle',pos:'RB',team:'Pit',bye:9,pts:148.30,rank:90,owner:'Cheesesteak\'s'},
+{name:'Alec Pierce',pos:'WR',team:'Ind',bye:13,pts:145.90,rank:91,owner:''},
+{name:'George Kittle',pos:'TE',team:'SF',bye:8,pts:100.48,rank:92,owner:'Max Bet'},
+{name:'Jacory Croskey-Merritt',pos:'RB',team:'Was',bye:7,pts:118.56,rank:93,owner:'Woolwich Fighting Chickens'},
+{name:'Brock Purdy',pos:'QB',team:'SF',bye:8,pts:316.44,rank:94,owner:'Max Bet'},
+{name:'Blake Corum',pos:'RB',team:'LAR',bye:11,pts:132.80,rank:95,owner:''},
+{name:'Chuba Hubbard',pos:'RB',team:'Car',bye:5,pts:147.61,rank:96,owner:'Cheesesteak\'s'},
+{name:'Jordan Addison',pos:'WR',team:'Min',bye:6,pts:107.49,rank:97,owner:'The Bye Week'},
+{name:'Michael Pittman Jr.',pos:'WR',team:'Pit',bye:9,pts:104.66,rank:98,owner:'The Bye Week'},
+{name:'Bo Nix',pos:'QB',team:'Den',bye:10,pts:318.33,rank:99,owner:'Stu Pedasso'},
+{name:'Jordan Mason',pos:'RB',team:'Min',bye:6,pts:128.25,rank:100,owner:'Max Bet'},
+{name:'Jaxson Dart',pos:'QB',team:'NYG',bye:8,pts:324.95,rank:101,owner:'Stu Pedasso'},
+{name:'RJ Harvey',pos:'RB',team:'Den',bye:10,pts:120.48,rank:102,owner:'Cheesesteak\'s'},
+{name:'Courtland Sutton',pos:'WR',team:'Den',bye:10,pts:111.73,rank:103,owner:'Eagles Rock 2'},
+{name:'Jayden Reed',pos:'WR',team:'GB',bye:11,pts:119.52,rank:104,owner:'Max Bet'},
+{name:'Kyle Monangai',pos:'RB',team:'Chi',bye:10,pts:137.02,rank:105,owner:'Max Bet'},
+{name:'Makai Lemon',pos:'WR',team:'Phi',bye:10,pts:89.58,rank:106,owner:''},
+{name:'Matthew Golden',pos:'WR',team:'GB',bye:11,pts:100.54,rank:107,owner:'Eagles Rock 2'},
+{name:'Dalton Kincaid',pos:'TE',team:'Buf',bye:7,pts:87.68,rank:108,owner:'The Snozzberries'},
+{name:'Kyler Murray',pos:'QB',team:'Min',bye:6,pts:302.11,rank:109,owner:'I Like Turtles'},
+{name:'Rachaad White',pos:'RB',team:'Was',bye:7,pts:116.43,rank:110,owner:'I Like Turtles'},
+{name:'Matthew Stafford',pos:'QB',team:'LAR',bye:11,pts:308.79,rank:111,owner:'Cheesesteak\'s'},
+{name:'Chris Rodriguez Jr.',pos:'RB',team:'Jax',bye:7,pts:106.66,rank:112,owner:'Woolwich Fighting Chickens'},
+{name:'Patrick Mahomes',pos:'QB',team:'KC',bye:5,pts:315.42,rank:113,owner:'The Bye Week'},
+{name:'Jalen Coker',pos:'WR',team:'Car',bye:5,pts:100.79,rank:114,owner:'Woolwich Fighting Chickens'},
+{name:'Kenny Gainwell',pos:'RB',team:'TB',bye:10,pts:120.07,rank:115,owner:'The Snozzberries'},
+{name:'De\'Zhaun Stribling',pos:'WR',team:'SF',bye:8,pts:69.45,rank:116,owner:''},
+{name:'Travis Kelce',pos:'TE',team:'KC',bye:5,pts:104.60,rank:117,owner:'I Like Turtles'},
+{name:'Jared Goff',pos:'QB',team:'Det',bye:6,pts:322.79,rank:118,owner:'The Snozzberries'},
+{name:'Jakobi Meyers',pos:'WR',team:'Jax',bye:7,pts:100.28,rank:119,owner:'Virginia Eagles'},
+{name:'Dallas Goedert',pos:'TE',team:'Phi',bye:10,pts:88.99,rank:120,owner:'Cheesesteak\'s'},
+{name:'Jayden Higgins',pos:'WR',team:'Hou',bye:8,pts:98.31,rank:121,owner:'Eagles Rock 2'},
+{name:'Isaiah Likely',pos:'TE',team:'NYG',bye:8,pts:88.89,rank:122,owner:''},
+{name:'Romeo Doubs',pos:'WR',team:'NE',bye:11,pts:95.89,rank:123,owner:'Virginia Eagles'},
+{name:'KC Concepcion',pos:'WR',team:'Cle',bye:11,pts:90.46,rank:124,owner:''},
+{name:'Wan\'Dale Robinson',pos:'WR',team:'Ten',bye:9,pts:101.47,rank:125,owner:''},
+{name:'Mark Andrews',pos:'TE',team:'Bal',bye:13,pts:102.68,rank:126,owner:'Cheesesteak\'s'},
+{name:'Xavier Worthy',pos:'WR',team:'KC',bye:5,pts:101.23,rank:127,owner:'I Like Turtles'},
+{name:'Keaton Mitchell',pos:'RB',team:'LAC',bye:7,pts:77.62,rank:128,owner:''},
+{name:'Aaron Jones Sr.',pos:'RB',team:'Min',bye:6,pts:115.27,rank:129,owner:'The Snozzberries'},
+{name:'Malik Willis',pos:'QB',team:'Mia',bye:6,pts:293.68,rank:130,owner:''},
+{name:'Jordan Love',pos:'QB',team:'GB',bye:11,pts:316.80,rank:131,owner:'Cheesesteak\'s'},
+{name:'Tyrone Tracy Jr.',pos:'RB',team:'NYG',bye:8,pts:89.71,rank:132,owner:'I Like Turtles'},
+{name:'Baker Mayfield',pos:'QB',team:'TB',bye:10,pts:294.94,rank:133,owner:'The Snozzberries'},
+{name:'Rashid Shaheed',pos:'WR',team:'Sea',bye:11,pts:87.56,rank:134,owner:'Stu Pedasso'},
+{name:'Tyler Shough',pos:'QB',team:'NO',bye:8,pts:309.10,rank:135,owner:''},
+{name:'Tank Bigsby',pos:'RB',team:'Phi',bye:10,pts:64.78,rank:136,owner:'Virginia Eagles'},
+{name:'Deebo Samuel Sr.',pos:'WR',team:'SF',bye:8,pts:78.81,rank:137,owner:'Max Bet'},
+{name:'Zach Charbonnet',pos:'RB',team:'Sea',bye:11,pts:86.74,rank:138,owner:'Hawk Time'},
+{name:'Jake Ferguson',pos:'TE',team:'Dal',bye:14,pts:87.00,rank:139,owner:'The Bye Week'},
+{name:'Tyler Allgeier',pos:'RB',team:'Ari',bye:14,pts:78.04,rank:140,owner:'The Snozzberries'},
+{name:'Woody Marks',pos:'RB',team:'Hou',bye:8,pts:96.32,rank:141,owner:'The Snozzberries'},
+{name:'Khalil Shakir',pos:'WR',team:'Buf',bye:7,pts:95.64,rank:142,owner:'Cheesesteak\'s'},
+{name:'Denzel Boston',pos:'WR',team:'Cle',bye:11,pts:75.95,rank:143,owner:''},
+{name:'Tyjae Spears',pos:'RB',team:'Ten',bye:9,pts:90.37,rank:144,owner:''},
+{name:'Jalen McMillan',pos:'WR',team:'TB',bye:10,pts:71.28,rank:145,owner:''},
+{name:'Travis Hunter',pos:'WR',team:'Jax',bye:7,pts:55.70,rank:146,owner:''},
+{name:'Chig Okonkwo',pos:'TE',team:'Was',bye:7,pts:74.66,rank:147,owner:'Max Bet'},
+{name:'Jalen Nailor',pos:'WR',team:'LV',bye:13,pts:82.11,rank:148,owner:''},
+{name:'Juwan Johnson',pos:'TE',team:'NO',bye:8,pts:87.14,rank:149,owner:'Hawk Time'},
+{name:'Adonai Mitchell',pos:'WR',team:'NYJ',bye:13,pts:61.03,rank:150,owner:''},
+{name:'Alvin Kamara',pos:'RB',team:'NO',bye:8,pts:69.75,rank:152,owner:'Woolwich Fighting Chickens'},
+{name:'Jonah Coleman',pos:'RB',team:'Den',bye:10,pts:54.43,rank:153,owner:''},
+{name:'Daniel Jones',pos:'QB',team:'Ind',bye:13,pts:287.82,rank:154,owner:'Hawk Time'},
+{name:'Brian Robinson',pos:'RB',team:'Atl',bye:11,pts:71.94,rank:155,owner:'Max Bet'},
+{name:'Sam Darnold',pos:'QB',team:'Sea',bye:11,pts:292.77,rank:156,owner:'Hawk Time'},
+{name:'MarShawn Lloyd',pos:'RB',team:'GB',bye:11,pts:58.24,rank:157,owner:''},
+{name:'Cam Ward',pos:'QB',team:'Ten',bye:9,pts:268.22,rank:158,owner:'Hawk Time'},
+{name:'C.J. Stroud',pos:'QB',team:'Hou',bye:8,pts:303.79,rank:161,owner:'Hawk Time'},
+{name:'Dylan Sampson',pos:'RB',team:'Cle',bye:11,pts:79.92,rank:163,owner:''},
+{name:'Brenton Strange',pos:'TE',team:'Jax',bye:7,pts:84.34,rank:164,owner:'Stu Pedasso'},
+{name:'Ryan Flournoy',pos:'WR',team:'Dal',bye:14,pts:67.43,rank:165,owner:''},
+{name:'Hunter Henry',pos:'TE',team:'NE',bye:11,pts:92.32,rank:167,owner:'I Like Turtles'},
+{name:'Jaydon Blue',pos:'RB',team:'Dal',bye:14,pts:48.52,rank:168,owner:'Woolwich Fighting Chickens'},
+{name:'Isiah Pacheco',pos:'RB',team:'Det',bye:6,pts:72.76,rank:169,owner:'Max Bet'},
+{name:'Dontayvion Wicks',pos:'WR',team:'Phi',bye:10,pts:57.09,rank:170,owner:''},
+{name:'Ray Davis',pos:'RB',team:'Buf',bye:7,pts:59.26,rank:171,owner:'Eagles Rock 2'},
+{name:'Bryce Young',pos:'QB',team:'Car',bye:5,pts:269.18,rank:172,owner:''},
+{name:'Mike Washington Jr.',pos:'RB',team:'LV',bye:13,pts:52.33,rank:173,owner:''},
+{name:'Oronde Gadsden',pos:'TE',team:'LAC',bye:7,pts:67.25,rank:176,owner:'Eagles Rock 2'},
+{name:'Pat Bryant',pos:'WR',team:'Den',bye:10,pts:54.87,rank:177,owner:''},
+{name:'Tre Tucker',pos:'WR',team:'LV',bye:13,pts:71.98,rank:178,owner:''},
+{name:'Kenyon Sadiq',pos:'TE',team:'NYJ',bye:13,pts:64.22,rank:181,owner:''},
+{name:'Emmett Johnson',pos:'RB',team:'KC',bye:5,pts:47.42,rank:182,owner:''},
+{name:'Greg Dulcich',pos:'TE',team:'Mia',bye:6,pts:78.75,rank:184,owner:''},
+{name:'Tre\' Harris',pos:'WR',team:'LAC',bye:7,pts:66.29,rank:185,owner:''},
+{name:'Omar Cooper Jr.',pos:'WR',team:'NYJ',bye:13,pts:67.49,rank:186,owner:''},
+{name:'AJ Barner',pos:'TE',team:'Sea',bye:11,pts:79.02,rank:187,owner:''},
+{name:'Terrance Ferguson',pos:'TE',team:'LAR',bye:11,pts:55.18,rank:190,owner:''},
+{name:'Nicholas Singleton',pos:'RB',team:'Ten',bye:9,pts:36.83,rank:192,owner:''},
+{name:'T.J. Hockenson',pos:'TE',team:'Min',bye:6,pts:73.95,rank:195,owner:'Woolwich Fighting Chickens'},
+{name:'Braelon Allen',pos:'RB',team:'NYJ',bye:13,pts:61.48,rank:196,owner:''},
+{name:'Malik Washington',pos:'WR',team:'Mia',bye:6,pts:61.40,rank:198,owner:''},
+{name:'George Holani',pos:'RB',team:'Sea',bye:11,pts:34.91,rank:199,owner:''},
+{name:'Isaac TeSlaa',pos:'WR',team:'Det',bye:6,pts:65.76,rank:200,owner:''},
+{name:'Jauan Jennings',pos:'WR',team:'Min',bye:6,pts:77.51,rank:201,owner:'I Like Turtles'},
+{name:'Jerry Jeudy',pos:'WR',team:'Cle',bye:11,pts:72.74,rank:202,owner:'Max Bet'},
+{name:'Ollie Gordon II',pos:'RB',team:'Mia',bye:6,pts:34.58,rank:203,owner:'Stu Pedasso'},
+{name:'Demond Claiborne',pos:'RB',team:'Min',bye:6,pts:25.60,rank:204,owner:''},
+{name:'Cyrus Allen',pos:'WR',team:'KC',bye:5,pts:34.46,rank:208,owner:''},
+{name:'Isaiah Davis',pos:'RB',team:'NYJ',bye:13,pts:46.74,rank:210,owner:''},
+{name:'Dalton Schultz',pos:'TE',team:'Hou',bye:8,pts:78.90,rank:211,owner:''},
+{name:'Kaytron Allen',pos:'RB',team:'Was',bye:7,pts:32.63,rank:212,owner:''},
+{name:'Kayshon Boutte',pos:'WR',team:'NE',bye:11,pts:55.03,rank:215,owner:''},
+{name:'Jaylin Noel',pos:'WR',team:'Hou',bye:8,pts:43.22,rank:216,owner:''},
+{name:'Zachariah Branch',pos:'WR',team:'Atl',bye:11,pts:51.42,rank:219,owner:''},
+{name:'Ja\'Kobi Lane',pos:'WR',team:'Bal',bye:13,pts:50.03,rank:220,owner:''},
+{name:'Jacoby Brissett',pos:'QB',team:'Ari',bye:14,pts:246.68,rank:222,owner:''},
+{name:'Gunnar Helm',pos:'TE',team:'Ten',bye:9,pts:65.55,rank:223,owner:''},
+{name:'Rashod Bateman',pos:'WR',team:'Bal',bye:13,pts:63.75,rank:224,owner:''},
+{name:'Fernando Mendoza',pos:'QB',team:'LV',bye:13,pts:209.86,rank:225,owner:''},
+{name:'Calvin Ridley',pos:'WR',team:'Ten',bye:9,pts:63.50,rank:227,owner:''},
+{name:'Kaelon Black',pos:'RB',team:'SF',bye:8,pts:45.10,rank:228,owner:''},
+{name:'Tyquan Thornton',pos:'WR',team:'KC',bye:5,pts:54.35,rank:229,owner:''},
+{name:'James Conner',pos:'RB',team:'Ari',bye:14,pts:35.75,rank:230,owner:''},
+{name:'Sean Tucker',pos:'RB',team:'TB',bye:10,pts:46.75,rank:231,owner:'Eagles Rock 2'},
+{name:'Antonio Williams',pos:'WR',team:'Was',bye:7,pts:45.85,rank:233,owner:''},
+{name:'Tank Dell',pos:'WR',team:'Hou',bye:8,pts:59.05,rank:234,owner:''},
+{name:'Cooper Kupp',pos:'WR',team:'Sea',bye:11,pts:57.90,rank:235,owner:''},
+{name:'Darnell Mooney',pos:'WR',team:'NYG',bye:8,pts:53.61,rank:236,owner:'The Snozzberries'},
+{name:'Malachi Fields',pos:'WR',team:'NYG',bye:8,pts:41.85,rank:237,owner:''},
+{name:'Kimani Vidal',pos:'RB',team:'LAC',bye:7,pts:48.29,rank:238,owner:'The Bye Week'},
+{name:'Caleb Douglas',pos:'WR',team:'Mia',bye:6,pts:41.34,rank:239,owner:''},
+{name:'Ted Hurst III',pos:'WR',team:'TB',bye:10,pts:39.87,rank:241,owner:''},
+{name:'Jack Bech',pos:'WR',team:'LV',bye:13,pts:44.81,rank:243,owner:''},
+{name:'Tory Horton',pos:'WR',team:'Sea',bye:11,pts:47.06,rank:245,owner:'Hawk Time'},
+{name:'Keenan Allen',pos:'WR',team:'LAC',bye:7,pts:43.30,rank:247,owner:'Woolwich Fighting Chickens'},
+{name:'Geno Smith',pos:'QB',team:'NYJ',bye:13,pts:228.68,rank:250,owner:''},
+{name:'Jordan James',pos:'RB',team:'SF',bye:8,pts:45.48,rank:251,owner:''},
+{name:'Adam Randall',pos:'RB',team:'Bal',bye:13,pts:28.52,rank:252,owner:''},
+{name:'Jahan Dotson',pos:'WR',team:'Atl',bye:11,pts:49.30,rank:253,owner:''},
+{name:'Tua Tagovailoa',pos:'QB',team:'Atl',bye:11,pts:193.81,rank:255,owner:''},
+{name:'Kirk Cousins',pos:'QB',team:'LV',bye:13,pts:51.61,rank:256,owner:''},
+{name:'Emari Demercado',pos:'RB',team:'KC',bye:5,pts:25.49,rank:257,owner:''},
+{name:'Justice Hill',pos:'RB',team:'Bal',bye:13,pts:45.16,rank:260,owner:''},
+{name:'Seth McGowan',pos:'RB',team:'Ind',bye:13,pts:24.81,rank:261,owner:''},
+{name:'Troy Franklin',pos:'WR',team:'Den',bye:10,pts:47.40,rank:262,owner:'The Snozzberries'},
+{name:'Tahj Brooks',pos:'RB',team:'Cin',bye:6,pts:23.73,rank:264,owner:''},
+{name:'Michael Penix Jr.',pos:'QB',team:'Atl',bye:11,pts:78.15,rank:266,owner:''},
+{name:'Aaron Rodgers',pos:'QB',team:'Pit',bye:9,pts:245.92,rank:268,owner:'Max Bet'},
+{name:'Darius Slayton',pos:'WR',team:'NYG',bye:8,pts:48.48,rank:270,owner:''},
+{name:'Samaje Perine',pos:'RB',team:'Cin',bye:6,pts:55.65,rank:271,owner:''},
+{name:'Shedeur Sanders',pos:'QB',team:'Cle',bye:11,pts:60.58,rank:274,owner:'The Bye Week'},
+{name:'Pat Freiermuth',pos:'TE',team:'Pit',bye:9,pts:72.02,rank:275,owner:''},
+{name:'Cade Otton',pos:'TE',team:'TB',bye:10,pts:62.26,rank:276,owner:''},
+{name:'Germie Bernard',pos:'WR',team:'Pit',bye:9,pts:51.69,rank:277,owner:''},
+{name:'Elijah Sarratt',pos:'WR',team:'Bal',bye:13,pts:39.62,rank:278,owner:''},
+{name:'Chris Bell',pos:'WR',team:'Mia',bye:6,pts:52.77,rank:280,owner:''},
+{name:'Skyler Bell',pos:'WR',team:'Buf',bye:7,pts:29.73,rank:281,owner:''},
+{name:'Emanuel Wilson',pos:'RB',team:'Sea',bye:11,pts:33.77,rank:282,owner:'I Like Turtles'},
+{name:'Colby Parkinson',pos:'TE',team:'LAR',bye:11,pts:48.45,rank:283,owner:''},
+{name:'DJ Giddens',pos:'RB',team:'Ind',bye:13,pts:31.41,rank:284,owner:''},
+{name:'Eli Stowers',pos:'TE',team:'Phi',bye:10,pts:41.27,rank:285,owner:''},
+{name:'Tyler Higbee',pos:'TE',team:'LAR',bye:11,pts:26.25,rank:286,owner:''},
+{name:'Darnell Washington',pos:'TE',team:'Pit',bye:9,pts:46.69,rank:287,owner:''},
+{name:'Evan Engram',pos:'TE',team:'Den',bye:10,pts:43.75,rank:288,owner:'Virginia Eagles'},
+{name:'Jaylen Wright',pos:'RB',team:'Mia',bye:6,pts:43.68,rank:289,owner:''},
+{name:'Najee Harris',pos:'RB',team:'LAC',bye:7,pts:13.35,rank:290,owner:''},
+{name:'Phil Mafah',pos:'RB',team:'Dal',bye:14,pts:11.35,rank:291,owner:''},
+{name:'Chris Brooks',pos:'RB',team:'GB',bye:11,pts:28.96,rank:292,owner:''},
+{name:'Xavier Legette',pos:'WR',team:'Car',bye:5,pts:48.20,rank:296,owner:''},
+{name:'Deshaun Watson',pos:'QB',team:'Cle',bye:11,pts:158.83,rank:297,owner:''},
+{name:'Malik Benson',pos:'WR',team:'LV',bye:13,pts:21.65,rank:298,owner:''},
+{name:'Keon Coleman',pos:'WR',team:'Buf',bye:7,pts:37.10,rank:299,owner:'I Like Turtles'},
+{name:'Ashton Dulin',pos:'WR',team:'Ind',bye:13,pts:29.08,rank:300,owner:''},
+{name:'Jalen Tolbert',pos:'WR',team:'Mia',bye:6,pts:42.58,rank:301,owner:''},
+{name:'Mike Gesicki',pos:'TE',team:'Cin',bye:6,pts:60.63,rank:302,owner:''},
+{name:'Brenen Thompson',pos:'WR',team:'LAC',bye:7,pts:25.22,rank:303,owner:''},
+{name:'Devaughn Vele',pos:'WR',team:'NO',bye:8,pts:51.10,rank:304,owner:''},
+{name:'Brandon Aiyuk',pos:'WR',team:'SF',bye:8,pts:26.23,rank:305,owner:'Max Bet'},
+{name:'Elic Ayomanor',pos:'WR',team:'Ten',bye:9,pts:33.63,rank:306,owner:''},
+{name:'Malik Davis',pos:'RB',team:'Dal',bye:14,pts:23.70,rank:307,owner:''},
+{name:'Eli Raridon',pos:'TE',team:'NE',bye:11,pts:25.13,rank:308,owner:''},
+{name:'David Njoku',pos:'TE',team:'LAC',bye:7,pts:32.81,rank:309,owner:'Stu Pedasso'},
+{name:'Treylon Burks',pos:'WR',team:'Was',bye:7,pts:28.01,rank:310,owner:''},
+{name:'Charlie Kolar',pos:'TE',team:'LAC',bye:7,pts:35.72,rank:311,owner:''},
+{name:'Mason Taylor',pos:'TE',team:'NYJ',bye:13,pts:39.64,rank:312,owner:'Woolwich Fighting Chickens'},
+{name:'Chimere Dike',pos:'WR',team:'Ten',bye:9,pts:37.07,rank:313,owner:''},
+{name:'Ty Johnson',pos:'RB',team:'Buf',bye:7,pts:44.37,rank:314,owner:''},
+{name:'DeMario Douglas',pos:'WR',team:'NE',bye:11,pts:34.62,rank:315,owner:''},
+{name:'Isaiah Bond',pos:'WR',team:'Cle',bye:11,pts:25.80,rank:316,owner:''},
+{name:'Erick All Jr.',pos:'TE',team:'Cin',bye:6,pts:29.30,rank:317,owner:''},
+{name:'Andrei Iosivas',pos:'WR',team:'Cin',bye:6,pts:48.93,rank:318,owner:''},
+{name:'Jake Tonges',pos:'TE',team:'SF',bye:8,pts:29.98,rank:319,owner:'Max Bet'},
+{name:'Mitchell Evans',pos:'TE',team:'Car',bye:5,pts:15.15,rank:320,owner:''},
+{name:'Luke McCaffrey',pos:'WR',team:'Was',bye:7,pts:14.88,rank:321,owner:''},
+{name:'Joshua Palmer',pos:'WR',team:'Buf',bye:7,pts:27.45,rank:322,owner:''},
+{name:'Carson Beck',pos:'QB',team:'Ari',bye:14,pts:34.46,rank:323,owner:''},
+{name:'Christian Kirk',pos:'WR',team:'SF',bye:8,pts:28.59,rank:324,owner:''},
+{name:'Oscar Delp',pos:'TE',team:'NO',bye:8,pts:24.85,rank:325,owner:''},
+{name:'Devin Neal',pos:'RB',team:'NO',bye:8,pts:9.49,rank:326,owner:''},
+{name:'Kaleb Johnson',pos:'RB',team:'Pit',bye:9,pts:20.11,rank:327,owner:'Max Bet'},
+{name:'Kendre Miller',pos:'RB',team:'NO',bye:8,pts:16.12,rank:328,owner:''},
+{name:'Trey Benson',pos:'RB',team:'Ari',bye:14,pts:18.07,rank:329,owner:'Eagles Rock 2'},
+{name:'Theo Johnson',pos:'TE',team:'NYG',bye:8,pts:40.17,rank:330,owner:'Hawk Time'},
+{name:'LeQuint Allen Jr.',pos:'RB',team:'Jax',bye:7,pts:28.54,rank:331,owner:''},
+{name:'Devin Singletary',pos:'RB',team:'NYG',bye:8,pts:20.10,rank:332,owner:''},
+{name:'Jawhar Jordan',pos:'RB',team:'Hou',bye:8,pts:22.95,rank:333,owner:''},
+{name:'Sione Vaki',pos:'RB',team:'Det',bye:6,pts:9.66,rank:334,owner:''},
+{name:'Trevor Etienne',pos:'RB',team:'Car',bye:5,pts:19.83,rank:335,owner:''},
+{name:'Raheim Sanders',pos:'RB',team:'Cle',bye:11,pts:17.61,rank:336,owner:''},
+{name:'Marvin Mims Jr.',pos:'WR',team:'Den',bye:10,pts:41.37,rank:337,owner:''},
+{name:'CJ Daniels',pos:'WR',team:'LAR',bye:11,pts:17.04,rank:338,owner:''},
+{name:'Colbie Young',pos:'WR',team:'Cin',bye:6,pts:21.71,rank:339,owner:''},
+{name:'Reggie Virgil',pos:'WR',team:'Ari',bye:14,pts:7.12,rank:340,owner:''},
+{name:'Savion Williams',pos:'WR',team:'GB',bye:11,pts:33.02,rank:341,owner:''},
+{name:'Brashard Smith',pos:'RB',team:'KC',bye:5,pts:29.76,rank:342,owner:''},
+{name:'Zavion Thomas',pos:'WR',team:'Chi',bye:10,pts:27.40,rank:343,owner:''},
+{name:'Roman Wilson',pos:'WR',team:'Pit',bye:9,pts:35.17,rank:345,owner:''},
+{name:'Mac Jones',pos:'QB',team:'SF',bye:8,pts:20.70,rank:346,owner:''},
+{name:'Kyle Williams',pos:'WR',team:'NE',bye:11,pts:23.35,rank:347,owner:''},
+{name:'Mack Hollins',pos:'WR',team:'NE',bye:11,pts:25.01,rank:348,owner:''},
+{name:'Hollywood Brown',pos:'WR',team:'Phi',bye:10,pts:31.19,rank:349,owner:'Hawk Time'},
+{name:'Calvin Austin III',pos:'WR',team:'NYG',bye:8,pts:21.72,rank:350,owner:''},
+{name:'Jordan Whittington',pos:'WR',team:'LAR',bye:11,pts:16.72,rank:351,owner:''},
+{name:'Kendrick Bourne',pos:'WR',team:'Ari',bye:14,pts:44.63,rank:352,owner:''},
+{name:'Roschon Johnson',pos:'RB',team:'Chi',bye:10,pts:8.42,rank:353,owner:''},
+{name:'Jarquez Hunter',pos:'RB',team:'LAR',bye:11,pts:7.23,rank:354,owner:''},
+{name:'Tyreek Hill',pos:'WR',team:'Mia',bye:6,pts:18.00,rank:357,owner:''},
+{name:'Darren Waller',pos:'TE',team:'Car',bye:5,pts:53.62,rank:358,owner:'Cheesesteak\'s'},
+{name:'Zach Ertz',pos:'TE',team:'Was',bye:7,pts:6.00,rank:359,owner:''},
+{name:'Kareem Hunt',pos:'RB',team:'KC',bye:5,pts:6.00,rank:361,owner:'Hawk Time'},
+{name:'Justin Fields',pos:'QB',team:'KC',bye:5,pts:26.06,rank:362,owner:''},
+{name:'Ricky Pearsall',pos:'WR',team:'SF',bye:8,pts:0.00,rank:364,owner:'Max Bet'},
+{name:'Jonnu Smith',pos:'TE',team:'Pit',bye:9,pts:6.00,rank:366,owner:''},
+{name:'Dawson Knox',pos:'TE',team:'Buf',bye:7,pts:47.82,rank:367,owner:''},
+{name:'Carson Wentz',pos:'QB',team:'Min',bye:6,pts:6.33,rank:369,owner:''},
+{name:'Noah Fant',pos:'TE',team:'NO',bye:8,pts:26.88,rank:371,owner:''},
+{name:'Michael Carter',pos:'RB',team:'Ten',bye:9,pts:4.78,rank:374,owner:''},
+{name:'Taysom Hill',pos:'TE',team:'NO',bye:8,pts:0.00,rank:376,owner:''},
+{name:'Cole Kmet',pos:'TE',team:'Chi',bye:10,pts:42.06,rank:379,owner:''},
+{name:'Audric Estime',pos:'RB',team:'NO',bye:8,pts:10.41,rank:383,owner:''},
+{name:'Bam Knight',pos:'RB',team:'Ari',bye:14,pts:3.34,rank:2028,owner:''},
+{name:'Josh Oliver',pos:'TE',team:'Min',bye:6,pts:25.31,rank:2040,owner:''},
+{name:'Austin Hooper',pos:'TE',team:'Atl',bye:11,pts:28.05,rank:2043,owner:''},
+{name:'Brock Wright',pos:'TE',team:'Det',bye:6,pts:24.01,rank:2044,owner:''},
+{name:'Michael Mayer',pos:'TE',team:'LV',bye:13,pts:40.96,rank:2045,owner:''},
+{name:'Greg Dortch',pos:'WR',team:'Det',bye:6,pts:23.48,rank:2046,owner:''},
+{name:'Joe Mixon',pos:'RB',team:'Hou',bye:8,pts:0.00,rank:2047,owner:''},
+{name:'KaVontae Turpin',pos:'WR',team:'Dal',bye:14,pts:47.82,rank:2048,owner:''},
+{name:'Joe Flacco',pos:'QB',team:'Cin',bye:6,pts:22.94,rank:2051,owner:'I Like Turtles'},
+{name:'Nick Chubb',pos:'RB',team:'Hou',bye:8,pts:6.00,rank:2052,owner:'I Like Turtles'},
+{name:'Sterling Shepard',pos:'WR',team:'TB',bye:10,pts:0.00,rank:2053,owner:''},
+{name:'Olamide Zaccheaus',pos:'WR',team:'Atl',bye:11,pts:35.30,rank:2055,owner:''},
+{name:'Kevin Austin Jr.',pos:'WR',team:'NO',bye:8,pts:10.61,rank:2056,owner:''},
+{name:'Cedric Tillman',pos:'WR',team:'Cle',bye:11,pts:16.65,rank:2057,owner:''},
+{name:'Tanner Hudson',pos:'TE',team:'Cin',bye:6,pts:15.53,rank:2058,owner:''},
+{name:'Miles Sanders',pos:'RB',team:'Dal',bye:14,pts:0.00,rank:2059,owner:''},
+{name:'J.J. McCarthy',pos:'QB',team:'Min',bye:6,pts:24.57,rank:2060,owner:'The Bye Week'},
+{name:'Ja\'Tavion Sanders',pos:'TE',team:'Car',bye:5,pts:27.47,rank:2061,owner:''},
+{name:'Devontez Walker',pos:'WR',team:'Bal',bye:13,pts:26.06,rank:2062,owner:''},
+{name:'Tez Johnson',pos:'WR',team:'TB',bye:10,pts:27.60,rank:2063,owner:''},
+{name:'Daniel Bellinger',pos:'TE',team:'Ten',bye:9,pts:28.14,rank:2064,owner:''},
+{name:'Hunter Renfrow',pos:'WR',team:'Car',bye:5,pts:0.00,rank:2065,owner:''},
+{name:'Tommy Tremble',pos:'TE',team:'Car',bye:5,pts:20.60,rank:2066,owner:''},
+{name:'Gabe Davis',pos:'WR',team:'Buf',bye:7,pts:0.00,rank:2067,owner:''},
+{name:'Xavier Hutchinson',pos:'WR',team:'Hou',bye:8,pts:28.63,rank:2068,owner:''},
+{name:'John Metchie III',pos:'WR',team:'Car',bye:5,pts:26.19,rank:2069,owner:''},
+{name:'Hunter Long',pos:'TE',team:'Jax',bye:7,pts:6.18,rank:2071,owner:''},
+{name:'Jackson Hawes',pos:'TE',team:'Buf',bye:7,pts:20.70,rank:2072,owner:''},
+{name:'Adam Trautman',pos:'TE',team:'Den',bye:10,pts:22.54,rank:2074,owner:''},
+{name:'DeAndre Hopkins',pos:'WR',team:'Bal',bye:13,pts:0.00,rank:2075,owner:''},
+{name:'Tyler Conklin',pos:'TE',team:'Det',bye:6,pts:2.79,rank:2076,owner:''},
+{name:'Demarcus Robinson',pos:'WR',team:'SF',bye:8,pts:17.21,rank:2077,owner:''},
+{name:'Lil\'Jordan Humphrey',pos:'WR',team:'Den',bye:10,pts:10.00,rank:2079,owner:''},
+{name:'Noah Gray',pos:'TE',team:'KC',bye:5,pts:35.44,rank:2080,owner:''},
+{name:'Van Jefferson',pos:'WR',team:'Was',bye:7,pts:2.13,rank:2081,owner:''},
+{name:'Jahdae Walker',pos:'WR',team:'Chi',bye:10,pts:24.32,rank:2082,owner:''},
+{name:'Davis Allen',pos:'TE',team:'LAR',bye:11,pts:9.19,rank:2083,owner:''},
+{name:'Ben Sinnott',pos:'TE',team:'Was',bye:7,pts:22.96,rank:2084,owner:''},
+{name:'Kalif Raymond',pos:'WR',team:'Chi',bye:10,pts:29.44,rank:2085,owner:''},
+{name:'Tyler Johnson',pos:'WR',team:'Dal',bye:14,pts:1.56,rank:2086,owner:''},
+{name:'Tim Patrick',pos:'WR',team:'NYJ',bye:13,pts:9.59,rank:2087,owner:''},
+{name:'Elijah Higgins',pos:'TE',team:'Ari',bye:14,pts:29.51,rank:2088,owner:''},
+{name:'JuJu Smith-Schuster',pos:'WR',team:'NYG',bye:8,pts:10.50,rank:2089,owner:''},
+{name:'Will Dissly',pos:'TE',team:'LAC',bye:7,pts:6.00,rank:2090,owner:''},
+{name:'Josh Reynolds',pos:'WR',team:'NYJ',bye:13,pts:0.00,rank:2091,owner:''},
+{name:'Austin Ekeler',pos:'RB',team:'Was',bye:7,pts:6.00,rank:2092,owner:''},
+{name:'Antonio Gibson',pos:'RB',team:'NE',bye:11,pts:0.00,rank:2093,owner:''},
+{name:'Tutu Atwell',pos:'WR',team:'Mia',bye:6,pts:37.26,rank:2096,owner:''},
+{name:'Tyler Lockett',pos:'WR',team:'LV',bye:13,pts:6.00,rank:2097,owner:''},
+{name:'Luke Musgrave',pos:'TE',team:'GB',bye:11,pts:27.44,rank:2099,owner:''},
+{name:'Nick Vannett',pos:'TE',team:'Sea',bye:11,pts:0.00,rank:2100,owner:''},
+{name:'Spencer Rattler',pos:'QB',team:'NO',bye:8,pts:18.95,rank:2101,owner:''},
+{name:'Tyrell Shavers',pos:'WR',team:'Buf',bye:7,pts:8.82,rank:2102,owner:''},
+{name:'Brandin Cooks',pos:'WR',team:'NO',bye:8,pts:6.00,rank:2103,owner:''},
+{name:'Mitch Tinsley',pos:'WR',team:'Cin',bye:6,pts:20.48,rank:2104,owner:''},
+{name:'Noah Brown',pos:'WR',team:'Was',bye:7,pts:6.00,rank:2105,owner:''},
+{name:'Alexander Mattison',pos:'RB',team:'Mia',bye:6,pts:0.00,rank:2106,owner:''},
+{name:'M. Valdes-Scantling',pos:'WR',team:'Dal',bye:14,pts:8.85,rank:2107,owner:''},
+{name:'Bub Means',pos:'WR',team:'NO',bye:8,pts:0.00,rank:2108,owner:''},
+{name:'Dyami Brown',pos:'WR',team:'Was',bye:7,pts:13.81,rank:2109,owner:'Stu Pedasso'},
+{name:'CJ Dippre',pos:'TE',team:'NE',bye:11,pts:0.00,rank:2110,owner:''},
+{name:'Carsen Ryan',pos:'TE',team:'Cle',bye:11,pts:0.00,rank:2111,owner:''},
+{name:'RJ Maryland',pos:'TE',team:'GB',bye:11,pts:0.00,rank:2112,owner:''},
+{name:'Carson Towt',pos:'TE',team:'Ind',bye:13,pts:0.00,rank:2113,owner:''},
+{name:'Evan Svoboda',pos:'TE',team:'LAC',bye:7,pts:0.00,rank:2114,owner:''},
+{name:'Thomas Fidone II',pos:'TE',team:'NYG',bye:8,pts:12.28,rank:2115,owner:''},
+{name:'Chris Myarick',pos:'TE',team:'LV',bye:13,pts:0.00,rank:2116,owner:''},
+{name:'Albert Okwuegbunam Jr.',pos:'TE',team:'LV',bye:13,pts:0.00,rank:2117,owner:''},
+{name:'Bauer Sharp',pos:'TE',team:'TB',bye:10,pts:0.00,rank:2118,owner:''},
+{name:'Lance Mason',pos:'TE',team:'Pit',bye:9,pts:6.00,rank:2119,owner:''},
+{name:'Marcedes Lewis',pos:'TE',team:'Den',bye:10,pts:0.00,rank:2120,owner:''},
+{name:'DJ Rogers',pos:'TE',team:'Dal',bye:14,pts:0.00,rank:2121,owner:''},
+{name:'Josh Cuevas',pos:'TE',team:'Bal',bye:13,pts:7.20,rank:2122,owner:''},
+{name:'Messiah Swinson',pos:'TE',team:'GB',bye:11,pts:0.00,rank:2123,owner:''},
+{name:'Tanner Arkin',pos:'TE',team:'NE',bye:11,pts:0.00,rank:2124,owner:''},
+{name:'Johnny Pascuzzi',pos:'TE',team:'LAC',bye:7,pts:0.00,rank:2125,owner:''},
+{name:'Connor Hulstein',pos:'TE',team:'NYJ',bye:13,pts:0.00,rank:2126,owner:''},
+{name:'Chamon Metayer',pos:'TE',team:'Car',bye:5,pts:0.00,rank:2127,owner:''},
+{name:'Devin Culp',pos:'TE',team:'TB',bye:10,pts:3.60,rank:2128,owner:''},
+{name:'Sal Cannella',pos:'TE',team:'Cle',bye:11,pts:0.00,rank:2129,owner:''},
+{name:'Ademola Faleye',pos:'TE',team:'TB',bye:10,pts:0.00,rank:2130,owner:''},
+{name:'Justin Joly',pos:'TE',team:'Den',bye:10,pts:25.47,rank:2131,owner:''},
+{name:'Treyton Welch',pos:'TE',team:'NO',bye:8,pts:0.00,rank:2132,owner:''},
+{name:'Mitch Van Vooren',pos:'TE',team:'NE',bye:11,pts:0.00,rank:2133,owner:''},
+{name:'Jared Wiley',pos:'TE',team:'KC',bye:5,pts:6.09,rank:2134,owner:''},
+{name:'Tre Watson',pos:'TE',team:'KC',bye:5,pts:0.00,rank:2135,owner:''},
+{name:'Robert Tonyan',pos:'TE',team:'Pit',bye:9,pts:0.48,rank:2136,owner:''},
+{name:'Nikola Kalinic',pos:'TE',team:'Chi',bye:10,pts:0.00,rank:2137,owner:''},
+{name:'Sam Roush',pos:'TE',team:'Chi',bye:10,pts:13.96,rank:2138,owner:''},
+{name:'Eni Falayi',pos:'TE',team:'GB',bye:11,pts:0.00,rank:2139,owner:''},
+{name:'Patrick Gurd',pos:'TE',team:'LV',bye:13,pts:0.00,rank:2140,owner:''},
+{name:'E.J. Jenkins',pos:'TE',team:'Phi',bye:10,pts:0.00,rank:2141,owner:''},
+{name:'Matt Hibner',pos:'TE',team:'Bal',bye:13,pts:16.41,rank:2142,owner:''},
+{name:'Bryson Nesbit',pos:'TE',team:'Min',bye:6,pts:0.00,rank:2143,owner:''},
+{name:'Tanner Koziol',pos:'TE',team:'Jax',bye:7,pts:12.68,rank:2144,owner:''},
+{name:'Rivaldo Fairweather',pos:'TE',team:'Ari',bye:14,pts:0.00,rank:2145,owner:''},
+{name:'Travis Vokolek',pos:'TE',team:'Ari',bye:14,pts:0.00,rank:2146,owner:''},
+{name:'Dallen Bentley',pos:'TE',team:'Den',bye:10,pts:1.26,rank:2147,owner:''},
+{name:'James Mitchell',pos:'TE',team:'Car',bye:5,pts:0.00,rank:2148,owner:''},
+{name:'Nate Boerkircher',pos:'TE',team:'Jax',bye:7,pts:13.56,rank:2149,owner:''},
+{name:'Matt Lauter',pos:'TE',team:'Ten',bye:9,pts:0.00,rank:2150,owner:''},
+{name:'Tyree Jackson',pos:'TE',team:'Was',bye:7,pts:0.00,rank:2151,owner:''},
+{name:'Michael Trigg',pos:'TE',team:'Dal',bye:14,pts:13.38,rank:2152,owner:''},
+{name:'Caden Prieskorn',pos:'TE',team:'Car',bye:5,pts:0.00,rank:2153,owner:''},
+{name:'Khalil Dinkins',pos:'TE',team:'SF',bye:8,pts:0.00,rank:2154,owner:''},
+{name:'Joshua Simon',pos:'TE',team:'Atl',bye:11,pts:0.00,rank:2155,owner:''},
+{name:'DeShawn Hanika',pos:'TE',team:'Ind',bye:13,pts:0.00,rank:2156,owner:''},
+{name:'Zaire Mitchell-Paden',pos:'TE',team:'NO',bye:8,pts:0.00,rank:2157,owner:''},
+{name:'Joel Wilson',pos:'TE',team:'Ten',bye:9,pts:0.00,rank:2158,owner:''},
+{name:'Stone Eby',pos:'TE',team:'Den',bye:10,pts:0.00,rank:2159,owner:''},
+{name:'Brandon Frazier',pos:'TE',team:'Atl',bye:11,pts:0.00,rank:2160,owner:''},
+{name:'Baylor Cupp',pos:'TE',team:'Ari',bye:14,pts:0.00,rank:2161,owner:''},
+{name:'Hayden Rucci',pos:'TE',team:'SF',bye:8,pts:0.00,rank:2162,owner:''},
+{name:'Luke Lachey',pos:'TE',team:'Hou',bye:8,pts:0.00,rank:2163,owner:''},
+{name:'McCallan Castles',pos:'TE',team:'GB',bye:11,pts:0.00,rank:2164,owner:''},
+{name:'Keleki Latu',pos:'TE',team:'Buf',bye:7,pts:0.00,rank:2165,owner:''},
+{name:'Nick Kallerup',pos:'TE',team:'Sea',bye:11,pts:0.00,rank:2166,owner:''},
+{name:'Nick Muse',pos:'TE',team:'Atl',bye:11,pts:0.00,rank:2167,owner:''},
+{name:'Brett Weaver',pos:'TE',team:'Den',bye:10,pts:0.00,rank:2168,owner:''},
+{name:'Max Klare',pos:'TE',team:'LAR',bye:11,pts:18.92,rank:2169,owner:''},
+{name:'Kenny Fletcher Jr.',pos:'TE',team:'TB',bye:10,pts:0.00,rank:2170,owner:''},
+{name:'Zack Kuntz',pos:'TE',team:'Dal',bye:14,pts:0.00,rank:2171,owner:''},
+{name:'Jaren Kanak',pos:'TE',team:'Ten',bye:9,pts:14.20,rank:2172,owner:''},
+{name:'Chase Curtis',pos:'TE',team:'NYJ',bye:13,pts:0.00,rank:2173,owner:''},
+{name:'Jerand Bradley',pos:'TE',team:'LAC',bye:7,pts:0.00,rank:2174,owner:''},
+{name:'Hayden Large',pos:'TE',team:'Chi',bye:10,pts:0.00,rank:2175,owner:''},
+{name:'Jake Briningstool',pos:'TE',team:'KC',bye:5,pts:0.00,rank:2176,owner:''},
+{name:'Louis Hansen',pos:'TE',team:'Hou',bye:8,pts:0.00,rank:2177,owner:''},
+{name:'Ty Pezza',pos:'TE',team:'Bal',bye:13,pts:0.00,rank:2178,owner:''},
+{name:'Miles Kitselman',pos:'TE',team:'Det',bye:6,pts:6.00,rank:2179,owner:''},
+{name:'Marshall Lang',pos:'TE',team:'Min',bye:6,pts:0.00,rank:2180,owner:''},
+{name:'Thomas Gordon',pos:'TE',team:'Det',bye:6,pts:0.00,rank:2181,owner:''},
+{name:'Dan Villari',pos:'TE',team:'LAR',bye:11,pts:0.00,rank:2182,owner:''},
+{name:'Drake Dabney',pos:'TE',team:'GB',bye:11,pts:0.00,rank:2183,owner:''},
+{name:'Drew Biber',pos:'TE',team:'GB',bye:11,pts:0.00,rank:2184,owner:''},
+{name:'Josh Kattus',pos:'TE',team:'Cin',bye:6,pts:0.00,rank:2185,owner:''},
+{name:'Lake McRee',pos:'TE',team:'Pit',bye:9,pts:0.00,rank:2186,owner:''},
+{name:'Patrick Herbert',pos:'TE',team:'Jax',bye:7,pts:0.00,rank:2187,owner:''},
+{name:'Jameson Geers',pos:'TE',team:'Ari',bye:14,pts:0.00,rank:2188,owner:''},
+{name:'Jack Endries',pos:'TE',team:'Cin',bye:6,pts:13.85,rank:2189,owner:''},
+{name:'Shawn Bowman',pos:'TE',team:'Ari',bye:14,pts:0.00,rank:2190,owner:''},
+{name:'Zach Horton',pos:'TE',team:'Det',bye:6,pts:0.00,rank:2191,owner:''},
+{name:'Heinrich Haarberg',pos:'TE',team:'Car',bye:5,pts:0.00,rank:2192,owner:''},
+{name:'Layne Pryor',pos:'TE',team:'Hou',bye:8,pts:0.00,rank:2193,owner:''},
+{name:'Teagan Quitoriano',pos:'TE',team:'Ari',bye:14,pts:0.00,rank:2194,owner:''},
+{name:'Princeton Fant',pos:'TE',team:'Dal',bye:14,pts:0.00,rank:2195,owner:''},
+{name:'JJ Galbreath',pos:'TE',team:'Pit',bye:9,pts:0.00,rank:2196,owner:''},
+{name:'Quentin Moore',pos:'TE',team:'Was',bye:7,pts:0.00,rank:2197,owner:''},
+{name:'Jeremiah Franklin',pos:'TE',team:'Mia',bye:6,pts:0.00,rank:2198,owner:''},
+{name:'J. Michael Gyllenborg',pos:'TE',team:'KC',bye:5,pts:30.00,rank:2199,owner:''},
+{name:'Moliki Matavao',pos:'TE',team:'NO',bye:8,pts:0.00,rank:2200,owner:''},
+{name:'Sean McKeon',pos:'TE',team:'Ind',bye:13,pts:0.00,rank:2201,owner:''},
+{name:'Jelani Woods',pos:'TE',team:'NYJ',bye:13,pts:1.36,rank:2202,owner:''},
+{name:'Tanner McLachlan',pos:'TE',team:'SF',bye:8,pts:0.00,rank:2203,owner:''},
+{name:'Rohan Jones',pos:'TE',team:'LAR',bye:11,pts:0.00,rank:2204,owner:''},
+{name:'Cody Hardy',pos:'TE',team:'NO',bye:8,pts:0.00,rank:2205,owner:''},
+{name:'Cole Turner',pos:'TE',team:'Mia',bye:6,pts:0.00,rank:2206,owner:''},
+{name:'Jack Velling',pos:'TE',team:'Atl',bye:11,pts:1.72,rank:2207,owner:''},
+{name:'Lawrence Cager',pos:'TE',team:'Was',bye:7,pts:0.00,rank:2208,owner:''},
+{name:'Gavin Bartholomew',pos:'TE',team:'Min',bye:6,pts:0.00,rank:2209,owner:''},
+{name:'Mark Redman',pos:'TE',team:'LAR',bye:11,pts:0.00,rank:2210,owner:''},
+{name:'Ethan Conner',pos:'TE',team:'Jax',bye:7,pts:0.00,rank:2211,owner:''},
+{name:'Stephen Carlson',pos:'TE',team:'Chi',bye:10,pts:0.00,rank:2212,owner:''},
+{name:'Caleb Lohner',pos:'TE',team:'Den',bye:10,pts:0.00,rank:2213,owner:''},
+{name:'Dae\'Quan Wright',pos:'TE',team:'Cle',bye:11,pts:0.00,rank:2214,owner:''},
+{name:'Jalin Conyers',pos:'TE',team:'Mia',bye:6,pts:0.00,rank:2215,owner:''},
+{name:'Mason Pline',pos:'TE',team:'KC',bye:5,pts:0.00,rank:2216,owner:''},
+{name:'Joe Royer',pos:'TE',team:'Cle',bye:11,pts:17.10,rank:2217,owner:''},
+{name:'Marlin Klein',pos:'TE',team:'Hou',bye:8,pts:16.26,rank:2218,owner:''},
+{name:'Will Kacmarek',pos:'TE',team:'Mia',bye:6,pts:31.86,rank:2219,owner:''},
+{name:'Seydou Traore',pos:'TE',team:'Mia',bye:6,pts:5.40,rank:2220,owner:''},
+{name:'Brevin Jordan',pos:'TE',team:'Hou',bye:8,pts:1.22,rank:2221,owner:''},
+{name:'Thomas Yassmin',pos:'TE',team:'GB',bye:11,pts:0.00,rank:2222,owner:''},
+{name:'Bryce Pierre',pos:'TE',team:'Car',bye:5,pts:0.00,rank:2223,owner:''},
+{name:'Ko Kieft',pos:'TE',team:'TB',bye:10,pts:0.32,rank:2224,owner:''},
+{name:'Tyler Moore',pos:'TE',team:'NYG',bye:8,pts:0.00,rank:2225,owner:''},
+{name:'Donald Parham Jr.',pos:'TE',team:'Pit',bye:9,pts:0.00,rank:2226,owner:''},
+{name:'Shane Zylstra',pos:'TE',team:'Buf',bye:7,pts:1.28,rank:2227,owner:''},
+{name:'Qadir Ismail',pos:'TE',team:'Chi',bye:10,pts:0.00,rank:2228,owner:''},
+{name:'David Sills V',pos:'WR',team:'TB',bye:10,pts:9.31,rank:2229,owner:''},
+{name:'Marcus Mariota',pos:'QB',team:'Was',bye:7,pts:20.11,rank:2230,owner:''},
+{name:'Jeremy Ruckert',pos:'TE',team:'NYJ',bye:13,pts:7.79,rank:2231,owner:''},
+{name:'Grant Calcaterra',pos:'TE',team:'Phi',bye:10,pts:12.88,rank:2232,owner:''},
+{name:'Elijah Arroyo',pos:'TE',team:'Sea',bye:11,pts:40.78,rank:2233,owner:''},
+{name:'Kenny Yeboah',pos:'TE',team:'Ari',bye:14,pts:0.00,rank:2234,owner:''},
+{name:'Ian Thomas',pos:'TE',team:'LV',bye:13,pts:5.71,rank:2235,owner:''},
+{name:'Isaiah Hodgins',pos:'WR',team:'NYG',bye:8,pts:3.96,rank:2236,owner:''},
+{name:'Josh Whyle',pos:'TE',team:'GB',bye:11,pts:6.03,rank:2237,owner:''},
+{name:'Chris Manhertz',pos:'TE',team:'NYG',bye:8,pts:2.80,rank:2238,owner:''},
+{name:'Elijah Moore',pos:'WR',team:'Phi',bye:10,pts:2.65,rank:2239,owner:''},
+{name:'Mo Alie-Cox',pos:'TE',team:'Ind',bye:13,pts:16.10,rank:2240,owner:''},
+{name:'Ben Sims',pos:'TE',team:'Mia',bye:6,pts:0.00,rank:2241,owner:''},
+{name:'David Moore',pos:'WR',team:'Car',bye:5,pts:3.12,rank:2242,owner:''},
+{name:'Foster Moreau',pos:'TE',team:'Hou',bye:8,pts:12.06,rank:2243,owner:''},
+{name:'Cam Grandy',pos:'TE',team:'Cin',bye:6,pts:0.00,rank:2244,owner:''},
+{name:'Jackson Meeks',pos:'WR',team:'Det',bye:6,pts:0.00,rank:2245,owner:''},
+{name:'Justin Shorter',pos:'WR',team:'LV',bye:13,pts:0.00,rank:2246,owner:''},
+{name:'Drew Sample',pos:'TE',team:'Cin',bye:6,pts:17.83,rank:2247,owner:''},
+{name:'Zay Jones',pos:'WR',team:'Ari',bye:14,pts:0.00,rank:2248,owner:''},
+{name:'Chris Moore',pos:'WR',team:'Bal',bye:13,pts:1.48,rank:2249,owner:''},
+{name:'Nate Adkins',pos:'TE',team:'Den',bye:10,pts:9.36,rank:2250,owner:''},
+{name:'Pharaoh Brown',pos:'TE',team:'Ind',bye:13,pts:0.00,rank:2251,owner:''},
+{name:'Curtis Samuel',pos:'WR',team:'Buf',bye:7,pts:0.00,rank:2252,owner:''},
+{name:'Jaheim Bell',pos:'TE',team:'Pit',bye:9,pts:0.00,rank:2253,owner:''},
+{name:'Will Mallory',pos:'TE',team:'Ind',bye:13,pts:6.90,rank:2254,owner:''},
+{name:'Cade Stover',pos:'TE',team:'Hou',bye:8,pts:22.42,rank:2255,owner:''},
+{name:'Jaleel McLaughlin',pos:'RB',team:'Den',bye:10,pts:6.93,rank:2256,owner:''},
+{name:'Ainias Smith',pos:'WR',team:'Car',bye:5,pts:0.00,rank:2257,owner:''},
+{name:'Ray-Ray McCloud III',pos:'WR',team:'Chi',bye:10,pts:0.00,rank:2258,owner:''},
+{name:'Anthony Firkser',pos:'TE',team:'Det',bye:6,pts:0.00,rank:2259,owner:''},
+{name:'Malik Heath',pos:'WR',team:'Atl',bye:11,pts:0.00,rank:2260,owner:''},
+{name:'John Bates',pos:'TE',team:'Was',bye:7,pts:19.72,rank:2261,owner:''},
+{name:'Jaret Patterson',pos:'RB',team:'LAC',bye:7,pts:0.00,rank:2262,owner:''},
+{name:'Sincere McCormick',pos:'RB',team:'SF',bye:8,pts:0.00,rank:2263,owner:''},
+{name:'Xavier Restrepo',pos:'WR',team:'Ten',bye:9,pts:3.26,rank:2264,owner:''},
+{name:'Jeremiah Webb',pos:'WR',team:'NE',bye:11,pts:0.00,rank:2265,owner:''},
+{name:'Vinny Anthony II',pos:'WR',team:'Atl',bye:11,pts:0.00,rank:2266,owner:''},
+{name:'Trayvon Rudolph',pos:'WR',team:'Min',bye:6,pts:0.00,rank:2267,owner:''},
+{name:'Courtney Jackson',pos:'WR',team:'Ten',bye:9,pts:0.00,rank:2268,owner:''},
+{name:'Montrell Washington',pos:'WR',team:'NYG',bye:8,pts:0.00,rank:2269,owner:''},
+{name:'A.T. Perry',pos:'WR',team:'Den',bye:10,pts:0.00,rank:2270,owner:''},
+{name:'Juwann Winfree',pos:'WR',team:'Hou',bye:8,pts:0.00,rank:2271,owner:''},
+{name:'Cortez Braham Jr.',pos:'WR',team:'Bal',bye:13,pts:0.00,rank:2272,owner:''},
+{name:'Wesley Grimes',pos:'WR',team:'SF',bye:8,pts:0.00,rank:2273,owner:''},
+{name:'Dohnte Meyers',pos:'WR',team:'Cin',bye:6,pts:0.00,rank:2274,owner:''},
+{name:'Kevin Coleman Jr.',pos:'WR',team:'Mia',bye:6,pts:25.65,rank:2275,owner:''},
+{name:'Shaleak Knotts',pos:'WR',team:'Min',bye:6,pts:0.00,rank:2276,owner:''},
+{name:'Josh Kelly',pos:'WR',team:'Hou',bye:8,pts:0.00,rank:2277,owner:''},
+{name:'Squirrel White',pos:'WR',team:'Chi',bye:10,pts:0.00,rank:2278,owner:''},
+{name:'Brandon Aubrey',pos:'K',team:'Dal',bye:14,pts:216.79,rank:166,owner:'The Snozzberries'},
+{name:'Ka\'imi Fairbairn',pos:'K',team:'Hou',bye:8,pts:207.37,rank:174,owner:'The Bye Week'},
+{name:'Cameron Dicker',pos:'K',team:'LAC',bye:7,pts:207.57,rank:183,owner:''},
+{name:'Jason Myers',pos:'K',team:'Sea',bye:11,pts:209.29,rank:188,owner:'Hawk Time'},
+{name:'Cam Little',pos:'K',team:'Jax',bye:7,pts:207.34,rank:193,owner:'Cheesesteak\'s'},
+{name:'Tyler Loop',pos:'K',team:'Bal',bye:13,pts:206.92,rank:197,owner:'The Snozzberries'},
+{name:'Eddy Pineiro',pos:'K',team:'SF',bye:8,pts:205.12,rank:207,owner:''},
+{name:'Will Reichard',pos:'K',team:'Min',bye:6,pts:201.87,rank:209,owner:''},
+{name:'Cairo Santos',pos:'K',team:'Chi',bye:10,pts:201.52,rank:213,owner:'Woolwich Fighting Chickens'},
+{name:'Evan McPherson',pos:'K',team:'Cin',bye:6,pts:206.36,rank:214,owner:''},
+{name:'Wil Lutz',pos:'K',team:'Den',bye:10,pts:197.44,rank:221,owner:''},
+{name:'Jake Bates',pos:'K',team:'Det',bye:6,pts:211.01,rank:226,owner:'Stu Pedasso'},
+{name:'Harrison Mevis',pos:'K',team:'LAR',bye:11,pts:215.09,rank:240,owner:'Virginia Eagles'},
+{name:'Andy Borregales',pos:'K',team:'NE',bye:11,pts:198.00,rank:246,owner:''},
+{name:'Chris Boswell',pos:'K',team:'Pit',bye:9,pts:197.17,rank:248,owner:'Eagles Rock 2'},
+{name:'Chase McLaughlin',pos:'K',team:'TB',bye:10,pts:201.47,rank:249,owner:'Max Bet'},
+{name:'Harrison Butker',pos:'K',team:'KC',bye:5,pts:201.90,rank:259,owner:'Virginia Eagles'},
+{name:'Trey Smack',pos:'K',team:'GB',bye:11,pts:190.00,rank:263,owner:''},
+{name:'Charlie Smyth',pos:'K',team:'NO',bye:8,pts:186.25,rank:273,owner:''},
+{name:'Daniel Carlson',pos:'K',team:'LV',bye:13,pts:102.00,rank:344,owner:''},
+{name:'Jake Elliott',pos:'K',team:'Phi',bye:10,pts:192.72,rank:355,owner:'I Like Turtles'},
+{name:'Spencer Shrader',pos:'K',team:'Ind',bye:13,pts:0.00,rank:360,owner:''},
+{name:'Zane Gonzalez',pos:'K',team:'Mia',bye:6,pts:106.00,rank:363,owner:''},
+{name:'Jake Moody',pos:'K',team:'Was',bye:7,pts:192.00,rank:365,owner:''},
+{name:'Brandon McManus',pos:'K',team:'GB',bye:11,pts:39.00,rank:370,owner:''},
+{name:'Joey Slye',pos:'K',team:'Ten',bye:9,pts:175.14,rank:372,owner:''},
+{name:'Chad Ryland',pos:'K',team:'Ari',bye:14,pts:171.04,rank:377,owner:''},
+{name:'Blake Grupe',pos:'K',team:'Ind',bye:13,pts:194.67,rank:378,owner:''},
+{name:'Nick Folk',pos:'K',team:'Atl',bye:11,pts:187.23,rank:381,owner:''},
+{name:'Matt Gay',pos:'K',team:'LV',bye:13,pts:166.33,rank:387,owner:''},
+{name:'Riley Patterson',pos:'K',team:'Mia',bye:6,pts:124.33,rank:2049,owner:''},
+{name:'Matt Prater',pos:'K',team:'Buf',bye:7,pts:47.00,rank:2050,owner:''},
+{name:'Joshua Karty',pos:'K',team:'Ari',bye:14,pts:0.00,rank:2054,owner:''},
+{name:'Andre Szmyt',pos:'K',team:'Cle',bye:11,pts:167.77,rank:2094,owner:''},
+{name:'Younghoe Koo',pos:'K',team:'NYG',bye:8,pts:47.00,rank:2095,owner:''},
+{name:'Ryan Fitzgerald',pos:'K',team:'Car',bye:5,pts:182.21,rank:2098,owner:''},
+{name:'Jason Sanders',pos:'K',team:'NYJ',bye:13,pts:174.71,rank:2475,owner:''},
+{name:'Tyler Bass',pos:'K',team:'Buf',bye:7,pts:207.55,rank:2492,owner:''},
+{name:'Cade York',pos:'K',team:'NYJ',bye:13,pts:38.00,rank:2599,owner:''},
+{name:'Kansei Matsuzawa',pos:'K',team:'LV',bye:13,pts:0.00,rank:2653,owner:''},
+{name:'Lenny Krieg',pos:'K',team:'Atl',bye:11,pts:12.00,rank:2654,owner:''},
+{name:'Mason Shipley',pos:'K',team:'NO',bye:8,pts:0.00,rank:2655,owner:''},
+{name:'Maddux Trujillo',pos:'K',team:'Buf',bye:7,pts:0.00,rank:2656,owner:''},
+{name:'Lucas Havrisik',pos:'K',team:'GB',bye:11,pts:0.00,rank:2657,owner:''},
+{name:'Laith Marjan',pos:'K',team:'Pit',bye:9,pts:0.00,rank:2658,owner:''},
+{name:'Will Ferrin',pos:'K',team:'NYJ',bye:13,pts:12.00,rank:2659,owner:''},
+{name:'Ethan Sanchez',pos:'K',team:'SF',bye:8,pts:0.00,rank:2660,owner:''},
+{name:'Ben Sauls',pos:'K',team:'NYG',bye:8,pts:127.92,rank:2661,owner:''},
+{name:'Paul Geelen',pos:'K',team:'Den',bye:10,pts:0.00,rank:2662,owner:''},
+{name:'Dominic Zvada',pos:'K',team:'NYG',bye:8,pts:143.00,rank:2663,owner:''},
+{name:'Chris Freeman',pos:'K',team:'Hou',bye:8,pts:0.00,rank:2664,owner:''},
+{name:'Drew Stevens',pos:'K',team:'Was',bye:7,pts:47.00,rank:2665,owner:''},
+{name:'Luke Drzewiecki',pos:'K',team:'Bal',bye:13,pts:0.00,rank:2666,owner:''},
+{name:'Gabriel Plascencia',pos:'K',team:'Chi',bye:10,pts:0.00,rank:2667,owner:''},
+{name:'Tanner Brown',pos:'K',team:'NO',bye:8,pts:0.00,rank:2668,owner:''},
+{name:'B.T. Potter',pos:'K',team:'TB',bye:10,pts:0.00,rank:2669,owner:''},
+{name:'Texans',pos:'DEF',team:'Hou',bye:8,pts:222.13,rank:151,owner:'Cheesesteak\'s'},
+{name:'Rams',pos:'DEF',team:'LAR',bye:11,pts:232.87,rank:159,owner:'The Bye Week'},
+{name:'Broncos',pos:'DEF',team:'Den',bye:10,pts:229.27,rank:160,owner:'Woolwich Fighting Chickens'},
+{name:'Seahawks',pos:'DEF',team:'Sea',bye:11,pts:221.26,rank:162,owner:'Hawk Time'},
+{name:'Eagles',pos:'DEF',team:'Phi',bye:10,pts:208.37,rank:175,owner:'Eagles Rock 2'},
+{name:'Vikings',pos:'DEF',team:'Min',bye:6,pts:218.90,rank:179,owner:''},
+{name:'Patriots',pos:'DEF',team:'NE',bye:11,pts:214.29,rank:180,owner:'Virginia Eagles'},
+{name:'Jaguars',pos:'DEF',team:'Jax',bye:7,pts:203.06,rank:189,owner:'Cheesesteak\'s'},
+{name:'Steelers',pos:'DEF',team:'Pit',bye:9,pts:207.05,rank:191,owner:'Stu Pedasso'},
+{name:'Ravens',pos:'DEF',team:'Bal',bye:13,pts:201.31,rank:194,owner:'Woolwich Fighting Chickens'},
+{name:'Chargers',pos:'DEF',team:'LAC',bye:7,pts:206.44,rank:205,owner:'Eagles Rock 2'},
+{name:'Packers',pos:'DEF',team:'GB',bye:11,pts:196.92,rank:206,owner:'I Like Turtles'},
+{name:'Cowboys',pos:'DEF',team:'Dal',bye:14,pts:188.73,rank:217,owner:'The Bye Week'},
+{name:'Chiefs',pos:'DEF',team:'KC',bye:5,pts:200.25,rank:218,owner:'I Like Turtles'},
+{name:'Bills',pos:'DEF',team:'Buf',bye:7,pts:204.52,rank:232,owner:''},
+{name:'Bengals',pos:'DEF',team:'Cin',bye:6,pts:194.18,rank:242,owner:''},
+{name:'Lions',pos:'DEF',team:'Det',bye:6,pts:214.24,rank:244,owner:'Virginia Eagles'},
+{name:'49ers',pos:'DEF',team:'SF',bye:8,pts:181.88,rank:254,owner:'Max Bet'},
+{name:'Falcons',pos:'DEF',team:'Atl',bye:11,pts:193.89,rank:258,owner:'The Snozzberries'},
+{name:'Buccaneers',pos:'DEF',team:'TB',bye:10,pts:190.98,rank:265,owner:'Cheesesteak\'s'},
+{name:'Giants',pos:'DEF',team:'NYG',bye:8,pts:187.76,rank:267,owner:'Hawk Time'},
+{name:'Colts',pos:'DEF',team:'Ind',bye:13,pts:193.51,rank:269,owner:''},
+{name:'Bears',pos:'DEF',team:'Chi',bye:10,pts:193.10,rank:272,owner:'Virginia Eagles'},
+{name:'Panthers',pos:'DEF',team:'Car',bye:5,pts:184.72,rank:279,owner:''},
+{name:'Browns',pos:'DEF',team:'Cle',bye:11,pts:196.64,rank:293,owner:'Stu Pedasso'},
+{name:'Titans',pos:'DEF',team:'Ten',bye:9,pts:181.85,rank:294,owner:''},
+{name:'Saints',pos:'DEF',team:'NO',bye:8,pts:193.78,rank:295,owner:'The Snozzberries'},
+{name:'Dolphins',pos:'DEF',team:'Mia',bye:6,pts:171.83,rank:2042,owner:''},
+{name:'Cardinals',pos:'DEF',team:'Ari',bye:14,pts:166.69,rank:2070,owner:''},
+{name:'Commanders',pos:'DEF',team:'Was',bye:7,pts:184.79,rank:2073,owner:''},
+{name:'Raiders',pos:'DEF',team:'LV',bye:13,pts:178.93,rank:2078,owner:''},
+{name:'Jets',pos:'DEF',team:'NYJ',bye:13,pts:171.47,rank:2466,owner:''}
+];
+
+  function pickNum(r, p){
+    return (r % 2 === 1) ? (r - 1) * 10 + p : (r - 1) * 10 + (11 - p);
+  }
+
+  function loadState(){
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if(!raw) return {order: DEFAULT_ORDER.slice(), picks: {}, trades: {}};
+      var parsed = JSON.parse(raw);
+      if(!parsed.order || parsed.order.length !== 10) parsed.order = DEFAULT_ORDER.slice();
+      if(!parsed.picks) parsed.picks = {};
+      if(!parsed.trades) parsed.trades = {};
+      return parsed;
+    } catch(e) { return {order: DEFAULT_ORDER.slice(), picks: {}, trades: {}}; }
+  }
+  function saveState(){
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch(e){}
+  }
+
+  var state = loadState();
+
+  // ---- Draft countdown ----
+  (function(){
+    var target = new Date('2026-09-07T00:00:00');
+    var now = new Date();
+    var days = Math.ceil((target - now) / (1000*60*60*24));
+    var el = document.getElementById('draft-countdown');
+    if(!el) return;
+    if(days > 0){
+      el.textContent = days + ' day' + (days===1?'':'s') + ' until the draft.';
+    } else {
+      el.textContent = 'Draft day is here (or has passed) — fill in the board below.';
+    }
+  })();
+
+  // ---- Build player <option> markup, grouped by position ----
+  var posOrder = ['QB','RB','WR','TE','K','DEF'];
+  var optionsHTML = '<option value="">— empty —</option>';
+  posOrder.forEach(function(pos){
+    var group = [];
+    PLAYERS.forEach(function(pl, idx){
+      if(pl.pos === pos) group.push(idx);
+    });
+    if(!group.length) return;
+    optionsHTML += '<optgroup label="' + pos + '">';
+    group.forEach(function(idx){
+      var pl = PLAYERS[idx];
+      optionsHTML += '<option value="' + idx + '">' + pl.rank + '. ' + pl.name + ' (' + pl.pos + ' - ' + pl.team + ')</option>';
+    });
+    optionsHTML += '</optgroup>';
+  });
+
+  // ---- Order grid (pick order editor) ----
+  var orderGrid = document.getElementById('orderGrid');
+  var orderSelects = [];
+  if(orderGrid){
+    for(var p = 0; p < 10; p++){
+      var wrap = document.createElement('div');
+      wrap.className = 'order-slot';
+      var label = document.createElement('label');
+      label.textContent = 'Pick ' + (p + 1);
+      var sel = document.createElement('select');
+      sel.dataset.pos = p;
+      TEAMS.forEach(function(t, ti){
+        var o = document.createElement('option');
+        o.value = ti;
+        o.textContent = t.name;
+        sel.appendChild(o);
+      });
+      sel.value = state.order[p];
+      sel.addEventListener('change', function(){
+        var pos = parseInt(this.dataset.pos, 10);
+        state.order[pos] = parseInt(this.value, 10);
+        saveState();
+        renderHeaders();
+      });
+      wrap.appendChild(label);
+      wrap.appendChild(sel);
+      orderGrid.appendChild(wrap);
+      orderSelects.push(sel);
+    }
+  }
+
+  // ---- Draft board table ----
+  var table = document.getElementById('draftBoardTable');
+  var allPickSelects = [];
+
+  function renderHeaders(){
+    if(!table) return;
+    var thead = table.querySelector('thead');
+    if(!thead) return;
+    var ths = thead.querySelectorAll('th[data-pos]');
+    ths.forEach(function(th){
+      var ti = state.order[parseInt(th.dataset.pos, 10)];
+      th.textContent = TEAMS[ti].name;
+    });
+  }
+
+  function buildBoard(){
+    if(!table) return;
+    var theadRow = document.createElement('tr');
+    theadRow.innerHTML = '<th class="rd-col">Rd</th>';
+    for(var p = 0; p < 10; p++){
+      var th = document.createElement('th');
+      th.dataset.pos = p;
+      th.textContent = TEAMS[state.order[p]].name;
+      theadRow.appendChild(th);
+    }
+    var thead = document.createElement('thead');
+    thead.appendChild(theadRow);
+    table.appendChild(thead);
+
+    var tbody = document.createElement('tbody');
+    for(var r = 1; r <= ROUNDS; r++){
+      var tr = document.createElement('tr');
+      var rdTd = document.createElement('td');
+      rdTd.className = 'rd-cell';
+      rdTd.textContent = r;
+      tr.appendChild(rdTd);
+      for(var p2 = 0; p2 < 10; p2++){
+        var td = document.createElement('td');
+        var cellWrap = document.createElement('div');
+        cellWrap.className = 'pick-cell';
+        var numSpan = document.createElement('span');
+        numSpan.className = 'pick-num';
+        numSpan.textContent = 'Pick ' + pickNum(r, p2 + 1);
+        var sel = document.createElement('select');
+        sel.className = 'pick-select';
+        sel.dataset.r = r;
+        sel.dataset.p = p2;
+        sel.innerHTML = optionsHTML;
+        var key = 'r' + r + 'p' + p2;
+        if(state.picks[key]){
+          sel.value = state.picks[key];
+          if(sel.value) sel.classList.add('filled');
+        }
+        sel.addEventListener('change', function(){
+          var k = 'r' + this.dataset.r + 'p' + this.dataset.p;
+          if(this.value){ state.picks[k] = this.value; this.classList.add('filled'); }
+          else { delete state.picks[k]; this.classList.remove('filled'); }
+          saveState();
+          refreshDisabled();
+        });
+
+        var tradeSel = document.createElement('select');
+        tradeSel.className = 'trade-tag';
+        tradeSel.dataset.r = r;
+        tradeSel.dataset.p = p2;
+        var noTradeOpt = document.createElement('option');
+        noTradeOpt.value = '';
+        noTradeOpt.textContent = 'No trade';
+        tradeSel.appendChild(noTradeOpt);
+        TEAMS.forEach(function(t, ti){
+          var o = document.createElement('option');
+          o.value = ti;
+          o.textContent = 'Traded to ' + t.name;
+          tradeSel.appendChild(o);
+        });
+        if(state.trades[key] !== undefined && state.trades[key] !== ''){
+          tradeSel.value = state.trades[key];
+          td.style.borderLeft = '4px solid ' + TEAM_COLORS[state.trades[key]];
+        }
+        tradeSel.addEventListener('change', function(){
+          var k = 'r' + this.dataset.r + 'p' + this.dataset.p;
+          var parentTd = this.closest('td');
+          if(this.value !== ''){
+            state.trades[k] = parseInt(this.value, 10);
+            parentTd.style.borderLeft = '4px solid ' + TEAM_COLORS[this.value];
+          } else {
+            delete state.trades[k];
+            parentTd.style.borderLeft = '';
+          }
+          saveState();
+        });
+
+        cellWrap.appendChild(numSpan);
+        cellWrap.appendChild(sel);
+        cellWrap.appendChild(tradeSel);
+        td.appendChild(cellWrap);
+        tr.appendChild(td);
+        allPickSelects.push(sel);
+      }
+      tbody.appendChild(tr);
+    }
+    table.appendChild(tbody);
+  }
+
+  function refreshDisabled(){
+    var taken = {};
+    allPickSelects.forEach(function(s){ if(s.value) taken[s.value] = true; });
+    allPickSelects.forEach(function(s){
+      var opts = s.querySelectorAll('option[value]:not([value=""])');
+      opts.forEach(function(o){
+        o.disabled = !!taken[o.value] && o.value !== s.value;
+      });
+    });
+  }
+
+  if(table && PLAYERS.length){
+    buildBoard();
+    refreshDisabled();
+  } else if(table){
+    table.innerHTML = '<tr><td style="padding:1.5rem; font-family:\'Barlow Condensed\',sans-serif; color:#8a8072;">Player database not loaded yet.</td></tr>';
+  }
+
+  var rulesJumpBtn = document.getElementById('rulesJumpBtn');
+  if(rulesJumpBtn) rulesJumpBtn.addEventListener('click', function(){
+    var rulesTabBtn = document.querySelector('.tab-btn[data-tab="rules"]');
+    if(rulesTabBtn) rulesTabBtn.click();
+  });
+
+  // ---- Toolbar actions ----
+  var btnClear = document.getElementById('btnClearPicks');
+  if(btnClear) btnClear.addEventListener('click', function(){
+    if(!window.confirm('Clear every pick on the board? This cannot be undone.')) return;
+    state.picks = {};
+    saveState();
+    allPickSelects.forEach(function(s){ s.value = ''; s.classList.remove('filled'); });
+    refreshDisabled();
+  });
+
+  var btnCopy = document.getElementById('btnCopyPicks');
+  if(btnCopy) btnCopy.addEventListener('click', function(){
+    var rows = [];
+    for(var r = 1; r <= ROUNDS; r++){
+      for(var p = 0; p < 10; p++){
+        var key = 'r' + r + 'p' + p;
+        var val = state.picks[key];
+        var teamName = TEAMS[state.order[p]].name;
+        if(state.trades[key] !== undefined) teamName = TEAMS[state.trades[key]].name + ' (traded from ' + TEAMS[state.order[p]].name + ')';
+        var playerLabel = val && PLAYERS[val] ? (PLAYERS[val].name + ' (' + PLAYERS[val].pos + ' - ' + PLAYERS[val].team + ')') : '—';
+        rows.push({num: pickNum(r, p + 1), text: pickNum(r, p + 1) + '. ' + teamName + ': ' + playerLabel});
+      }
+    }
+    rows.sort(function(a,b){ return a.num - b.num; });
+    var text = 'Draft Board — ' + new Date().toLocaleDateString() + '\n' + rows.map(function(x){ return x.text; }).join('\n');
+    var status = document.getElementById('saveStatus');
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      if(status) status.textContent = 'Copied to clipboard.';
+    } catch(e){
+      window.prompt('Copy this text:', text);
+    }
+  });
+
+  // ---- Roster snapshot ----
+  var snapGrid = document.getElementById('rosterSnapGrid');
+  if(snapGrid){
+    if(!PLAYERS.length){
+      snapGrid.innerHTML = '<p style="font-family:\'Barlow Condensed\',sans-serif;color:#8a8072;">Player database not loaded yet.</p>';
+    } else {
+      TEAMS.forEach(function(t){
+        var owned = PLAYERS.filter(function(pl){ return pl.owner === t.name; });
+        if(!owned.length) return;
+        owned.sort(function(a,b){ return a.rank - b.rank; });
+        var card = document.createElement('div');
+        card.className = 'roster-snap-card';
+        var h4 = document.createElement('h4');
+        h4.textContent = t.name + ' (' + t.manager + ')';
+        card.appendChild(h4);
+        var ul = document.createElement('ul');
+        owned.forEach(function(pl){
+          var li = document.createElement('li');
+          li.className = 'roster-row';
+          var top = document.createElement('div');
+          top.className = 'roster-row-top';
+          top.innerHTML = '<span>' + pl.name + '</span><span class="pos">' + pl.pos + ' - ' + pl.team + '</span>';
+          li.appendChild(top);
+          var k = KEEPER_INFO[pl.name];
+          if(k){
+            var tag = document.createElement('div');
+            var cls = 'k-unknown';
+            if(k.eligible === true) cls = 'k-eligible';
+            else if(k.eligible === false) cls = 'k-ineligible';
+            tag.className = 'keeper-tag ' + cls;
+            tag.textContent = k.note;
+            li.appendChild(tag);
+          }
+          ul.appendChild(li);
+        });
+        card.appendChild(ul);
+        snapGrid.appendChild(card);
+      });
+      if(!snapGrid.children.length){
+        snapGrid.innerHTML = '<p style="font-family:\'Barlow Condensed\',sans-serif;color:#8a8072;">No rostered players yet.</p>';
+      }
+    }
+  }
+
+  // ---- Standings shell (all zero, pre-season) ----
+  var standingsBody = document.getElementById('standingsBody');
+  if(standingsBody){
+    TEAMS.forEach(function(t, i){
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + (i+1) + '</td><td>' + t.name + '</td><td>' + t.manager + '</td><td class="num">0-0-0</td><td class="num">—</td><td class="num">—</td><td>—</td>';
+      standingsBody.appendChild(tr);
+    });
+  }
+
+} catch(e) { /* fail quietly, rest of page still works */ }
+})();
+</script>
+
+
+</body></html>
