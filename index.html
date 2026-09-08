@@ -142,6 +142,25 @@
   .tab-panel{display:none;}
   .tab-panel.active{display:block;}
 
+  /* ---- 2026 Season sub-tabs ---- */
+  .subtab-nav{
+    display:flex; flex-wrap:wrap; gap:0.6rem;
+    padding:1.6rem 6vw 0; max-width:1080px; margin:0 auto -0.5rem;
+  }
+  .subtab-btn{
+    appearance:none; cursor:pointer;
+    font-family:'Barlow Condensed', sans-serif; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.06em; font-size:0.82rem;
+    color:var(--navy); background:transparent;
+    border:1px solid rgba(12,26,48,0.2); border-radius:999px;
+    padding:0.5rem 1.1rem;
+    transition:background .15s ease, color .15s ease;
+  }
+  .subtab-btn:hover{background:rgba(12,26,48,0.06);}
+  .subtab-btn.active{background:var(--navy); color:var(--gold-bright); border-color:var(--navy);}
+  .subtab-panel{display:none;}
+  .subtab-panel.active{display:block;}
+
   /* ---------- SECTIONS ---------- */
   section{padding: 4.5rem 6vw;}
   .section-head{max-width:720px; margin-bottom:2.6rem;}
@@ -1370,6 +1389,16 @@
 <!-- ================= 2026 SEASON TAB ================= -->
 <div id="tab-season2026" class="tab-panel">
 
+<nav class="subtab-nav">
+  <button class="subtab-btn active" data-subtab="draft">Draft</button>
+  <button class="subtab-btn" data-subtab="rosters">Rosters</button>
+  <button class="subtab-btn" data-subtab="matchups">Matchups</button>
+  <button class="subtab-btn" data-subtab="standings">Standings</button>
+  <button class="subtab-btn" data-subtab="waivers">Waivers</button>
+</nav>
+
+<div id="subtab-draft" class="subtab-panel active">
+
 <section id="draft-board-section">
   <div class="section-head">
     <span class="eyebrow">Sept 7, 2026 &nbsp;•&nbsp; Offline Draft &nbsp;•&nbsp; Complete</span>
@@ -1460,6 +1489,10 @@
   </div>
 </section>
 
+</div>
+
+<div id="subtab-rosters" class="subtab-panel">
+
 <section id="roster-snapshot-section" style="background:#ece5d4;">
   <div class="section-head">
     <span class="eyebrow">Every Pick, Every Team</span>
@@ -1468,6 +1501,52 @@
   </div>
   <div class="roster-snap-grid" id="rosterSnapGrid"></div>
 </section>
+
+</div>
+
+<div id="subtab-matchups" class="subtab-panel">
+
+<section id="matchups-2026-section">
+  <div class="section-head">
+    <span class="eyebrow">Week 1 &nbsp;·&nbsp; Sep 9 &ndash; Sep 14</span>
+    <h2>This Week's Matchups</h2>
+    <p class="sub-note">Yahoo's Week 1 projections, with a little context on each pairing. Updates as the season moves.</p>
+  </div>
+
+  <div class="story">
+    <span class="tag">Gati favored, 111.92 &ndash; 104.43</span>
+    <h3>The Snozzberries (Bob) at Woolwich Fighting Chickens (Gati)</h3>
+    <p>Two two-time champions (2008/2012 for Bob, 2009/2019 for Gati) open the year against each other. Yahoo likes Gati by about 7.5 projected points — not exactly the receipts Bob wants heading into a season that's already carrying an F draft grade.</p>
+  </div>
+
+  <div class="story">
+    <span class="tag">I Like Turtles favored, 115.46 &ndash; 0.00</span>
+    <h3>Max Bet (Bill) at I Like Turtles (Scott)</h3>
+    <p>Scott's B+ draft projects as the week's highest score. Bill's Week 1 projection is showing 0.00 — the commissioner appears to still have an empty lineup with kickoff approaching. Might want to fix that before Sunday, commish.</p>
+  </div>
+
+  <div class="story">
+    <span class="tag">Cheesesteak's favored, 110.81 &ndash; 102.13</span>
+    <h3>Eagles Rock 2 (Rich) at Cheesesteak's (Chris)</h3>
+    <p>Rich's F-grade, projected-1-13 season doesn't get a gentle opener — projected to lose out of the gate to a Cheesesteak's team that's made a habit of grinding out slow starts before a title run (see: 2020's 1-12 into a 2025 ring).</p>
+  </div>
+
+  <div class="story">
+    <span class="tag">Stu Pedasso favored, 110.13 &ndash; 106.15</span>
+    <h3>Hawk Time (John) at Stu Pedasso (Drew)</h3>
+    <p>Two of the draft's lower grades collide. Drew's nine-wide-receiver experiment gets a slight edge over John's roster, by about 4 points — the sophomore-slump and cursed-franchise storylines both get their first data point this week.</p>
+  </div>
+
+  <div class="story" style="border-bottom:none;">
+    <span class="tag">The Bye Week favored, 113.00 &ndash; 109.24</span>
+    <h3>Virginia Eagles (Sean) at The Bye Week (Joe)</h3>
+    <p>Yahoo's best-graded draft in the league (A-) opens as the projected favorite. Sean's entire career is built on "good, never great" — six playoff trips, zero rings, always close — and a projected 3.76-point margin is about as on-brand a first test as it gets.</p>
+  </div>
+</section>
+
+</div>
+
+<div id="subtab-standings" class="subtab-panel">
 
 <section id="standings-2026-section">
   <div class="section-head">
@@ -1483,6 +1562,10 @@
   </div>
 </section>
 
+</div>
+
+<div id="subtab-waivers" class="subtab-panel">
+
 <section id="waivers-2026-section" style="background:#ece5d4;">
   <div class="section-head">
     <span class="eyebrow">Transaction Log</span>
@@ -1491,6 +1574,8 @@
   </div>
   <div class="waiver-empty" id="waiverEmpty">No transactions yet. First waiver run is Tuesday of Week 1.</div>
 </section>
+
+</div>
 
 </div>
 <!-- ================= END 2026 SEASON TAB ================= -->
@@ -1634,6 +1719,18 @@
       btn.classList.add('active');
       document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
       window.scrollTo({top:0, behavior:'instant'});
+    });
+  });
+
+  // 2026 Season sub-tab switching
+  var subtabBtns = document.querySelectorAll('.subtab-btn');
+  var subtabPanels = document.querySelectorAll('.subtab-panel');
+  subtabBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      subtabBtns.forEach(function(b){ b.classList.remove('active'); });
+      subtabPanels.forEach(function(p){ p.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('subtab-' + btn.dataset.subtab).classList.add('active');
     });
   });
 
