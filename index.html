@@ -1372,35 +1372,31 @@
 
 <section id="draft-board-section">
   <div class="section-head">
-    <span class="eyebrow">Sept 7, 2026 &nbsp;•&nbsp; Offline Draft</span>
-    <h2>Draft Board</h2>
-    <p>A live board to run during the draft. Set the pick order below (defaults to a worst&#8209;to&#8209;first guess off 2025's final standings — fix it once Yahoo assigns the real order), then fill in picks as they happen. Players already taken are grayed out everywhere else. Everything autosaves to this browser.</p>
-    <span class="season-note" id="draft-countdown"></span>
+    <span class="eyebrow">Sept 7, 2026 &nbsp;•&nbsp; Offline Draft &nbsp;•&nbsp; Complete</span>
+    <h2>2026 Draft Recap</h2>
+    <p>Ten teams, twenty rounds, four trades along the way — reconstructed directly from the live draft sheet, with every traded pick cross-applied so each team's list below reflects true final ownership (not just the round they originally held).</p>
   </div>
 
   <div class="season-banner" id="keeper-banner">
-    <strong>Keeper deadline: Tuesday, Sept 8, 2026, 3:00am ET</strong> — the day after the draft. Max 3 keepers per team, 2 years max per player, round-1 picks aren't keeper-eligible. The roster snapshot below auto-projects each player's 2026 keeper cost from the 2025 draft board — it's best-effort name-matching against a hand-typed sheet, so double-check anything that looks off. Full rules on the <button type="button" id="rulesJumpBtn" style="background:none;border:none;color:var(--gold-bright);text-decoration:underline;cursor:pointer;font:inherit;padding:0;">Rules tab</button>.
+    <strong>Draft's in the books.</strong> Keeper deadline was Tuesday, Sept 8, 2026, 3:00am ET — the day after the draft. Full keeper rules on the <button type="button" id="rulesJumpBtn" style="background:none;border:none;color:var(--gold-bright);text-decoration:underline;cursor:pointer;font:inherit;padding:0;">Rules tab</button>.
   </div>
 
-  <div class="draft-toolbar">
-    <button type="button" id="btnClearPicks" class="ghost">Clear All Picks</button>
-    <button type="button" id="btnCopyPicks">Copy Results As Text</button>
-    <span class="save-status" id="saveStatus">All picks save automatically to this browser.</span>
-  </div>
-
-  <div class="subhead" style="font-size:1.05rem; margin-top:0;">Pick Order (Round 1)</div>
-  <div class="order-grid" id="orderGrid"></div>
-
-  <div class="draft-board-wrap">
-    <table class="draft-board" id="draftBoardTable"></table>
+  <div class="subhead" style="font-size:1.05rem; margin-top:0;">Draft-Day Trades</div>
+  <div class="story" style="max-width:1080px; margin-bottom:0; padding-bottom:0; border-bottom:none;">
+    <p style="font-family:'Barlow Condensed', sans-serif; font-size:1.02rem; line-height:1.9; color:#332f28;">
+      <b>Scott ⇄ Joe</b> — Scott's Round 20 for Joe's Round 5 (Scott landed Jameson Williams; Joe got an extra 20th in Kayshon Boutte).<br>
+      <b>Scott ⇄ Bob</b> — Scott's Round 12 for Bob's Round 7 (Scott landed Christian Watson; Bob got an extra 12th in Trevor Lawrence).<br>
+      <b>Bob ⇄ Bill</b> — Bob's Round 3 for Bill's Round 20 (Bill landed Tetairoa McMillan; Bob got an extra 20th in Ray Davis).<br>
+      <b>Bill ⇄ Gati</b> — Bill's Round 19 for Gati's Round 6 (Gati landed Jalen McMillan; Bill got an extra 6th in Sam LaPorta).
+    </p>
   </div>
 </section>
 
 <section id="roster-snapshot-section" style="background:#ece5d4;">
   <div class="section-head">
-    <span class="eyebrow">Pre-Draft Reference</span>
-    <h2>Current Rosters (Snapshot)</h2>
-    <p class="sub-note" id="rosterSnapNote">Pulled from Yahoo's league Players page. This reflects rosters as they stood before keepers were finalized — not a prediction of who's actually kept.</p>
+    <span class="eyebrow">Every Pick, Every Team</span>
+    <h2>2026 Rosters</h2>
+    <p class="sub-note" id="rosterSnapNote">Full draft results by team, in round order. Rounds marked with an asterisk (*) are extra picks acquired in a trade.</p>
   </div>
   <div class="roster-snap-grid" id="rosterSnapGrid"></div>
 </section>
@@ -2537,217 +2533,60 @@ try {
     }
   }
 
-  // ---- Draft board table ----
-  var table = document.getElementById('draftBoardTable');
-  var allPickSelects = [];
-
-  function renderHeaders(){
-    if(!table) return;
-    var thead = table.querySelector('thead');
-    if(!thead) return;
-    var ths = thead.querySelectorAll('th[data-pos]');
-    ths.forEach(function(th){
-      var ti = state.order[parseInt(th.dataset.pos, 10)];
-      th.textContent = TEAMS[ti].name;
-    });
-  }
-
-  function buildBoard(){
-    if(!table) return;
-    var theadRow = document.createElement('tr');
-    theadRow.innerHTML = '<th class="rd-col">Rd</th>';
-    for(var p = 0; p < 10; p++){
-      var th = document.createElement('th');
-      th.dataset.pos = p;
-      th.textContent = TEAMS[state.order[p]].name;
-      theadRow.appendChild(th);
-    }
-    var thead = document.createElement('thead');
-    thead.appendChild(theadRow);
-    table.appendChild(thead);
-
-    var tbody = document.createElement('tbody');
-    for(var r = 1; r <= ROUNDS; r++){
-      var tr = document.createElement('tr');
-      var rdTd = document.createElement('td');
-      rdTd.className = 'rd-cell';
-      rdTd.textContent = r;
-      tr.appendChild(rdTd);
-      for(var p2 = 0; p2 < 10; p2++){
-        var td = document.createElement('td');
-        var cellWrap = document.createElement('div');
-        cellWrap.className = 'pick-cell';
-        var numSpan = document.createElement('span');
-        numSpan.className = 'pick-num';
-        numSpan.textContent = 'Pick ' + pickNum(r, p2 + 1);
-        var sel = document.createElement('select');
-        sel.className = 'pick-select';
-        sel.dataset.r = r;
-        sel.dataset.p = p2;
-        sel.innerHTML = optionsHTML;
-        var key = 'r' + r + 'p' + p2;
-        if(state.picks[key]){
-          sel.value = state.picks[key];
-          if(sel.value) sel.classList.add('filled');
-        }
-        sel.addEventListener('change', function(){
-          var k = 'r' + this.dataset.r + 'p' + this.dataset.p;
-          if(this.value){ state.picks[k] = this.value; this.classList.add('filled'); }
-          else { delete state.picks[k]; this.classList.remove('filled'); }
-          saveState();
-          refreshDisabled();
-        });
-
-        var tradeSel = document.createElement('select');
-        tradeSel.className = 'trade-tag';
-        tradeSel.dataset.r = r;
-        tradeSel.dataset.p = p2;
-        var noTradeOpt = document.createElement('option');
-        noTradeOpt.value = '';
-        noTradeOpt.textContent = 'No trade';
-        tradeSel.appendChild(noTradeOpt);
-        TEAMS.forEach(function(t, ti){
-          var o = document.createElement('option');
-          o.value = ti;
-          o.textContent = 'Traded to ' + t.name;
-          tradeSel.appendChild(o);
-        });
-        if(state.trades[key] !== undefined && state.trades[key] !== ''){
-          tradeSel.value = state.trades[key];
-          td.style.borderLeft = '4px solid ' + TEAM_COLORS[state.trades[key]];
-        }
-        tradeSel.addEventListener('change', function(){
-          var k = 'r' + this.dataset.r + 'p' + this.dataset.p;
-          var parentTd = this.closest('td');
-          if(this.value !== ''){
-            state.trades[k] = parseInt(this.value, 10);
-            parentTd.style.borderLeft = '4px solid ' + TEAM_COLORS[this.value];
-          } else {
-            delete state.trades[k];
-            parentTd.style.borderLeft = '';
-          }
-          saveState();
-        });
-
-        cellWrap.appendChild(numSpan);
-        cellWrap.appendChild(sel);
-        cellWrap.appendChild(tradeSel);
-        td.appendChild(cellWrap);
-        tr.appendChild(td);
-        allPickSelects.push(sel);
-      }
-      tbody.appendChild(tr);
-    }
-    table.appendChild(tbody);
-  }
-
-  function refreshDisabled(){
-    var taken = {};
-    allPickSelects.forEach(function(s){ if(s.value) taken[s.value] = true; });
-    allPickSelects.forEach(function(s){
-      var opts = s.querySelectorAll('option[value]:not([value=""])');
-      opts.forEach(function(o){
-        o.disabled = !!taken[o.value] && o.value !== s.value;
-      });
-    });
-  }
-
-  if(table && PLAYERS.length){
-    buildBoard();
-    refreshDisabled();
-  } else if(table){
-    table.innerHTML = '<tr><td style="padding:1.5rem; font-family:\'Barlow Condensed\',sans-serif; color:#8a8072;">Player database not loaded yet.</td></tr>';
-  }
-
   var rulesJumpBtn = document.getElementById('rulesJumpBtn');
   if(rulesJumpBtn) rulesJumpBtn.addEventListener('click', function(){
     var rulesTabBtn = document.querySelector('.tab-btn[data-tab="rules"]');
     if(rulesTabBtn) rulesTabBtn.click();
   });
 
-  // ---- Toolbar actions ----
-  var btnClear = document.getElementById('btnClearPicks');
-  if(btnClear) btnClear.addEventListener('click', function(){
-    if(!window.confirm('Clear every pick on the board? This cannot be undone.')) return;
-    state.picks = {};
-    saveState();
-    allPickSelects.forEach(function(s){ s.value = ''; s.classList.remove('filled'); });
-    refreshDisabled();
-  });
+  // ---- 2026 draft results, by team (round order; * = extra pick acquired via trade) ----
+  var DRAFT2026 = {
+    "I Like Turtles": ["R1 Jahmyr Gibbs RB Det","R2 A.J. Brown WR NE","R3 Trey McBride TE Ari","R4 David Montgomery RB Hou","R5 Rome Odunze WR Chi","R5* Jameson Williams WR Det (from Joe)","R6 DK Metcalf WR Pit","R7 J.K. Dobbins RB Den","R7* Christian Watson WR GB (from Bob)","R8 Kenny Gainwell RB TB","R9 Alec Pierce WR Ind","R10 Kyle Monangai RB Chi","R11 Cam Skattebo RB NYG","R13 Stefon Diggs WR Was","R14 Patrick Mahomes QB KC","R15 Rhamondre Stevenson RB NE","R16 Cameron Dicker K LAC","R17 Jaguars DEF","R18 Chiefs DEF","R19 Kyler Murray QB Min"],
+    "Max Bet": ["R1 Bijan Robinson RB Atl","R2 Malik Nabers WR NYG","R3 Drake London WR Atl","R3* Tetairoa McMillan WR Car (from Bob)","R4 Jadarian Price RB Sea","R5 DJ Moore WR Buf","R6 Carnell Tate WR Ten","R6* Sam LaPorta TE Det (from Gati)","R7 Javonte Williams RB Dal","R8 Jordan Addison WR Min","R9 De'Zhaun Stribling WR SF","R10 George Kittle TE SF","R11 Xavier Worthy WR KC","R12 Chargers DEF","R13 Matthew Golden WR GB","R14 Brian Robinson RB Atl","R15 Emmett Johnson RB KC","R16 Brock Purdy QB SF","R17 Eddy Pineiro K SF","R18 Ricky Pearsall WR SF"],
+    "Stu Pedasso": ["R1 Ja'Marr Chase WR Cin","R2 Omarion Hampton RB LAC","R3 Nico Collins WR Hou","R4 Bucky Irving RB TB","R5 TreVeyon Henderson RB NE","R6 Ladd McConkey WR LAC","R7 Marvin Harrison Jr. WR Ari","R8 RJ Harvey RB Den","R9 Chris Godwin Jr. WR TB","R10 Jalen Hurts QB Phi","R11 Rachaad White RB Was","R12 Jayden Reed WR GB","R13 Tucker Kraft TE GB","R14 Denzel Boston WR Cle","R15 Deebo Samuel Sr. WR SF","R16 Sean Tucker RB TB","R17 Vikings DEF","R18 Jaxson Dart QB NYG","R19 Michael Pittman Jr. WR Pit","R20 Harrison Mevis K LAR"],
+    "Hawk Time": ["R1 Amon-Ra St. Brown WR Det","R2 Jeremiyah Love RB Ari","R3 Garrett Wilson WR NYJ","R4 Tee Higgins WR Cin","R5 Chris Olave WR NO","R6 Joe Burrow QB Cin","R7 Chuba Hubbard RB Car","R8 Juwan Johnson TE NO","R9 Seahawks DEF","R10 Rashid Shaheed WR Sea","R11 Dak Prescott QB Dal","R12 Tyler Allgeier RB Ari","R13 Dalton Schultz TE Hou","R14 Jason Myers K Sea","R15 Omar Cooper Jr. WR NYJ","R16 Patriots DEF","R17 Odell Beckham Jr. WR NYG","R18 Cooper Kupp WR Sea","R19 Jake Bates K Det","R20 AJ Barner TE Sea"],
+    "Virginia Eagles": ["R1 Puka Nacua WR LAR","R2 Ashton Jeanty RB LV","R3 Breece Hall RB NYJ","R4 Josh Allen QB Buf","R5 Terry McLaurin WR Was","R6 Courtland Sutton WR Den","R7 Jaylen Warren RB Pit","R8 Jacory Croskey-Merritt RB Was","R9 Kyle Pitts Sr. TE Atl","R10 Jakobi Meyers WR Jax","R11 Aaron Jones Sr. RB Min","R12 Steelers DEF","R13 Caleb Williams QB Chi","R14 Tyjae Spears RB Ten","R15 Jake Ferguson TE Dal","R16 Jerry Jeudy WR Cle","R17 Lions DEF","R18 Romeo Doubs WR NE","R19 Harrison Butker K KC","R20 Braelon Allen RB NYJ"],
+    "Eagles Rock 2": ["R1 Saquon Barkley RB Phi","R2 Ken Walker III RB KC","R3 Jaylen Waddle WR Den","R4 Parker Washington WR Jax","R5 Luther Burden III WR Chi","R6 Blake Corum RB LAR","R7 Brock Bowers TE LV","R8 Jonathon Brooks RB Car","R9 Tank Bigsby RB Phi","R10 Jonah Coleman RB Den","R11 Drake Maye QB NE","R12 Ravens DEF","R13 Dallas Goedert TE Phi","R14 Bhayshul Tuten RB Jax","R15 Dontayvion Wicks WR Phi","R16 Cyrus Allen WR KC","R17 Jordan Love QB GB","R18 Will Reichard K Min","R19 Jordyn Tyson WR NO","R20 Kenyon Sadiq TE NYJ"],
+    "The Snozzberries": ["R1 James Cook III RB Buf","R2 Derrick Henry RB Bal","R4 Emeka Egbuka WR TB","R5 Davante Adams WR LAR","R6 Rashee Rice WR KC","R8 Mike Evans WR SF","R9 Zach Charbonnet RB Sea","R10 Brandon Aubrey K Dal","R11 Isaiah Likely TE NYG","R12 Eagles DEF","R12* Trevor Lawrence QB Jax (from Scott)","R13 Mark Andrews TE Bal","R14 Keaton Mitchell RB LAC","R15 Woody Marks RB Hou","R16 Jared Goff QB Det","R17 Isiah Pacheco RB Det","R18 Justice Hill RB Bal","R19 Dalton Kincaid TE Buf","R20 Tyler Shough QB NO","R20* Ray Davis RB Buf (from Bill)"],
+    "Cheesesteak's": ["R1 Justin Jefferson WR Min","R2 De'Von Achane RB Mia","R3 Kyren Williams RB LAR","R4 Colston Loveland TE Chi","R5 George Pickens WR Dal","R6 Tony Pollard RB Ten","R7 Jordan Mason RB Min","R8 Brian Thomas Jr. WR Jax","R9 Justin Herbert QB LAC","R10 Harold Fannin Jr. TE Cle","R11 Josh Downs WR Ind","R12 Texans DEF","R13 Cam Little K Jax","R14 Dylan Sampson RB Cle","R15 Matthew Stafford QB LAR","R16 Wan'Dale Robinson WR Ten","R17 Browns DEF","R18 C.J. Stroud QB Hou","R19 T.J. Hockenson TE Min","R20 Cairo Santos K Chi"],
+    "The Bye Week": ["R1 Christian McCaffrey RB SF","R2 Chase Brown RB Cin","R3 D'Andre Swift RB Chi","R4 Tyler Warren TE Ind","R6 DeVonta Smith WR Phi","R7 Jayden Daniels QB Was","R8 KC Concepcion WR Cle","R9 Jaxon Smith-Njigba WR Sea","R10 Rico Dowdle RB Pit","R11 Rams DEF","R12 Mike Washington Jr. RB LV","R13 Bo Nix QB Den","R14 Kaelon Black RB SF","R15 Tre Tucker WR LV","R16 Ja'Kobi Lane WR Bal","R17 Brenton Strange TE Jax","R18 Evan McPherson K Cin","R19 Michael Wilson WR Ari","R20 Alvin Kamara RB NO","R20* Kayshon Boutte WR Hou (from Scott)"],
+    "Woolwich Fighting Chickens": ["R1 Jonathan Taylor RB Ind","R2 CeeDee Lamb WR Dal","R3 Travis Etienne Jr. RB NO","R4 Zay Flowers WR Bal","R5 Lamar Jackson QB Bal","R7 MarShawn Lloyd RB GB","R8 Josh Jacobs RB GB","R9 Quentin Johnston WR LAC","R10 Makai Lemon WR Phi","R11 Broncos DEF","R12 Quinshon Judkins RB Cle","R13 Travis Kelce TE KC","R14 Malik Washington WR Mia","R15 Jalen Coker WR Car","R16 Caleb Douglas WR Mia","R17 Ka'imi Fairbairn K Hou","R18 Baker Mayfield QB TB","R19 Chris Rodriguez Jr. RB Jax","R19* Jalen McMillan WR TB (from Bill)","R20 Malik Davis RB Dal"]
+  };
 
-  var btnCopy = document.getElementById('btnCopyPicks');
-  if(btnCopy) btnCopy.addEventListener('click', function(){
-    var rows = [];
-    for(var r = 1; r <= ROUNDS; r++){
-      for(var p = 0; p < 10; p++){
-        var key = 'r' + r + 'p' + p;
-        var val = state.picks[key];
-        var teamName = TEAMS[state.order[p]].name;
-        if(state.trades[key] !== undefined) teamName = TEAMS[state.trades[key]].name + ' (traded from ' + TEAMS[state.order[p]].name + ')';
-        var playerLabel = val && PLAYERS[val] ? (PLAYERS[val].name + ' (' + PLAYERS[val].pos + ' - ' + PLAYERS[val].team + ')') : '—';
-        rows.push({num: pickNum(r, p + 1), text: pickNum(r, p + 1) + '. ' + teamName + ': ' + playerLabel});
-      }
-    }
-    rows.sort(function(a,b){ return a.num - b.num; });
-    var text = 'Draft Board — ' + new Date().toLocaleDateString() + '\n' + rows.map(function(x){ return x.text; }).join('\n');
-    var status = document.getElementById('saveStatus');
-    try {
-      var ta = document.createElement('textarea');
-      ta.value = text;
-      ta.style.position = 'fixed';
-      ta.style.left = '-9999px';
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-      if(status) status.textContent = 'Copied to clipboard.';
-    } catch(e){
-      window.prompt('Copy this text:', text);
-    }
-  });
-
-  // ---- Roster snapshot ----
+  // ---- Render full draft results, one card per team ----
   var snapGrid = document.getElementById('rosterSnapGrid');
   if(snapGrid){
-    if(!PLAYERS.length){
-      snapGrid.innerHTML = '<p style="font-family:\'Barlow Condensed\',sans-serif;color:#8a8072;">Player database not loaded yet.</p>';
-    } else {
-      TEAMS.forEach(function(t){
-        var owned = PLAYERS.filter(function(pl){ return pl.owner === t.name; });
-        if(!owned.length) return;
-        owned.sort(function(a,b){ return a.rank - b.rank; });
-        var card = document.createElement('div');
-        card.className = 'roster-snap-card';
-        var h4 = document.createElement('h4');
-        h4.textContent = t.name + ' (' + t.manager + ')';
-        card.appendChild(h4);
-        var ul = document.createElement('ul');
-        owned.forEach(function(pl){
-          var li = document.createElement('li');
-          li.className = 'roster-row';
-          var top = document.createElement('div');
-          top.className = 'roster-row-top';
-          top.innerHTML = '<span>' + pl.name + '</span><span class="pos">' + pl.pos + ' - ' + pl.team + '</span>';
-          li.appendChild(top);
-          var k = KEEPER_INFO[pl.name];
-          if(k){
-            var tag = document.createElement('div');
-            var cls = 'k-unknown';
-            if(k.eligible === true) cls = 'k-eligible';
-            else if(k.eligible === false) cls = 'k-ineligible';
-            tag.className = 'keeper-tag ' + cls;
-            tag.textContent = k.note;
-            li.appendChild(tag);
-          }
-          ul.appendChild(li);
-        });
-        card.appendChild(ul);
-        snapGrid.appendChild(card);
+    TEAMS.forEach(function(t){
+      var picks = DRAFT2026[t.name];
+      if(!picks || !picks.length) return;
+      var card = document.createElement('div');
+      card.className = 'roster-snap-card';
+      var h4 = document.createElement('h4');
+      h4.textContent = t.name + ' (' + t.manager + ')';
+      card.appendChild(h4);
+      var ul = document.createElement('ul');
+      picks.forEach(function(label){
+        var li = document.createElement('li');
+        li.className = 'roster-row';
+        var traded = label.indexOf('(from ') !== -1;
+        var m = label.match(/^(R\d+\*?)\s(.+)$/);
+        var rd = m ? m[1] : '';
+        var rest = m ? m[2] : label;
+        var top = document.createElement('div');
+        top.className = 'roster-row-top';
+        top.innerHTML = '<span>' + rest + '</span><span class="pos">' + rd + '</span>';
+        li.appendChild(top);
+        if(traded){
+          var tag = document.createElement('div');
+          tag.className = 'keeper-tag k-eligible';
+          tag.textContent = 'Acquired via trade';
+          li.appendChild(tag);
+        }
+        ul.appendChild(li);
       });
-      if(!snapGrid.children.length){
-        snapGrid.innerHTML = '<p style="font-family:\'Barlow Condensed\',sans-serif;color:#8a8072;">No rostered players yet.</p>';
-      }
-    }
+      card.appendChild(ul);
+      snapGrid.appendChild(card);
+    });
   }
 
   // ---- Standings shell (all zero, pre-season) ----
